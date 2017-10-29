@@ -1,18 +1,24 @@
 # onlinestore
 Admin and BookStore
-Getting Started
+
+# Getting Started
+
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-Prerequisites
-Maven - Dependency Management, how to install
+ 
+
+# Maven - Dependency Management, 
+how to install
 Web Server (one of them) 
-nginx - how to install
+
+# nginx - how to install
 http-server - npm - before install this you should install npm, how to install npm
 Fast installing and deployment
-back-end
+ 
+# Directory 
 cd IdeaProject/onlinestore/
 mvn clean install
 
-Run Each Module
+ # Run Each Module
 cd IdeaProject/onlinestore/admin
 mvn spring-boot:run
 
@@ -24,7 +30,7 @@ mvn spring-boot:run
 
 boostore is running on http://localhost:8080/
  
- Built With
+# Built With
 Spring-boot - The web framework used
 Spring starter Security  - The web security framework used
 Spring LDAP for security test
@@ -34,9 +40,9 @@ MySQL(5.7) - DBMS
 H2(1.4) - DBMS for testing
 Thymeleaf - Template Engine
 
-Author
+# Author
 Valentine Ezugu - Valentine-Ezugu
 
-TODOs
+# TODOs
 add more tests
 
