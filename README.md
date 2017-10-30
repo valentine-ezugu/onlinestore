@@ -25,10 +25,14 @@ mvn spring-boot:run
 
 admin is running on http://localhost:8081/adminportal
 
+username and password = admin and admin
+
 cd IdeaProject/onlinestore/bookstore
 mvn spring-boot:run
 
 boostore is running on http://localhost:8080/
+
+username and password = V and A
  
 # Built With
 Spring-boot - The web framework used
