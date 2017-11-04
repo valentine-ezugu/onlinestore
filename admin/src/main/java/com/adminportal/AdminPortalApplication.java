@@ -18,6 +18,9 @@ import java.util.Set;
 public class AdminPortalApplication implements CommandLineRunner {
 
     @Autowired
+    SecurityUtility securityUtility;
+
+    @Autowired
     private UserService userService;
 
     public static void main(String[] args) {
@@ -28,7 +31,7 @@ public class AdminPortalApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         com.adminportal.domain.User user1 = new com.adminportal.domain.User();
         user1.setUsername("admin");
-        user1.setPassword(SecurityUtility.passwordEncoder().encode("admin"));
+        user1.setPassword(securityUtility.passwordEncoder().encode("admin"));
         user1.setEmail("admin@yahoo.com");
         Set<UserRole> userRoles = new HashSet<>();
         Role role1 = new Role();

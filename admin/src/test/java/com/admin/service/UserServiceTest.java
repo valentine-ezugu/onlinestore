@@ -21,8 +21,12 @@ import java.util.Set;
 
 import static org.easymock.EasyMock.*;
 
+
 @Transactional
 public class UserServiceTest extends AbstractTest {
+
+    @Autowired
+    SecurityUtility securityUtility;
 
     @Autowired
     UserService userService;
@@ -44,7 +48,7 @@ public class UserServiceTest extends AbstractTest {
     public void saveUser() throws Exception {
         User user = new User();
         user.setUsername("vsl");
-        user.setPassword(SecurityUtility.passwordEncoder().encode("vsl"));
+        user.setPassword(securityUtility.passwordEncoder().encode("vsl"));
         user.setEmail("val@yahoo.com");
         Set<UserRole> userRoles = new HashSet<>();
         Role role1 = new Role();
