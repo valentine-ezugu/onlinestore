@@ -9,10 +9,6 @@ These instructions will get you a copy of the project up and running on your loc
 # Maven - Dependency Management, 
 how to install
 Web Server (one of them) 
-
-# nginx - how to install
-http-server - npm - before install this you should install npm, how to install npm
-Fast installing and deployment
  
 # Directory 
 cd IdeaProject/onlinestore/
