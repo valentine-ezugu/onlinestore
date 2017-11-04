@@ -214,7 +214,7 @@ CREATE TABLE `user_shipping` (
 
 
 
- alter table billing_address  drop constraint if exists FKn9o6nq40aqjyebaofkolmgv69;
+ //alter table billing_address  drop constraint if exists FKn9o6nq40aqjyebaofkolmgv69;
 alter table billing_address add constraint FKn9o6nq40aqjyebaofkolmgv69 foreign key (order_id) references user_id ;
 
 

@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import com.bookstore.domain.User;
 import com.bookstore.repository.UserRepository;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class UserSecurityService implements UserDetailsService{
 
     @Autowired

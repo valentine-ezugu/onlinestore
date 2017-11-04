@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import javax.transaction.Transactional;
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +17,16 @@ import java.util.List;
  */
 
 @Service
+@Transactional
 public class BookServiceImpl implements BookService {
 
     @Autowired
     BookRepository bookRepository;
 
     @Override
-    public List<Book> findAll() {
+    public List<Book> findAll()
+
+    {
         return (List<Book>) bookRepository.findAll();
     }
 

@@ -5,6 +5,8 @@ import com.bookstore.repository.ShoppingCartRepository;
 import com.bookstore.service.api.CartItemService;
 import com.bookstore.service.api.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +23,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
     @Autowired
     private ShoppingCartRepository shoppingCartRepository;
 
-    public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) {
+    public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) throws AccessDeniedException
+
+    {
         BigDecimal cartTotal = new BigDecimal(0);
 
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
@@ -40,7 +44,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
         return shoppingCart;
     }
 
-    public void clearShoppingCart(ShoppingCart shoppingCart) {
+    public void clearShoppingCart(ShoppingCart shoppingCart)throws DataAccessException
+
+    {
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 
         for (CartItem cartItem : cartItemList) {

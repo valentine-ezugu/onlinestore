@@ -1,4 +1,4 @@
-package BookstoreTest.unitTest;
+package com.bookstore.services;
 
 import com.bookstore.domain.security.LoginStatus;
 import com.bookstore.service.impl.SpringSecurityLoginService;
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SpringSecurityLoginTest {
+public class SecurityLoginTest {
 
     SpringSecurityLoginService loginService;
 

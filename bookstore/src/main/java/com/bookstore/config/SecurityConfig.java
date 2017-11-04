@@ -29,12 +29,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private  Environment env;
 
+    SecurityUtility securityUtility;
+
      @Autowired
     private UserSecurityService userSecurityService;
 
     private BCryptPasswordEncoder passwordEncoder(){
 
-        return SecurityUtility.passwordEncoder();
+        return securityUtility.passwordEncoder();
     }
 
     private static final String[] PUBLIC_MATCHERS = {

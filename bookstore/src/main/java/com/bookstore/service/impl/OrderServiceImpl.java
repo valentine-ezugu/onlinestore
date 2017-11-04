@@ -5,8 +5,11 @@ import com.bookstore.repository.OrderRepository;
 import com.bookstore.service.api.CartItemService;
 import com.bookstore.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,6 +17,7 @@ import java.util.List;
  * Created by Pc on 9/19/2017.
  */
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
@@ -27,7 +31,9 @@ public class OrderServiceImpl implements OrderService {
                              BillingAddress billingAddress,
                              Payment payment,
                              String shippingMethod,
-                             User user) {
+                             User user) throws DataAccessException, AccessDeniedException
+
+    {
 
         Order order = new Order();
         order.setBillingAddress(billingAddress);
@@ -59,7 +65,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order findOne(Long id) {
+    public Order findOne(Long id)throws AccessDeniedException
+
+    {
         return orderRepository.findOne(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.bookstore.service.api;
 
 import com.bookstore.domain.*;
+import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
@@ -8,17 +9,17 @@ import java.util.List;
  * Created by Pc on 9/8/2017.
  */
 public interface CartItemService  {
-    List<CartItem> findByShoppingCart(ShoppingCart shoppingCart);
+    List<CartItem> findByShoppingCart(ShoppingCart shoppingCart)throws DataAccessException;
 
-    CartItem updateCartItem(CartItem cartItem);
+    CartItem updateCartItem(CartItem cartItem)throws DataAccessException;
 
-    CartItem addBookToCartItem(Book book, User user, int qty);
+    CartItem addBookToCartItem(Book book, User user, int qty)throws DataAccessException;
 
-     CartItem findById(Long id) ;
+     CartItem findById(Long id)throws DataAccessException ;
 
-    void removeCartItem(CartItem cartItem);
+    void removeCartItem(CartItem cartItem)throws DataAccessException;
 
-    CartItem save(CartItem cartItem);
+    CartItem save(CartItem cartItem)throws DataAccessException;
 
-    List<CartItem> findByOrder(Order order);
+    List<CartItem> findByOrder(Order order)throws DataAccessException;
 }

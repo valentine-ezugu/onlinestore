@@ -5,8 +5,11 @@ import com.bookstore.repository.BookToCartItemRepository;
 import com.bookstore.repository.CartItemRepository;
 import com.bookstore.service.api.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -14,6 +17,7 @@ import java.util.List;
  * Created by Pc on 9/8/2017.
  */
 @Service
+@Transactional
 public class CartItemServiceImpl implements CartItemService {
 
     @Override
@@ -27,7 +31,8 @@ public class CartItemServiceImpl implements CartItemService {
     @Autowired
     private BookToCartItemRepository bookToCartItemRepository;
 
-    public CartItem updateCartItem(CartItem cartItem) {
+    public CartItem updateCartItem(CartItem cartItem) throws AccessDeniedException , DataAccessException
+    {
         BigDecimal bigDecimal = new BigDecimal(cartItem.getBook().getOurPrice()).multiply(new BigDecimal(cartItem.getQty()));
 
         bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -38,10 +43,8 @@ public class CartItemServiceImpl implements CartItemService {
         return cartItem;
     }
 
-
-
-
-     public CartItem addBookToCartItem(Book book, User user, int qty) {
+     public CartItem addBookToCartItem(Book book, User user, int qty) throws   AccessDeniedException
+    {
         List<CartItem> cartItemList = findByShoppingCart(user.getShoppingCart());
 
         for (CartItem cartItem : cartItemList) {
@@ -70,21 +73,26 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
 
-    public CartItem findById(Long id) {
+    public CartItem findById(Long id)throws DataAccessException, AccessDeniedException
+    {
         return cartItemRepository.findOne(id);
     }
 
-    public void removeCartItem(CartItem cartItem) {
+    public void removeCartItem(CartItem cartItem) throws DataAccessException
+
+    {
         bookToCartItemRepository.deleteByCartItem(cartItem);
         cartItemRepository.delete(cartItem);
     }
 
 
-    public CartItem save(CartItem cartItem) {
+    public CartItem save(CartItem cartItem)throws DataAccessException, AccessDeniedException
+    {
         return cartItemRepository.save(cartItem);
     }
 
-    public List<CartItem> findByOrder(Order order) {
+    public List<CartItem> findByOrder(Order order)throws DataAccessException, AccessDeniedException
+    {
         return  cartItemRepository.findByOrder(order);
 
     }

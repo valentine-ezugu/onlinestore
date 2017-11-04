@@ -3,12 +3,16 @@ package com.bookstore.service.impl;
 import com.bookstore.domain.Payment;
 import com.bookstore.domain.UserPayment;
 import com.bookstore.service.api.PaymentService;
+import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
-    public Payment setByUserPayment(UserPayment userPayment, Payment payment) {
+    public Payment setByUserPayment(UserPayment userPayment, Payment payment) throws AccessDeniedException
+
+    {
         payment.setType(userPayment.getType());
         payment.setHolderName(userPayment.getHolderName());
         payment.setCardNumber(userPayment.getCardNumber());

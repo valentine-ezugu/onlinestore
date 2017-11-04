@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
 public class BookDetail {
   
     private final Long id;
  
     private final String title;
- 
 
     @JsonCreator 
     public BookDetail(@JsonProperty("id")Long id, 

@@ -91,4 +91,5 @@ public class PasswordResetToken {
                 ", expirydate=" + expiryDate +
                 '}';
     }
+
 }

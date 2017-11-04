@@ -5,6 +5,7 @@ import com.adminportal.service.api.LoginService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,14 +13,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class SpringSecurityLoginService implements LoginService {
     private Log log = LogFactory.getLog(SpringSecurityLoginService.class);
 
     @Autowired(required = false)
   public   AuthenticationManager authenticationManager;
 
-    public LoginStatus getStatus() {
+    public LoginStatus getStatus()throws DataAccessException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && !auth.getName().equals("anonymousUser") && auth.isAuthenticated()) {
             return new LoginStatus(true, auth.getName());
@@ -28,7 +32,7 @@ public class SpringSecurityLoginService implements LoginService {
         }
     }
 
-    public LoginStatus login(String username, String password) {
+    public LoginStatus login(String username, String password) throws DataAccessException{
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
 
         try {

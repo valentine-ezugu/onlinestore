@@ -1,6 +1,5 @@
 package com.adminportal;
 
-
 import com.adminportal.domain.security.Role;
 import com.adminportal.domain.security.UserRole;
 import com.adminportal.service.api.UserService;
@@ -17,6 +16,7 @@ import java.util.Set;
 @Configuration
 @SpringBootApplication
 public class AdminPortalApplication implements CommandLineRunner {
+
     @Autowired
     private UserService userService;
 

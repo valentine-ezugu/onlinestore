@@ -1,4 +1,4 @@
-package com.admintest.service;
+package com.admin.service;
 
 import com.adminportal.domain.security.LoginStatus;
 import com.adminportal.service.impl.SpringSecurityLoginService;

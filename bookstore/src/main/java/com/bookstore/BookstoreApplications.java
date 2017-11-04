@@ -18,6 +18,9 @@ import java.util.Set;
 public class BookstoreApplications implements CommandLineRunner {
 
     @Autowired
+    SecurityUtility securityUtility;
+
+    @Autowired
     private UserService userService;
 
     public static void main(String[] args) {
@@ -30,7 +33,7 @@ public class BookstoreApplications implements CommandLineRunner {
         user1.setFirstname("Valentine");
         user1.setLastname("Ezugu");
         user1.setUsername("V");
-        user1.setPassword(SecurityUtility.passwordEncoder().encode("A"));
+        user1.setPassword(securityUtility.passwordEncoder().encode("A"));
         user1.setEmail("valentineezugu@yahoo.com");
         Set<UserRole> userRoles = new HashSet<>();
         Role role1 = new Role();

@@ -2,6 +2,7 @@ package com.bookstore.service.api;
 
 import com.bookstore.domain.*;
 import org.aspectj.weaver.ast.Or;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,8 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface OrderService {
 
-   Order createOrder(ShoppingCart shoppingCart, ShippingAddress shippingAddress, BillingAddress billingAddress, Payment payment, String shippingMethod, User user);
+   Order createOrder(ShoppingCart shoppingCart, ShippingAddress shippingAddress, BillingAddress billingAddress, Payment payment, String shippingMethod, User user)throws DataAccessException;
 
 
-   Order findOne(Long id);
+   Order findOne(Long id)throws DataAccessException;
 }

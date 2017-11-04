@@ -6,12 +6,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by Pc on 8/13/2017.
- */
-
 @Entity
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -20,7 +17,7 @@ public class Book {
     private String author;
     private String publisher;
     private String publicationDate;
-    private String language ;
+    private String language;
     private String category;
     private String numberOfPages;
     private String format;

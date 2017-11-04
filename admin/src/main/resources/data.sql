@@ -5,9 +5,7 @@ INSERT INTO password_reset_token VALUES (1,'2017-10-01 16:27:48','59bdd703-c3e4-
 
 INSERT INTO role VALUES (0,'ADMIN',0),(1,'USER',1);
 
-
 INSERT INTO shopping_cart VALUES (1,NULL,2),(2,NULL,3);
-
 
 INSERT INTO user_role VALUES (1,0,1),(2,1,2),(3,1,3);
 

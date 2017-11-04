@@ -34,6 +34,8 @@ import java.util.*;
 @Controller
 public class HomeController {
 
+
+    SecurityUtility securityUtility;
     @Autowired
     private JavaMailSender mailSender;
 
@@ -138,8 +140,8 @@ public class HomeController {
             model.addAttribute("emailNotExits", true);
             return "Myaccount";
         }
-        String password = SecurityUtility.randomPassword();
-        String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
+        String password = securityUtility.randomPassword();
+        String encryptedPassword = securityUtility.passwordEncoder().encode(password);
         user.setPassword(encryptedPassword);
         userService.save(user);
 
@@ -500,9 +502,9 @@ public class HomeController {
         user.setUsername(username);
         user.setEmail(userEmail);
 
-        String password = SecurityUtility.randomPassword();
+        String password = securityUtility.randomPassword();
 
-        String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
+        String encryptedPassword = securityUtility.passwordEncoder().encode(password);
         user.setPassword(encryptedPassword);
 
         Role role = new Role();
@@ -583,7 +585,7 @@ public class HomeController {
 
 //		update password
         if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")) {
-            BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
+            BCryptPasswordEncoder passwordEncoder = securityUtility.passwordEncoder();
             String dbPassword = currentUser.getPassword();
             if (passwordEncoder.matches(user.getPassword(), dbPassword)) {
                 currentUser.setPassword(passwordEncoder.encode(newPassword));
