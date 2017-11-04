@@ -8,7 +8,6 @@ import com.bookstore.domain.security.PasswordResetToken;
 import com.bookstore.domain.security.UserRole;
 import org.springframework.dao.DataAccessException;
 
-import java.nio.file.AccessDeniedException;
 import java.util.Set;
 
 public interface UserService {
