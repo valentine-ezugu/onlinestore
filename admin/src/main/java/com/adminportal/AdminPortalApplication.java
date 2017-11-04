@@ -18,7 +18,7 @@ import java.util.Set;
 public class AdminPortalApplication implements CommandLineRunner {
 
     @Autowired
-    SecurityUtility securityUtility;
+    private SecurityUtility securityUtility;
 
     @Autowired
     private UserService userService;
