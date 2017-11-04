@@ -8,14 +8,17 @@ import com.bookstore.service.api.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Service
+@javax.transaction.Transactional
 public class UserServiceImpl implements UserService {
 
     private static final Logger Log = LoggerFactory.getLogger(UserService.class);
@@ -36,38 +39,38 @@ public class UserServiceImpl implements UserService {
     private UserShippingRepository userShippingRepository;
 
     @Override
-    public PasswordResetToken getPasswordResetToken(final String token) {
+    public PasswordResetToken getPasswordResetToken(final String token)throws DataAccessException {
         return passwordResetTokenRepository.findByToken(token);
     }
 
     @Override
-    public void createPasswordResetTokenForUser(final User user, final String token) {
+    public void createPasswordResetTokenForUser(final User user, final String token) throws DataAccessException{
         final PasswordResetToken myToken = new PasswordResetToken(token, user);
         passwordResetTokenRepository.save(myToken);
     }
     @Override
-   public User findByUsername(String username){
+   public User findByUsername(String username)throws DataAccessException{
         return userRepository.findByUsername(username);
     }
 
     @Override
-    public User findById(Long id) {
+    public User findById(Long id)throws DataAccessException {
         return userRepository.findOne(id);
     }
 
     @Override
-    public User getUserById(Long id) {
+    public User getUserById(Long id) throws DataAccessException {
         return userRepository.findOne(id);
     }
     @Override
-    public User findByEmail(String email){
+    public User findByEmail(String email)throws DataAccessException{
        return userRepository.findByEmail(email);
     }
 
     //handling the logic of creating a user and role saving
     @Override
     @Transactional
-     public User createUser(User user, Set<UserRole> userRoles){
+     public User createUser(User user, Set<UserRole> userRoles) throws DataAccessException{
      User localUser = userRepository.findByUsername(user.getUsername());
 
      if(localUser != null){
@@ -92,7 +95,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User user) {
+    public User save(User user)throws DataAccessException {
         return userRepository.save(user);
     }
 
@@ -109,7 +112,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserShipping(UserShipping userShipping, User user) {
+    public void updateUserShipping(UserShipping userShipping, User user) throws DataAccessException {
             userShipping.setUser(user);
             userShipping.setUserShippingDefault(true);
             user.getUserShippingList().add(userShipping);
@@ -117,7 +120,7 @@ public class UserServiceImpl implements UserService {
         }
 
     @Override
-    public void setUserDefaultShipping(Long userShippingId, User user) {
+    public void setUserDefaultShipping(Long userShippingId, User user) throws DataAccessException{
         List<UserShipping> userShippingList =(List<UserShipping>)userShippingRepository.findAll();
 
         for(UserShipping userShipping : userShippingList){ //first we look through shipping list if any
@@ -133,7 +136,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void setUserDefaultPayment(Long userPaymentId, User user) {
+    public void setUserDefaultPayment(Long userPaymentId, User user) throws DataAccessException{
 
         List<UserPayment >userPaymentsList =(List<UserPayment>)userPaymentRepository.findAll();
 
