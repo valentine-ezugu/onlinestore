@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 
 @Profile("test")
 @Configuration
-@PropertySource(value = {"classpath:application.properties"})
+@PropertySource(value = {"classpath:message.properties"})
 public  class H2DataConfig {
 
     @Autowired
