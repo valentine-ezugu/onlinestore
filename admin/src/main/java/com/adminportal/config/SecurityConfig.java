@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/newUser",
             "/ForgetPassword",
             "/login",
-            "/fonts/**",  //adding fonts helped to downloading glyphicons doc when login in
+            "/fonts/**",
             "/bookshelf"
 
     };
