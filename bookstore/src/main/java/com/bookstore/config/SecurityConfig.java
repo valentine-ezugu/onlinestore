@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/newUser",
             "/ForgetPassword",
             "/login",
-            "/fonts/**",  
+            "/fonts/**",
             "/bookshelf",
             "/hours",
             "faq",
