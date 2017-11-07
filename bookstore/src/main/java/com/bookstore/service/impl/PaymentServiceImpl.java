@@ -7,7 +7,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class PaymentServiceImpl implements PaymentService {
 
     public Payment setByUserPayment(UserPayment userPayment, Payment payment) throws AccessDeniedException

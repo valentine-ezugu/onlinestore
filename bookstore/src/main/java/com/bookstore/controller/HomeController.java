@@ -14,7 +14,6 @@ import com.bookstore.utility.USConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,8 +33,9 @@ import java.util.*;
 @Controller
 public class HomeController {
 
+    @Autowired
+    private SecurityUtility securityUtility;
 
-    SecurityUtility securityUtility;
     @Autowired
     private JavaMailSender mailSender;
 
@@ -105,8 +105,7 @@ public class HomeController {
         return "bookshelf";
     }
 
-
-    @RequestMapping("/bookDetail")
+     @RequestMapping("/bookDetail")
     public String bookDetail(
             @PathParam("id") Long id, Model model, Principal principal
     ) {
@@ -509,7 +508,7 @@ public class HomeController {
 
         Role role = new Role();
         role.setRoleId(1);
-        role.setName("Role_USER");
+        role.setName("USER");
         Set<UserRole> userRoles = new HashSet<>();
         userRoles.add(new UserRole(user, role));
         userService.createUser(user, userRoles);
@@ -592,12 +591,12 @@ public class HomeController {
             } else {
                 model.addAttribute("incorrectPassword", true);
 
-                return "Myrofile";
+                return "Myprofile";
             }
         }
 
-        currentUser.setFirstname(user.getFirstname());
-        currentUser.setLastname(user.getLastname());
+        currentUser.setFirstName(user.getFirstName());
+        currentUser.setLastName(user.getLastName());
         currentUser.setUsername(user.getUsername());
         currentUser.setEmail(user.getEmail());
 

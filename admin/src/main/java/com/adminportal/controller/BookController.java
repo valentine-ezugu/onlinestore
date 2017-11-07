@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+
 import com.adminportal.repository.BookRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class BookController {
     public String addBook(Model model) {
         Book book = new Book();
         model.addAttribute("book", book);
-        return "addBook";
+         return "addBook";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -47,7 +48,8 @@ public class BookController {
         MultipartFile bookImage = book.getBookImage();
 
         try {
-            byte[] bytes = bookImage.getBytes();
+
+            byte[] bytes =  bookImage.getBytes();
             String name = book.getId() + ".png";
 
             BufferedOutputStream stream = new BufferedOutputStream(
@@ -66,6 +68,7 @@ public class BookController {
     public String bookInfo(@RequestParam("id") Long id, Model model) {
         Book book = bookService.findOne(id);
         model.addAttribute("book", book);
+
         return "bookInfo";
     }
 
@@ -82,6 +85,7 @@ public class BookController {
         bookService.save(book);
 
         MultipartFile bookImage = book.getBookImage();
+
         if (!bookImage.isEmpty()) {
             try {
                 byte[] bytes = bookImage.getBytes();
@@ -97,6 +101,7 @@ public class BookController {
                 e.printStackTrace();
             }
         }
+
         return "redirect:/book/bookInfo?id=" + book.getId();
     }
 
@@ -112,7 +117,7 @@ public class BookController {
     public String remove(
             @ModelAttribute("id") String id, Model model
     ) {
-        bookService.removeOne(Long.parseLong(id.substring(0,8)));
+        bookService.removeOne(Long.parseLong(id.substring(8)));
         List<Book> bookList = bookService.findAll();
         model.addAttribute("bookList", bookList);
 

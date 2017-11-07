@@ -1,5 +1,6 @@
 package com.adminportal;
 
+import com.adminportal.domain.User;
 import com.adminportal.domain.security.Role;
 import com.adminportal.domain.security.UserRole;
 import com.adminportal.service.api.UserService;
@@ -9,12 +10,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Configuration
 @SpringBootApplication
+@EnableTransactionManagement
 public class AdminPortalApplication implements CommandLineRunner {
 
     @Autowired
@@ -29,14 +32,16 @@ public class AdminPortalApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        com.adminportal.domain.User user1 = new com.adminportal.domain.User();
+        User user1 = new User();
+        user1.setFirstName("valik");
+        user1.setLastName("ezugu");
         user1.setUsername("admin");
         user1.setPassword(securityUtility.passwordEncoder().encode("admin"));
         user1.setEmail("admin@yahoo.com");
         Set<UserRole> userRoles = new HashSet<>();
         Role role1 = new Role();
         role1.setRoleId(0);
-        role1.setName("ADMIN");//ROLE_ADMIN
+        role1.setName("ADMIN");
         userRoles.add(new UserRole(user1, role1));
         userService.createUser(user1, userRoles);
     }

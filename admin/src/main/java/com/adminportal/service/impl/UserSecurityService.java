@@ -12,7 +12,6 @@ import com.adminportal.repository.UserRepository;
 import javax.transaction.Transactional;
 
 @Service
-@Transactional
 public class UserSecurityService implements UserDetailsService{
 	
 	@Autowired

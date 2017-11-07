@@ -3,7 +3,9 @@ package com.adminportal.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.util.Assert;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.Transient;
 import java.util.List;
 
 public class BookDetail {
@@ -34,6 +36,8 @@ public class BookDetail {
     public int hashCode() { 
         return this.id.hashCode() * 31 + this.title.hashCode(); 
     }
+
+
 
     @Override 
     public boolean equals(Object obj) { 

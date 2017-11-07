@@ -12,8 +12,7 @@ import com.bookstore.repository.UserRepository;
 import javax.transaction.Transactional;
 
 @Service
-@Transactional
-public class UserSecurityService implements UserDetailsService{
+ public class UserSecurityService implements UserDetailsService{
 
     @Autowired
     private UserRepository userRepository;

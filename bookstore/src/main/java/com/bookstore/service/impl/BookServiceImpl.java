@@ -5,6 +5,7 @@ import com.bookstore.repository.BookRepository;
 import com.bookstore.service.api.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 
 
 import javax.transaction.Transactional;
@@ -12,9 +13,7 @@ import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Pc on 8/15/2017.
- */
+
 
 @Service
 @Transactional

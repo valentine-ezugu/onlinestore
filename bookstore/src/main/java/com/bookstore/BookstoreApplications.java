@@ -10,12 +10,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Configuration
 @SpringBootApplication
-public class BookstoreApplications implements CommandLineRunner {
+@EnableTransactionManagement
+public class BookstoreApplications  implements CommandLineRunner   {
 
     @Autowired
     SecurityUtility securityUtility;
@@ -30,8 +33,8 @@ public class BookstoreApplications implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         User user1 = new User();
-        user1.setFirstname("Valentine");
-        user1.setLastname("Ezugu");
+        user1.setFirstName("Valentine");
+        user1.setLastName("Ezugu");
         user1.setUsername("V");
         user1.setPassword(securityUtility.passwordEncoder().encode("A"));
         user1.setEmail("valentineezugu@yahoo.com");
@@ -42,5 +45,4 @@ public class BookstoreApplications implements CommandLineRunner {
         userRoles.add(new UserRole(user1, role1));
         userService.createUser(user1, userRoles);
     }
-
 }

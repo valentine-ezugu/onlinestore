@@ -2,16 +2,14 @@ package com.bookstore.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by Pc on 8/13/2017.
- */
+
 
 @Entity
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -35,8 +33,8 @@ public class Book {
 
     private int inStockNumber;
 
-    @Transient
-    private MultipartFile bookImage;
+//   @Transient
+//    private MultipartFile bookImage;
 
     @OneToMany(mappedBy = "book")
     @JsonIgnore
@@ -171,13 +169,13 @@ public class Book {
         this.inStockNumber = inStockNumber;
     }
 
-    public MultipartFile getBookImage() {
-        return bookImage;
-    }
-
-    public void setBookImage(MultipartFile bookImage) {
-        this.bookImage = bookImage;
-    }
+//    public MultipartFile getBookImage() {
+//        return bookImage;
+//    }
+//
+//    public void setBookImage(MultipartFile bookImage) {
+//        this.bookImage = bookImage;
+//    }
 
     public List<BookToCartItem> getBookToCartItemList() {
         return bookToCartItemList;

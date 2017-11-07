@@ -80,7 +80,7 @@ public class ShoppingCartControllerTest {
 
 
     @Test
-    @WithMockUser(username = "V", roles = {"USER"})
+    @WithMockUser//(username = "V", roles = {"USER"})
     public void addItemToShoppingCart() throws Exception {
 
         CartItem cartItem = new CartItem();
@@ -117,7 +117,7 @@ public class ShoppingCartControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "V", roles = {"USER"})
+    @WithMockUser//(username = "V", roles = {"USER"})
     public void updateCartItemTest() throws Exception {
 
         Book book = new Book();
@@ -145,7 +145,7 @@ public class ShoppingCartControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "V", roles = {"USER"})
+    @WithMockUser//(username = "V", roles = {"USER"})
     public void checkBookDetail() throws Exception {
         Book book = new Book();
         book.setId(1L);

@@ -5,9 +5,6 @@ import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
-/**
- * Created by Pc on 8/14/2017.
- */
 public interface BookService {
 
     Book save(Book book)throws DataAccessException;

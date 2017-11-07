@@ -29,6 +29,7 @@ import java.util.Arrays;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private Environment env;
 
@@ -54,7 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     };
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().
@@ -63,10 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/book/bookList/**").hasRole("ADMIN").
                 antMatchers("/book/add/**").hasRole("ADMIN").
 
-
                 and().formLogin();
-
-
 
         http
                 .csrf().disable().cors().disable()
@@ -91,6 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         }
     }
+
     @Bean
     public UserDetailsService userDetailsService(){
         GrantedAuthority authority = new SimpleGrantedAuthority("ADMIN");

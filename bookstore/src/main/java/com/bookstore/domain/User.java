@@ -24,9 +24,25 @@ public class User implements UserDetails{
 
     private String password;
 
-    private String firstname;
+    private String firstName;
 
-    private String lastname;
+    private String lastName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     @Column(name = "email",nullable =false,updatable= false)
     private String email;
@@ -84,21 +100,6 @@ public class User implements UserDetails{
         this.password = password;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
 
     public String getEmail() {
         return email;

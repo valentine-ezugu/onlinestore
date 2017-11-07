@@ -2,9 +2,6 @@ package com.adminportal.domain;
 
 import javax.persistence.*;
 
-/**
- * Created by Pc on 8/24/2017.
- */
 
 @Entity
 public class BillingAddress {

@@ -20,18 +20,17 @@ import java.util.List;
 @Transactional
 public class OrderServiceImpl implements OrderService {
     @Autowired
+    CartItemService cartItemService;
+    @Autowired
     private OrderRepository orderRepository;
 
-    @Autowired
-    CartItemService cartItemService;
-
     @Override
-    public synchronized Order  createOrder(ShoppingCart shoppingCart,
-                             ShippingAddress shippingAddress,
-                             BillingAddress billingAddress,
-                             Payment payment,
-                             String shippingMethod,
-                             User user) throws DataAccessException, AccessDeniedException
+    public synchronized Order createOrder(ShoppingCart shoppingCart,
+                                          ShippingAddress shippingAddress,
+                                          BillingAddress billingAddress,
+                                          Payment payment,
+                                          String shippingMethod,
+                                          User user) throws DataAccessException, AccessDeniedException
 
     {
 
@@ -42,12 +41,12 @@ public class OrderServiceImpl implements OrderService {
         order.setShippingAddress(shippingAddress);
         order.setShippingMethod(shippingMethod);
 
-        List<CartItem> cartItemList= cartItemService.findByShoppingCart(shoppingCart);
+        List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 
-        for (CartItem cartItem : cartItemList){
-            Book book =cartItem.getBook();
+        for (CartItem cartItem : cartItemList) {
+            Book book = cartItem.getBook();
             cartItem.setOrder(order);
-            book.setInStockNumber(book.getInStockNumber()- cartItem.getQty());
+            book.setInStockNumber(book.getInStockNumber() - cartItem.getQty());
 
         }
 
@@ -65,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order findOne(Long id)throws AccessDeniedException
+    public Order findOne(Long id) throws AccessDeniedException
 
     {
         return orderRepository.findOne(id);

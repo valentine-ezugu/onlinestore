@@ -26,14 +26,14 @@ import static org.easymock.EasyMock.*;
 public class UserServiceTest extends AbstractTest {
 
     @Autowired
-    SecurityUtility securityUtility;
+    private SecurityUtility securityUtility;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
-    RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @Before
     public void setUp() {

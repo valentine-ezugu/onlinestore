@@ -87,7 +87,7 @@ public class BookControllerTest {
         Book book = new Book();
         List<Book> expectedBookList = createBookList(10);
 
-         /* expect */
+
         bookService.removeOne(anyLong());
         EasyMock.expectLastCall();
         bookService.removeOne(anyLong());
@@ -99,7 +99,7 @@ public class BookControllerTest {
                 .perform(post("/book/remove")
                         .accept(MediaType.TEXT_HTML)
                         .contentType(MediaType.TEXT_HTML)
-                        .param("id", "12345678"))
+                        .param("id", "012345678"))
 
                 .andExpect(view().name("redirect:/book/bookList"))
                 .andReturn();

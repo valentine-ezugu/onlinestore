@@ -1,7 +1,7 @@
 package com.bookstore.config;
+
  import com.bookstore.service.impl.UserSecurityService;
  import com.bookstore.utility.SecurityUtility;
- import org.springframework.context.annotation.Bean;
  import org.springframework.core.env.Environment;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.context.annotation.Configuration;
@@ -19,19 +19,20 @@ package com.bookstore.config;
  import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
  import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private  Environment env;
 
-    SecurityUtility securityUtility;
+    @Autowired
+    private SecurityUtility securityUtility;
 
-     @Autowired
+    @Autowired
     private UserSecurityService userSecurityService;
 
     private BCryptPasswordEncoder passwordEncoder(){
@@ -58,9 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().
                   antMatchers(PUBLIC_MATCHERS).permitAll().
-                antMatchers( "/bookDetail/**").hasRole("USER").
-                antMatchers("/listOfCreditCards/**").hasRole("USER").
-                antMatchers( "/shoppingCart/addItem/**").hasRole("USER").
+               // antMatchers( "/bookDetail/**").hasRole("USER").
+                //antMatchers("/listOfCreditCards/**").hasRole("USER").
+                //antMatchers( "/shoppingCart/addItem/**").hasRole("USER").
                  and().formLogin();
 
         http
@@ -74,6 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe();
     }
+
     @Configuration
     protected static class AuthenticationConfiguration extends
             GlobalAuthenticationConfigurerAdapter {
@@ -81,21 +83,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         public void init(AuthenticationManagerBuilder auth) throws Exception {
             auth.inMemoryAuthentication().withUser("V").password("A").roles("USER");
+            auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
 
         }
     }
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        GrantedAuthority authority = new SimpleGrantedAuthority("USER");
-        UserDetails userDetails = (UserDetails)new User("V", "A", Arrays.asList(authority));
-        return new InMemoryUserDetailsManager(Arrays.asList(userDetails));
-    }
-
-
     //authenticate  user name password invoke user details service for confirmation
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth)throws Exception{
-//        auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
-//     }
+     @Autowired
+     public void configureGlobal(AuthenticationManagerBuilder auth)throws Exception{
+         auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
+     }
 }

@@ -25,11 +25,8 @@ public class UserServiceTest extends AbstractTest {
     @Autowired
     private UserService userService;
 
-
-    SecurityUtility securityUtility;
-
     @Autowired
-    private UserRepository userRepository;
+    SecurityUtility securityUtility;
 
     @Before
     public void setUp() throws Exception {
@@ -49,7 +46,6 @@ public class UserServiceTest extends AbstractTest {
         role1.setName("ROLE_USER");
         userRoles.add(new UserRole(user1, role1));
         userService.createUser(user1, userRoles);
-        userRepository.save(user1);
         assert (user1.getUsername().equals("V"));
     }
 

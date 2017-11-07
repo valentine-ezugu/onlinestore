@@ -2,7 +2,6 @@ package com.adminportal.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -37,17 +36,6 @@ public class Book {
     @OneToMany(mappedBy = "book")
     @JsonIgnore
     private List<BookToCartItem> bookToCartItemList;
-
-    @Transient
-    private List<Book> bookList;
-
-    public List<Book> getBookList() {
-        return bookList;
-    }
-
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
-    }
 
     public Long getId() {
         return id;
