@@ -5,6 +5,8 @@ import com.bookstore.domain.security.Role;
 import com.bookstore.domain.security.UserRole;
 import com.bookstore.service.api.UserService;
 import com.bookstore.utility.SecurityUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,10 +23,13 @@ import java.util.Set;
 public class BookstoreApplications  implements CommandLineRunner   {
 
     @Autowired
-    SecurityUtility securityUtility;
+    private SecurityUtility securityUtility;
 
     @Autowired
     private UserService userService;
+
+    private static final Logger logger = LoggerFactory.getLogger(BookstoreApplications.class);
+
 
     public static void main(String[] args) {
         SpringApplication.run(BookstoreApplications.class, args);
@@ -44,5 +49,10 @@ public class BookstoreApplications  implements CommandLineRunner   {
         role1.setName("USER");
         userRoles.add(new UserRole(user1, role1));
         userService.createUser(user1, userRoles);
+
+        logger.error("Message logged at ERROR level");
+        logger.warn("Message logged at WARN level");
+        logger.info("Message logged at INFO level");
+        logger.debug("Message logged at DEBUG level");
     }
 }

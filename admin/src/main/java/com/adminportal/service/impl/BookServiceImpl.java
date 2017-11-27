@@ -4,6 +4,8 @@ import com.adminportal.domain.Book;
 import com.adminportal.dto.book.BookForSave;
 import com.adminportal.repository.BookRepository;
 import com.adminportal.service.api.BookService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,14 @@ import java.util.List;
 @Transactional
 public class BookServiceImpl implements BookService {
 
+    private Logger logger = LoggerFactory.getLogger(BookServiceImpl.class);
+
+    public void service(){
+        logger.info("Message at INFO level from TestService.service()");
+        logger.warn("Message at WARN level from TestService.service()");
+    }
+
+
     @Autowired
     private BookRepository bookRepository;
 
@@ -28,16 +38,16 @@ public class BookServiceImpl implements BookService {
         Assert.hasText(bookForSave.getTitle(), "Title Required");
         Assert.hasText(bookForSave.getAuthor(), "author should have text");
         Assert.hasText(bookForSave.getCategory(), " category should have text");
-        Assert.notNull(bookForSave.getIsbn(), "course start should be represented");
+        Assert.notNull(bookForSave.getIsbn(), "Isbn should be represented");
         Assert.notNull(bookForSave.getListPrice(), "List price cant be empty");
         Assert.notNull(bookForSave.getOurPrice(), "price cant be null");
-        Assert.hasText(bookForSave.getFormat(), "enter Detail");
-        Assert.notNull(bookForSave.getNumberOfPages(), "enter Detail");
+        Assert.hasText(bookForSave.getFormat(), "enter Format  Detail");
+        Assert.notNull(bookForSave.getNumberOfPages(), "enter NumberOfPages Detail");
         bookForSave.getPublisher();
         bookForSave.getShippingWeight();
         bookForSave.isActive();
-        Assert.hasText(bookForSave.getPublicationDate(), "Date Required");
-        Assert.hasText(bookForSave.getLanguage(), "Title Required");
+        Assert.hasText(bookForSave.getPublicationDate(), "PublicationDate Required");
+        Assert.hasText(bookForSave.getLanguage(), "Language Required");
         bookForSave.getDescription();
         Assert.notNull(bookForSave.getInStockNumber(), "stock number Required");
         Assert.notNull(bookForSave, "bookForSave should not be null");
