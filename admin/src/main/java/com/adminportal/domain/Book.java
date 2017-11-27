@@ -1,7 +1,9 @@
 package com.adminportal.domain;
 
+import com.adminportal.dto.book.BookForSave;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -24,10 +26,11 @@ public class Book {
     private double shippingWeight;
     private double listPrice;
     private double ourPrice;
-    private boolean active= true;
+    private boolean active = true;
 
     @Column(columnDefinition="text")
     private String description;
+
     private int inStockNumber;
 
     @Transient
@@ -36,6 +39,29 @@ public class Book {
     @OneToMany(mappedBy = "book")
     @JsonIgnore
     private List<BookToCartItem> bookToCartItemList;
+
+    public Book() {
+    }
+
+    public Book(BookForSave bookForSave) {
+
+        this.title = bookForSave.getTitle();
+        this.id =bookForSave.getId();
+        this.author = bookForSave.getAuthor();
+        this.publisher = bookForSave.getPublisher();
+        this.publicationDate = bookForSave.getPublicationDate();
+        this.language = bookForSave.getLanguage();
+        this.category = bookForSave.getCategory();
+        this.numberOfPages = bookForSave.getNumberOfPages();
+        this.format = bookForSave.getFormat();
+        this.isbn = bookForSave.getIsbn();
+        this.shippingWeight = bookForSave.getShippingWeight();
+        this.listPrice = bookForSave.getListPrice();
+        this.ourPrice = bookForSave.getOurPrice();
+        this.active = bookForSave.isActive();
+        this.description = bookForSave.getDescription();
+        this.inStockNumber = bookForSave.getInStockNumber();
+    }
 
     public Long getId() {
         return id;

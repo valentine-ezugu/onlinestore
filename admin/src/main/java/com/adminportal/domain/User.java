@@ -2,6 +2,7 @@ package com.adminportal.domain;
 
 import com.adminportal.domain.security.Authority;
 import com.adminportal.domain.security.UserRole;
+import com.adminportal.dto.user.LoginInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,22 +30,6 @@ public class User implements UserDetails {
 
     private String lastName;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     @Column(name = "email", nullable = false, updatable = false)
     private String email;
 
@@ -57,15 +42,25 @@ public class User implements UserDetails {
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    List<UserShipping> userShippingList;
+    private List<UserShipping> userShippingList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    List<UserPayment> userPaymentList;
+    private List<UserPayment> userPaymentList;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<UserRole> userRoles = new HashSet<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<Order> orderList;
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
 
     public Set<UserRole> getUserRoles() {
         return userRoles;
@@ -78,6 +73,15 @@ public class User implements UserDetails {
     public Long getId() {
 
         return id;
+    }
+
+    public User() {
+    }
+
+    public User(LoginInfo loginInfo) {
+
+        this.username = loginInfo.getUsername();
+        this.password = loginInfo.getPassword();
     }
 
     public void setId(Long id) {
@@ -98,6 +102,22 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {

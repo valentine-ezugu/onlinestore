@@ -5,11 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
 
-/**
- * Created by Pc on 8/13/2017.
- */
 @Controller
 public class HomeController {
     @Autowired
@@ -28,13 +24,6 @@ public class HomeController {
     @RequestMapping("/login")
     public String login() {
         return "login";
-    }
-
-    //for test purposes only
-    @RequestMapping("/allUsers")
-    public  String   allUsers(){
-        userRepository.findAll();
-        return "found all";
     }
 
 }

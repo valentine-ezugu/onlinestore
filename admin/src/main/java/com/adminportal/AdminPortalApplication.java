@@ -3,6 +3,7 @@ package com.adminportal;
 import com.adminportal.domain.User;
 import com.adminportal.domain.security.Role;
 import com.adminportal.domain.security.UserRole;
+import com.adminportal.dto.user.LoginInfo;
 import com.adminportal.service.api.UserService;
 import com.adminportal.utility.SecurityUtility;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,11 @@ public class AdminPortalApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user1 = new User();
-        user1.setFirstName("valik");
-        user1.setLastName("ezugu");
-        user1.setUsername("admin");
-        user1.setPassword(securityUtility.passwordEncoder().encode("admin"));
+
+        LoginInfo loginDto = new LoginInfo();
+        loginDto.setPassword(securityUtility.passwordEncoder().encode("admin"));
+        loginDto.setUsername("admin");
+        User user1 = new User(loginDto);
         user1.setEmail("admin@yahoo.com");
         Set<UserRole> userRoles = new HashSet<>();
         Role role1 = new Role();

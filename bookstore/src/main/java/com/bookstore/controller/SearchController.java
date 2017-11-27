@@ -1,8 +1,9 @@
 package com.bookstore.controller;
 
-import java.security.Principal;
-import java.util.List;
-
+import com.bookstore.domain.Book;
+import com.bookstore.domain.User;
+import com.bookstore.dto.book.BookDetailForList;
+import com.bookstore.dto.user.UserForProfile;
 import com.bookstore.service.api.BookService;
 import com.bookstore.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bookstore.domain.Book;
-import com.bookstore.domain.User;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -28,14 +30,15 @@ public class SearchController {
     public String searchByCategory(
             @RequestParam("category") String category,
             Model model, Principal principal
-    ){
-        if(principal!=null) {
+    ) {
+        if (principal != null) {
             String username = principal.getName();
             User user = userService.findByUsername(username);
-            model.addAttribute("user", user);
+            UserForProfile userForProfile = new UserForProfile(user);
+            model.addAttribute("user", userForProfile);
         }
 
-        String classActiveCategory = "active"+category;
+        String classActiveCategory = "active" + category;
         classActiveCategory = classActiveCategory.replaceAll("\\s+", "");
         classActiveCategory = classActiveCategory.replaceAll("&", "");
         model.addAttribute(classActiveCategory, true);
@@ -46,8 +49,11 @@ public class SearchController {
             model.addAttribute("emptyList", true);
             return "bookshelf";
         }
-
-        model.addAttribute("bookList", bookList);
+        List<BookDetailForList> bookListToFront = new ArrayList<>();
+        for(Book book : bookList){
+            bookListToFront.add(new BookDetailForList(book));
+        }
+        model.addAttribute("bookList", bookListToFront);
 
         return "bookshelf";
     }
@@ -57,7 +63,7 @@ public class SearchController {
             @ModelAttribute("keyword") String keyword,
             Principal principal, Model model
     ) {
-        if(principal!=null) {
+        if (principal != null) {
             String username = principal.getName();
             User user = userService.findByUsername(username);
             model.addAttribute("user", user);
@@ -69,9 +75,11 @@ public class SearchController {
             model.addAttribute("emptyList", true);
             return "bookshelf";
         }
-
-        model.addAttribute("bookList", bookList);
-
+        List<BookDetailForList> bookListToFront = new ArrayList<>();
+        for(Book book : bookList){
+            bookListToFront.add(new BookDetailForList(book));
+        }
+        model.addAttribute("bookList", bookListToFront);
         return "bookshelf";
     }
 }

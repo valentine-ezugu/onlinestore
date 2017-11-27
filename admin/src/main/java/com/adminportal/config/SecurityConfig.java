@@ -30,6 +30,7 @@ import java.util.Arrays;
 @EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     @Autowired
     private Environment env;
 

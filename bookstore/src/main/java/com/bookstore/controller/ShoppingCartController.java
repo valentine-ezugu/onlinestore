@@ -4,11 +4,12 @@ import com.bookstore.domain.Book;
 import com.bookstore.domain.CartItem;
 import com.bookstore.domain.ShoppingCart;
 import com.bookstore.domain.User;
+import com.bookstore.dto.cart.CartItemForList;
+import com.bookstore.dto.shoppingCart.ShoppingCartLite;
 import com.bookstore.service.api.BookService;
 import com.bookstore.service.api.CartItemService;
 import com.bookstore.service.api.ShoppingCartService;
 import com.bookstore.service.api.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,31 +25,40 @@ import java.util.List;
 public class ShoppingCartController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    CartItemService cartItemService;
+    private CartItemService cartItemService;
 
     @Autowired
-    BookService bookService;
+    private BookService bookService;
     @Autowired
-    ShoppingCartService shoppingCartService;
+    private ShoppingCartService shoppingCartService;
 
 
-    @RequestMapping(value = "/cart"  )
-    public String shoppingCart(Model model, Principal principal ) {
+    @RequestMapping(value = "/cart")
+    public String shoppingCart(Model model, Principal principal) {
+
         User user = userService.findByUsername(principal.getName());
-        ShoppingCart shoppingCart = user.getShoppingCart();
 
-        List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+             ShoppingCart shoppingCart = user.getShoppingCart();
+
+             List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+
+        List<CartItemForList> cartItemForLists = new ArrayList<>();
+        for (CartItem cartItem : cartItemList) {
+            cartItemForLists.add( new CartItemForList(cartItem));
+        }
+
+        ShoppingCartLite shoppingCartLite = new ShoppingCartLite(shoppingCart);
 
         shoppingCartService.updateShoppingCart(shoppingCart);
 
-        model.addAttribute("cartItemList", cartItemList);
-        model.addAttribute("shoppingCart", shoppingCart);
+             model.addAttribute("cartItemList", cartItemForLists);
+             model.addAttribute("shoppingCart", shoppingCartLite);
 
-        return "shoppingCart";
-    }
+             return "shoppingCart";
+         }
 
     @RequestMapping("/addItem")
     public String addItem(
@@ -60,35 +71,35 @@ public class ShoppingCartController {
         try {
             book = bookService.findOne(book.getId());
 
-        if (Integer.parseInt(qty) > book.getInStockNumber()) {
-            model.addAttribute("notEnoughStock", true);
-            return "forward:/bookDetail?id="+book.getId();
+            if (Integer.parseInt(qty) > book.getInStockNumber()) {
+                model.addAttribute("notEnoughStock", true);
+                return "forward:/bookDetail?id=" + book.getId();
+            }
+
+            CartItem cartItem = cartItemService.addBookToCartItem(book, user, Integer.parseInt(qty));
+            model.addAttribute("addBookSuccess", true);
+
+        } catch (NullPointerException e) {
+
         }
 
-        CartItem cartItem = cartItemService.addBookToCartItem(book, user, Integer.parseInt(qty));
-        model.addAttribute("addBookSuccess", true);
-
-        }catch (NullPointerException e){
-
-        }
-
-        return "forward:/bookDetail?id="+book.getId();
+        return "forward:/bookDetail?id=" + book.getId();
     }
 
 
     @RequestMapping("/updateCartItem")
-    public String updateShoppingCartItem( @ModelAttribute("id")Long cartItemId,
-                                      @ModelAttribute("qty") int qty ){
+    public String updateShoppingCartItem(@ModelAttribute("id") Long cartItemId,
+                                         @ModelAttribute("qty") int qty) {
 
-            CartItem cartItem = cartItemService.findById(cartItemId);
-            cartItem.setQty(qty);
-            cartItemService.updateCartItem(cartItem);
+        CartItem cartItem = cartItemService.findById(cartItemId);
+        cartItem.setQty(qty);
+        cartItemService.updateCartItem(cartItem);
         return "forward:/shoppingCart/cart";
     }
 
     @RequestMapping("/removeItem")
-    public String updateShoppingCartItem( @ModelAttribute("id")Long id){
-          cartItemService.removeCartItem(cartItemService.findById(id));
-         return "forward:/shoppingCart/cart";
+    public String updateShoppingCartItem(@ModelAttribute("id") Long id) {
+        cartItemService.removeCartItem(cartItemService.findById(id));
+        return "forward:/shoppingCart/cart";
     }
 }
