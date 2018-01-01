@@ -2,7 +2,6 @@ package com.bookstore.domain;
 
 import com.bookstore.domain.security.Authority;
 import com.bookstore.domain.security.UserRole;
-import com.bookstore.dto.user.LoginInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,36 +14,36 @@ import java.util.Set;
 
 
 @Entity
-public class User implements UserDetails {
+public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name ="id",nullable =false,updatable= false)
     private Long id;
 
     private String username;
 
     private String password;
 
-    private String firstName;
+    private String firstname;
 
-    private String lastName;
+    private String lastname;
 
-    @Column(name = "email", nullable = false, updatable = false)
+    @Column(name = "email",nullable =false,updatable= false)
     private String email;
 
     private String phone;
 
     private boolean enabled = true;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
     private ShoppingCart shoppingCart;
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     private List<UserShipping> userShippingList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     private List<UserPayment> userPaymentList;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -53,23 +52,6 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Order> orderList;
-
-    public User() {
-    }
-
-    public User(LoginInfo loginInfo) {
-
-        this.username = loginInfo.getUsername();
-        this.password = loginInfo.getPassword();
-    }
-
-    public List<Order> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
-    }
 
     public Set<UserRole> getUserRoles() {
         return userRoles;
@@ -80,7 +62,6 @@ public class User implements UserDetails {
     }
 
     public Long getId() {
-
         return id;
     }
 
@@ -93,7 +74,7 @@ public class User implements UserDetails {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+         this.username = username;
     }
 
     public String getPassword() {
@@ -104,20 +85,20 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -134,6 +115,10 @@ public class User implements UserDetails {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public List<UserShipping> getUserShippingList() {
@@ -160,10 +145,18 @@ public class User implements UserDetails {
         this.shoppingCart = shoppingCart;
     }
 
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
-        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
+        userRoles.forEach(ur ->authorities.add(new Authority(ur.getRole().getName())) );
 
         return authorities;
     }
@@ -172,7 +165,6 @@ public class User implements UserDetails {
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
@@ -182,14 +174,9 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     //if not enabled we cant log in
     public boolean isEnabled() {
         return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
 }

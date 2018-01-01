@@ -1,11 +1,9 @@
 package com.bookstore.controller;
 
-import com.bookstore.domain.Book;
-import com.bookstore.domain.User;
+import com.bookstore.domain.*;
 import com.bookstore.dto.book.BookDetailForList;
 import com.bookstore.dto.user.UserForProfile;
-import com.bookstore.service.api.BookService;
-import com.bookstore.service.api.UserService;
+import com.bookstore.services.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +18,7 @@ import java.util.List;
 
 @Controller
 public class SearchController {
+
     @Autowired
     private UserService userService;
 

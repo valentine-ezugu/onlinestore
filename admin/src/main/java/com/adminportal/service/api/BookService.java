@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BookService {
 
-    Book save(BookForSave bookForSave ) throws DataAccessException ;
+    Book save(Book book ) throws DataAccessException ;
 
     Book findOne(Long id)throws DataAccessException;
 

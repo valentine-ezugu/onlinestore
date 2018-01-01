@@ -1,9 +1,9 @@
 package com.bookstore;
 
-import com.bookstore.domain.User;
+import com.bookstore.domain.*;
 import com.bookstore.domain.security.Role;
 import com.bookstore.domain.security.UserRole;
-import com.bookstore.service.api.UserService;
+import com.bookstore.services.api.UserService;
 import com.bookstore.utility.SecurityUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.HashSet;
@@ -19,7 +21,9 @@ import java.util.Set;
 
 @Configuration
 @SpringBootApplication
-@EnableTransactionManagement
+@EntityScan(basePackages = {"com.bookstore"})
+@EnableJpaRepositories(basePackages = {"com.bookstore.repository"})
+ @EnableTransactionManagement
 public class BookstoreApplications  implements CommandLineRunner   {
 
     @Autowired
@@ -38,8 +42,8 @@ public class BookstoreApplications  implements CommandLineRunner   {
     @Override
     public void run(String... strings) throws Exception {
         User user1 = new User();
-        user1.setFirstName("Valentine");
-        user1.setLastName("Ezugu");
+        user1.setFirstname("Valentine");
+        user1.setLastname("Ezugu");
         user1.setUsername("V");
         user1.setPassword(securityUtility.passwordEncoder().encode("A"));
         user1.setEmail("valentineezugu@yahoo.com");

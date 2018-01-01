@@ -1,5 +1,7 @@
 package com.bookstore.domain.security;
+
 import com.bookstore.domain.User;
+
 import javax.persistence.*;
 
 @Entity

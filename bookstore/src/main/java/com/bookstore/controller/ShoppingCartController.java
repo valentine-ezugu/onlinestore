@@ -1,15 +1,11 @@
 package com.bookstore.controller;
 
-import com.bookstore.domain.Book;
-import com.bookstore.domain.CartItem;
-import com.bookstore.domain.ShoppingCart;
-import com.bookstore.domain.User;
+import com.bookstore.domain.*;
 import com.bookstore.dto.cart.CartItemForList;
 import com.bookstore.dto.shoppingCart.ShoppingCartLite;
-import com.bookstore.service.api.BookService;
-import com.bookstore.service.api.CartItemService;
-import com.bookstore.service.api.ShoppingCartService;
-import com.bookstore.service.api.UserService;
+import com.bookstore.services.api.*;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +31,8 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCartService shoppingCartService;
 
+    @Autowired
+    private Mapper mapper;
 
     @RequestMapping(value = "/cart")
     public String shoppingCart(Model model, Principal principal) {
@@ -43,11 +41,16 @@ public class ShoppingCartController {
 
              ShoppingCart shoppingCart = user.getShoppingCart();
 
-             List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+        List<String> lists = new ArrayList<>();
+        lists.add("mapping.xml");
+
+        mapper = new DozerBeanMapper(lists);
+
+        List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 
         List<CartItemForList> cartItemForLists = new ArrayList<>();
         for (CartItem cartItem : cartItemList) {
-            cartItemForLists.add( new CartItemForList(cartItem));
+            cartItemForLists.add( mapper.map(cartItem, CartItemForList.class,"cartItemForList"));
         }
 
         ShoppingCartLite shoppingCartLite = new ShoppingCartLite(shoppingCart);

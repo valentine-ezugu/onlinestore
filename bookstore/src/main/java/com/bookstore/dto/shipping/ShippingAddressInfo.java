@@ -1,8 +1,5 @@
 package com.bookstore.dto.shipping;
-
-import com.bookstore.domain.Order;
-import com.bookstore.domain.ShippingAddress;
-
+import com.bookstore.domain.*;
 
 public class ShippingAddressInfo {
 
@@ -18,19 +15,6 @@ public class ShippingAddressInfo {
 
     public ShippingAddressInfo() {
     }
-
-    public ShippingAddressInfo(ShippingAddress shippingAddress) {
-        id = shippingAddress.getId();
-        shippingAddressName = shippingAddress.getShippingAddressName();
-        shippingAddressStreet1 = shippingAddress.getShippingAddressStreet1();
-        shippingAddressStreet2 = shippingAddress.getShippingAddressStreet2();
-        shippingAddressCity = shippingAddress.getShippingAddressCity();
-        shippingAddressState = shippingAddress.getShippingAddressState();
-        shippingAddressCountry = shippingAddress.getShippingAddressCountry();
-        shippingAddressZipCode = shippingAddress.getShippingAddressZipCode();
-        order = shippingAddress.getOrder();
-    }
-
 
     public Long getId() {
         return id;

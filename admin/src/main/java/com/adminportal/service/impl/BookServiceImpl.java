@@ -33,42 +33,45 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepository;
 
-    public Book save(BookForSave bookForSave) throws DataAccessException {
-
-        Assert.hasText(bookForSave.getTitle(), "Title Required");
-        Assert.hasText(bookForSave.getAuthor(), "author should have text");
-        Assert.hasText(bookForSave.getCategory(), " category should have text");
-        Assert.notNull(bookForSave.getIsbn(), "Isbn should be represented");
-        Assert.notNull(bookForSave.getListPrice(), "List price cant be empty");
-        Assert.notNull(bookForSave.getOurPrice(), "price cant be null");
-        Assert.hasText(bookForSave.getFormat(), "enter Format  Detail");
-        Assert.notNull(bookForSave.getNumberOfPages(), "enter NumberOfPages Detail");
-        bookForSave.getPublisher();
-        bookForSave.getShippingWeight();
-        bookForSave.isActive();
-        Assert.hasText(bookForSave.getPublicationDate(), "PublicationDate Required");
-        Assert.hasText(bookForSave.getLanguage(), "Language Required");
-        bookForSave.getDescription();
-        Assert.notNull(bookForSave.getInStockNumber(), "stock number Required");
-        Assert.notNull(bookForSave, "bookForSave should not be null");
-        MultipartFile file = bookForSave.getBookImage();
-
-        try {
-            byte[] bytes = file.getBytes();
-            String name = bookForSave.getId() + ".png";
-
-            BufferedOutputStream stream = new BufferedOutputStream(
-                    new FileOutputStream(new File("src/main/resources/static/image/book/" + name)));
-
-            stream.write(bytes);
-            stream.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Book book = new Book(bookForSave);
-        return bookRepository.save(book);
+    public Book save(Book book) {
+         return bookRepository.save(book);
     }
+//    public Book save(BookForSave bookForSave) throws DataAccessException {
+//
+//        Assert.hasText(bookForSave.getTitle(), "Title Required");
+//        Assert.hasText(bookForSave.getAuthor(), "author should have text");
+//        Assert.hasText(bookForSave.getCategory(), " category should have text");
+//        Assert.notNull(bookForSave.getIsbn(), "Isbn should be represented");
+//        Assert.notNull(bookForSave.getListPrice(), "List price cant be empty");
+//        Assert.notNull(bookForSave.getOurPrice(), "price cant be null");
+//        Assert.hasText(bookForSave.getFormat(), "enter Format  Detail");
+//        Assert.notNull(bookForSave.getNumberOfPages(), "enter NumberOfPages Detail");
+//        bookForSave.getPublisher();
+//        bookForSave.getShippingWeight();
+//        bookForSave.isActive();
+//        Assert.hasText(bookForSave.getPublicationDate(), "PublicationDate Required");
+//        Assert.hasText(bookForSave.getLanguage(), "Language Required");
+//        bookForSave.getDescription();
+//        Assert.notNull(bookForSave.getInStockNumber(), "stock number Required");
+//        Assert.notNull(bookForSave, "bookForSave should not be null");
+//        MultipartFile file = bookForSave.getBookImage();
+//
+//        try {
+//            byte[] bytes = file.getBytes();
+//            String name = bookForSave.getId() + ".png";
+//
+//            BufferedOutputStream stream = new BufferedOutputStream(
+//                    new FileOutputStream(new File("src/main/resources/static/image/book/" + name)));
+//
+//            stream.write(bytes);
+//            stream.close();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        Book book = new Book(bookForSave);
+//        return bookRepository.save(book);
+//    }
 
     public List<Book> findAll() throws DataAccessException {
         return (List<Book>) bookRepository.findAll();

@@ -21,11 +21,11 @@ public class SpringSecurityLoginService implements LoginService {
     private Log log = LogFactory.getLog(SpringSecurityLoginService.class);
 
     @Autowired(required = false)
-  public   AuthenticationManager authenticationManager;
+    public   AuthenticationManager authenticationManager;
 
     public LoginStatus getStatus()throws DataAccessException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null && !auth.getName().equals("anonymousUser") && auth.isAuthenticated()) {
+        if (auth != null &&  !auth.getName().equals("anonymousUser") && auth.isAuthenticated()) {
             return new LoginStatus(true, auth.getName());
         } else {
             return new LoginStatus(false, null);

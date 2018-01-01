@@ -1,6 +1,6 @@
 package com.bookstore.config;
 
- import com.bookstore.service.impl.UserSecurityService;
+ import com.bookstore.services.impl.UserSecurityService;
  import com.bookstore.utility.SecurityUtility;
  import org.springframework.core.env.Environment;
  import org.springframework.beans.factory.annotation.Autowired;

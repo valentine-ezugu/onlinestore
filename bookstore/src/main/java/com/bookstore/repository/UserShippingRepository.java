@@ -1,7 +1,7 @@
 package com.bookstore.repository;
 
 
-import com.bookstore.domain.UserShipping;
+import com.bookstore.domain.*;
 import org.springframework.data.repository.CrudRepository;
 
 /**

@@ -1,6 +1,6 @@
 package com.adminportal.dto.book;
 
-import com.adminportal.domain.Book;
+import org.springframework.web.multipart.MultipartFile;
 
 
 public class BookDetailLite {
@@ -18,47 +18,33 @@ public class BookDetailLite {
     private double shippingWeight;
     private double listPrice;
     private double ourPrice;
-    private boolean active= true;
+    private boolean active = true;
     private String description;
     private int inStockNumber;
+    private MultipartFile bookImage;
 
 
+    //
+//    public BookDetailLite(Book book){
+//        id =book.getId();
+//        title = book.getTitle();
+//        author =book.getAuthor();
+//        publisher = book.getPublisher();
+//        publicationDate = book.getPublicationDate();
+//        language = book.getLanguage();
+//        numberOfPages = book.getNumberOfPages();
+//        category =book.getCategory();
+//        format = book.getFormat();
+//        isbn = book.getIsbn();
+//        shippingWeight = book.getShippingWeight();
+//        listPrice = book.getListPrice();
+//        ourPrice = book.getOurPrice();
+//        active = book.isActive();
+//        description = book.getDescription();
+//        inStockNumber = book.getInStockNumber();
+//
+//    }
 
-    public BookDetailLite(Book book){
-        id =book.getId();
-        title = book.getTitle();
-        author =book.getAuthor();
-        publisher = book.getPublisher();
-        publicationDate = book.getPublicationDate();
-        language = book.getLanguage();
-        numberOfPages = book.getNumberOfPages();
-        category =book.getCategory();
-        format = book.getFormat();
-        isbn = book.getIsbn();
-        shippingWeight = book.getShippingWeight();
-        listPrice = book.getListPrice();
-        ourPrice = book.getOurPrice();
-        active = book.isActive();
-        description = book.getDescription();
-        inStockNumber = book.getInStockNumber();
-
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getInStockNumber() {
-        return inStockNumber;
-    }
-
-    public void setInStockNumber(int inStockNumber) {
-        this.inStockNumber = inStockNumber;
-    }
 
     public Long getId() {
         return id;
@@ -172,4 +158,27 @@ public class BookDetailLite {
         this.active = active;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getInStockNumber() {
+        return inStockNumber;
+    }
+
+    public void setInStockNumber(int inStockNumber) {
+        this.inStockNumber = inStockNumber;
+    }
+
+    public MultipartFile getBookImage() {
+        return bookImage;
+    }
+
+    public void setBookImage(MultipartFile bookImage) {
+        this.bookImage = bookImage;
+    }
 }

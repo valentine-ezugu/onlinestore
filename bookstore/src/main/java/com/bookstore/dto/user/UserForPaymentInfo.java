@@ -1,8 +1,5 @@
 package com.bookstore.dto.user;
-
-import com.bookstore.domain.User;
-import com.bookstore.domain.UserBilling;
-import com.bookstore.domain.UserPayment;
+import com.bookstore.domain.*;
 
 public class UserForPaymentInfo {
 
@@ -20,20 +17,6 @@ public class UserForPaymentInfo {
     private UserBilling userBilling;
 
     public UserForPaymentInfo() {
-    }
-
-    public UserForPaymentInfo(UserPayment userPayment) {
-        id = userPayment.getId();
-        type = userPayment.getType();
-        cardName = userPayment.getCardName();
-        cardNumber = userPayment.getCardNumber();
-        expiryMonth = userPayment.getExpiryMonth();
-        expiryYear = userPayment.getExpiryYear();
-        cvc = userPayment.getCvc();
-        holderName = userPayment.getHolderName();
-        defaultPayment = userPayment.isDefaultPayment();
-        user = userPayment.getUser();
-        userBilling = userPayment.getUserBilling();
     }
 
     public Long getId() {

@@ -1,25 +1,118 @@
 package com.adminportal.dto.book;
 
 import com.adminportal.domain.Book;
+import com.adminportal.domain.BookToCartItem;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 public class BookDetailForList {
 
     private Long id;
     private String title;
     private String author;
+    private String publisher;
+    private String publicationDate;
+    private String language;
     private String category;
+    private String numberOfPages;
+    private String format;
+    private int isbn;
+    private double shippingWeight;
     private double listPrice;
     private double ourPrice;
-    private boolean active;
+    private boolean active= true;
+    private String description;
+    private int inStockNumber;
+    private List<BookToCartItem> bookToCartItemList;
+    private MultipartFile bookImage;
 
-    public BookDetailForList(Book book) {
-        this.id = book.getId();
-        this.title =book.getTitle();
-        this.author = book.getAuthor();
-        this.category = book.getCategory();
-        this.listPrice = book.getListPrice();
-        this.ourPrice = book.getOurPrice();
-        this.active = book.isActive();
+    public List<BookToCartItem> getBookToCartItemList() {
+        return bookToCartItemList;
+    }
+
+    public void setBookToCartItemList(List<BookToCartItem> bookToCartItemList) {
+        this.bookToCartItemList = bookToCartItemList;
+    }
+
+    public MultipartFile getBookImage() {
+        return bookImage;
+    }
+
+    public void setBookImage(MultipartFile bookImage) {
+        this.bookImage = bookImage;
+    }
+
+    public String getPublicationDate() {
+        return publicationDate;
+    }
+
+    public void setPublicationDate(String publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getNumberOfPages() {
+        return numberOfPages;
+    }
+
+    public void setNumberOfPages(String numberOfPages) {
+        this.numberOfPages = numberOfPages;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public int getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(int isbn) {
+        this.isbn = isbn;
+    }
+
+    public double getShippingWeight() {
+        return shippingWeight;
+    }
+
+    public void setShippingWeight(double shippingWeight) {
+        this.shippingWeight = shippingWeight;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getInStockNumber() {
+        return inStockNumber;
+    }
+
+    public void setInStockNumber(int inStockNumber) {
+        this.inStockNumber = inStockNumber;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
     public Long getId() {

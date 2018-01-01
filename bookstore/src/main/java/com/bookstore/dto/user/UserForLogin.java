@@ -1,6 +1,6 @@
 package com.bookstore.dto.user;
 
-import com.bookstore.domain.User;
+import com.bookstore.domain.*;
 
 
 public class UserForLogin {

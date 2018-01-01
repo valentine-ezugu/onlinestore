@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
- public class CartItem {
+public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,6 +23,7 @@ import java.util.List;
     @OneToMany(mappedBy = "cartItem")
     @JsonIgnore
     private List<BookToCartItem> bookToCartItemList;
+
 
     @ManyToOne
     @JoinColumn(name = "shopping_cart_id")

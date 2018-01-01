@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private Environment env;
 
     @Autowired
-    SecurityUtility securityUtility;
+    private SecurityUtility securityUtility;
 
     @Autowired
     private UserSecurityService userSecurityService;

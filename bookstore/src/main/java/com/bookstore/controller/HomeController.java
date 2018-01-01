@@ -1,20 +1,22 @@
 package com.bookstore.controller;
 
 import com.bookstore.domain.*;
-import com.bookstore.domain.security.PasswordResetToken;
-import com.bookstore.domain.security.Role;
-import com.bookstore.domain.security.UserRole;
+import com.bookstore.domain.PasswordResetToken;
+import com.bookstore.domain.security.*;
 import com.bookstore.dto.book.BookDetailExtraLite;
 import com.bookstore.dto.book.BookDetailForShelf;
 import com.bookstore.dto.order.OrderForFindOne;
 import com.bookstore.dto.user.*;
 import com.bookstore.repository.PasswordResetTokenRepository;
 import com.bookstore.repository.UserRepository;
-import com.bookstore.service.api.*;
-import com.bookstore.service.impl.UserSecurityService;
+
+import com.bookstore.services.api.*;
+import com.bookstore.services.impl.UserSecurityService;
 import com.bookstore.utility.MailConstructor;
 import com.bookstore.utility.SecurityUtility;
 import com.bookstore.utility.USConstants;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -74,6 +76,9 @@ public class HomeController {
 
     @Autowired
     private SecurityUtility securityUtility;
+
+   @Autowired
+   private Mapper mapper;
 
     @RequestMapping("/")
     public String index() {
@@ -201,7 +206,7 @@ public class HomeController {
         User user = userService.findByUsername(principal.getName());
         UserForProfile userForProfile = new UserForProfile(user);
 
-        model.addAttribute("user", userForProfile);
+        model.addAttribute("user", user);
         model.addAttribute("userPaymentList", userForProfile.getUserPaymentList());
         model.addAttribute("userShippingList", userForProfile.getUserShippingList());
         model.addAttribute("orderList", userForProfile.getOrderList());
@@ -222,6 +227,11 @@ public class HomeController {
 
         UserForProfile userForProfile = new UserForProfile(user);
 
+        List<String> lists = new ArrayList<>();
+        lists.add("mapping.xml");
+
+        mapper = new DozerBeanMapper(lists);
+
         model.addAttribute("user", userForProfile);
         model.addAttribute("addNewCreditCard", true);
         model.addAttribute("classActiveBilling", true);
@@ -232,7 +242,8 @@ public class HomeController {
         UserPayment userPayment = new UserPayment();
 
         UserForPaymentOrOrder userForBillingAddresses = new UserForPaymentOrOrder(userBilling);
-        UserForPaymentInfo userForPaymentAddresses = new UserForPaymentInfo(userPayment);
+
+        UserForPaymentInfo userForPaymentAddresses = mapper.map(userPayment,UserForPaymentInfo.class ,"userForPaymentInfo");
 
         model.addAttribute("userBilling", userForBillingAddresses);
         model.addAttribute("userPayment", userForPaymentAddresses);
@@ -261,7 +272,12 @@ public class HomeController {
         model.addAttribute("listOfCreditCards", true);
 
         UserShipping userShipping = new UserShipping();
-        UserForShippingLite userForShippingLite = new UserForShippingLite(userShipping);
+
+        List<String> list = new ArrayList<>();
+        list.add("mapping.xml");
+
+        mapper = new DozerBeanMapper(list);
+        UserForShippingLite userForShippingLite = mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId");
 
         model.addAttribute("userShipping", userForShippingLite);
 
@@ -330,10 +346,18 @@ public class HomeController {
     ) {
         User user = userService.findByUsername(principal.getName());
 
+
+        List<String> list = new ArrayList<>();
+        list.add("mapping.xml");
+
+        mapper = new DozerBeanMapper(list);
+
         UserForProfile userForProfile = new UserForProfile(user);
 
         UserPayment userPayment = userPaymentService.findById(creditCardId);
-        UserForPaymentInfo userForPaymentAddresses = new UserForPaymentInfo(userPayment);
+
+        UserForPaymentInfo userForPaymentAddresses = mapper.map(userPayment,UserForPaymentInfo.class ,"userForPaymentInfo");
+
 
         if (user.getId() != userPayment.getUser().getId()) {
             return "badRequestPage";
@@ -439,9 +463,14 @@ public class HomeController {
         UserShipping userShipping = userShippingService.findById(shippingAddressId);
 
         UserForProfile userForProfile = new UserForProfile(user);
-        UserForShippingLite userForShippingLite = new UserForShippingLite(userShipping);
 
-        if (user.getId() != userShipping.getUser().getId()) { //basic security check
+        List<String> list = new ArrayList<>();
+        list.add("mapping.xml");
+
+        mapper = new DozerBeanMapper(list);
+        UserForShippingLite userForShippingLite = mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId");
+
+        if (user.getId() != userShipping.getUser().getId()) { //basic securit check
             return "badRequestPage";
         } else {
             model.addAttribute("user", userForProfile);
@@ -507,7 +536,11 @@ public class HomeController {
 
         UserShipping userShipping = new UserShipping();
 
-        UserForShippingLite userForShippingLite = new UserForShippingLite(userShipping);
+        List<String> list = new ArrayList<>();
+        list.add("mapping.xml");
+
+        mapper = new DozerBeanMapper(list);
+        UserForShippingLite userForShippingLite = mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId");
 
         model.addAttribute("userShipping", userForShippingLite);
 
@@ -652,8 +685,8 @@ public class HomeController {
             }
         }
 
-        currentUser.setFirstName(user.getFirstName());
-        currentUser.setLastName(user.getLastName());
+        currentUser.setFirstname(user.getFirstname());
+        currentUser.setLastname(user.getLastname());
         currentUser.setUsername(user.getUsername());
         currentUser.setEmail(user.getEmail());
 
@@ -666,7 +699,7 @@ public class HomeController {
         model.addAttribute("listOfShippingAddresses", true);
         model.addAttribute("listOfCreditCards", true);
 
-        //security check for safety
+        //securit check for safety
         UserDetails userDetails = userSecurityService.loadUserByUsername(currentUser.getUsername());
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),
@@ -704,7 +737,11 @@ public class HomeController {
 
             UserShipping userShipping = new UserShipping();
 
-            UserForShippingLite userForShippingLite = new UserForShippingLite(userShipping);
+            List<String> list = new ArrayList<>();
+            list.add("mapping.xml");
+
+            mapper = new DozerBeanMapper(list);
+            UserForShippingLite userForShippingLite = mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId");
 
             model.addAttribute("userShipping", userForShippingLite);
 

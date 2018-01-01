@@ -33,8 +33,8 @@ public class UserForProfile {
         id = user.getId();
         username = user.getUsername();
         password = user.getPassword();
-        firstName = user.getFirstName();
-        lastName = user.getLastName();
+        firstName = user.getFirstname();
+        lastName = user.getLastname();
         email = user.getEmail();
         phone = user.getPhone();
         enabled = user.isEnabled();

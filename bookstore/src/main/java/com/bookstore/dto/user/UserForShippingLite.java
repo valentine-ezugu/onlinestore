@@ -1,8 +1,7 @@
 package com.bookstore.dto.user;
 
+import com.bookstore.domain.*;
 
-import com.bookstore.domain.User;
-import com.bookstore.domain.UserShipping;
 
 public class UserForShippingLite {
 
@@ -20,18 +19,6 @@ public class UserForShippingLite {
     public UserForShippingLite() {
     }
 
-    public UserForShippingLite(UserShipping userShipping) {
-         id = userShipping.getId();
-         userShippingName = userShipping.getUserShippingName();
-         userShippingStreet1 = userShipping.getUserShippingStreet1();
-         userShippingStreet2 = userShipping.getUserShippingStreet2();
-         userShippingCity = userShipping.getUserShippingCity();
-         userShippingState = userShipping.getUserShippingState();
-         userShippingCountry = userShipping.getUserShippingCountry();
-         userShippingZipCode = userShipping.getUserShippingZipCode();
-         userShippingDefault = userShipping.isUserShippingDefault();
-         user = userShipping.getUser();
-    }
 
     public Long getId() {
         return id;

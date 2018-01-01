@@ -2,9 +2,6 @@ package com.bookstore.domain;
 
 import javax.persistence.*;
 
-/**
- * Created by Pc on 8/24/2017.
- */
 
 @Entity
 public class BillingAddress {
@@ -20,7 +17,6 @@ public class BillingAddress {
     private String billingAddressState;
     private String billingAddressCountry;
     private String billingAddressZipCode;
-
 
     @OneToOne
     private Order order;

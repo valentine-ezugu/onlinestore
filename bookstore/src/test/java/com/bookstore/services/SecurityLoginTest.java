@@ -1,7 +1,7 @@
 package com.bookstore.services;
 
 import com.bookstore.domain.security.LoginStatus;
-import com.bookstore.service.impl.SpringSecurityLoginService;
+import com.bookstore.services.impl.SpringSecurityLoginService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

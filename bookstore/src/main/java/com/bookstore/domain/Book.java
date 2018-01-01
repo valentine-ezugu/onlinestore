@@ -1,15 +1,12 @@
 package com.bookstore.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import java.util.List;
 
-
-
 @Entity
 public class Book {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -32,9 +29,6 @@ public class Book {
     private String description;
 
     private int inStockNumber;
-
-//   @Transient
-//    private MultipartFile bookImage;
 
     @OneToMany(mappedBy = "book")
     @JsonIgnore

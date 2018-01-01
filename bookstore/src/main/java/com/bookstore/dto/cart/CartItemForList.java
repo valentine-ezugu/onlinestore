@@ -19,16 +19,6 @@ public class CartItemForList {
     public CartItemForList() {
     }
 
-    public CartItemForList(CartItem cartItem) {
-        id = cartItem.getId();
-        qty = cartItem.getQty();
-        subTotal = cartItem.getSubTotal();
-        book = cartItem.getBook();
-        bookToCartItemList = cartItem.getBookToCartItemList();
-        shoppingCart = cartItem.getShoppingCart();
-        order = cartItem.getOrder();
-    }
-
     public Long getId() {
         return id;
     }

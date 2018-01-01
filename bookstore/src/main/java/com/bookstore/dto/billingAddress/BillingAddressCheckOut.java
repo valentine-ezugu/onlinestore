@@ -1,12 +1,10 @@
 package com.bookstore.dto.billingAddress;
 
-
-import com.bookstore.domain.BillingAddress;
 import com.bookstore.domain.Order;
 
 public class BillingAddressCheckOut {
-    private Long id;
 
+    private Long id;
     private String billingAddressName;
     private String billingAddressStreet1;
     private String billingAddressStreet2;
@@ -15,21 +13,6 @@ public class BillingAddressCheckOut {
     private String billingAddressCountry;
     private String billingAddressZipCode;
     private Order order;
-
-    public BillingAddressCheckOut() {
-    }
-
-    public BillingAddressCheckOut(BillingAddress billingAddress) {
-        id = billingAddress.getId();
-        billingAddressName = billingAddress.getBillingAddressName();
-        billingAddressStreet1 = billingAddress.getBillingAddressStreet1();
-        billingAddressStreet2 = billingAddress.getBillingAddressStreet2();
-        billingAddressCity = billingAddress.getBillingAddressCity();
-        billingAddressState = billingAddress.getBillingAddressState();
-        billingAddressCountry = billingAddress.getBillingAddressCountry();
-        billingAddressZipCode = billingAddress.getBillingAddressZipCode();
-        order = billingAddress.getOrder();
-    }
 
     public Long getId() {
         return id;

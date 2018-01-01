@@ -1,7 +1,5 @@
 package com.bookstore.domain;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-
 import javax.persistence.*;
 
 /**

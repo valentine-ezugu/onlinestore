@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://dozer.sourceforge.net"
+          xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+    <configuration>
+        <stop-on-errors>true</stop-on-errors>
+        <date-format>MM/dd/yyyy HH:mm</date-format>
+        <wildcard>true</wildcard>
+    </configuration>
+
+    <mapping map-id="userShippingLiteId">
+        <class-a>com.bookstore.domain.UserShipping</class-a>
+        <class-b>com.bookstore.dto.user.UserForShippingLite</class-b>
+
+        <field>
+            <a>id</a>
+            <b>id</b>
+        </field>
+        <field>
+            <a>userShippingName</a>
+            <b>userShippingName</b>
+        </field>
+        <field>
+            <a>userShippingStreet1</a>
+            <b>userShippingStreet1</b>
+        </field>
+        <field>
+            <a>userShippingStreet2</a>
+            <b>userShippingStreet2</b>
+        </field>
+        <field>
+            <a>userShippingCity</a>
+            <b>userShippingCity</b>
+        </field>
+        <field>
+            <a>userShippingState</a>
+            <b>userShippingState</b>
+        </field>
+        <field>
+            <a>userShippingCountry</a>
+            <b>userShippingCountry</b>
+        </field>
+
+        <field>
+            <a>userShippingZipCode</a>
+            <b>userShippingZipCode</b>
+        </field>
+
+        <field>
+            <a>userShippingDefault</a>
+            <b>userShippingDefault</b>
+        </field>
+
+        <field>
+            <a>user</a>
+            <b>user</b>
+        </field>
+    </mapping>
+
+    <mapping map-id="cartItemForList">
+        <class-a>com.bookstore.domain.CartItem</class-a>
+        <class-b>com.bookstore.dto.cart.CartItemForList</class-b>
+
+        <field>
+            <a>id</a>
+            <b>id</b>
+        </field>
+
+        <field>
+            <a>qty</a>
+            <b>qty</b>
+        </field>
+
+        <field>
+            <a>subTotal</a>
+            <b>subTotal</b>
+        </field>
+
+        <field>
+            <a>book</a>
+            <b>book</b>
+        </field>
+
+        <field>
+            <a>bookToCartItemList</a>
+            <b>bookToCartItemList</b>
+        </field>
+
+        <field>
+            <a>shoppingCart</a>
+            <b>shoppingCart</b>
+        </field>
+
+        <field>
+            <a>order</a>
+            <b>order</b>
+        </field>
+    </mapping>
+
+    <mapping map-id="billingAddressCheckout">
+        <class-a>com.bookstore.domain.BillingAddress</class-a>
+        <class-b>com.bookstore.dto.billingAddress.BillingAddressCheckOut</class-b>
+
+        <field>
+            <a>billingAddressName</a>
+            <b>billingAddressName</b>
+        </field>
+
+        <field>
+            <a>billingAddressStreet1</a>
+            <b>billingAddressStreet1</b>
+        </field>
+        <field>
+            <a>billingAddressStreet2</a>
+            <b>billingAddressStreet2</b>
+        </field>
+
+        <field>
+            <a>billingAddressCity</a>
+            <b>billingAddressCity</b>
+        </field>
+        <field>
+            <a>billingAddressState</a>
+            <b>billingAddressState</b>
+        </field>
+
+        <field>
+            <a>billingAddressCountry</a>
+            <b>billingAddressCountry</b>
+        </field>
+        <field>
+            <a>billingAddressZipCode</a>
+            <b>billingAddressZipCode</b>
+        </field>
+
+        <field>
+            <a>order</a>
+            <b>order</b>
+        </field>
+
+    </mapping>
+
+    <mapping map-id="paymentExtraInfo">
+        <class-a>com.bookstore.domain.Payment</class-a>
+        <class-b>com.bookstore.dto.payment.PaymentExtraInfo</class-b>
+        <field>
+            <a>id</a>
+            <b>id</b>
+        </field>
+        <field>
+            <a>type</a>
+            <b>type</b>
+        </field>
+
+        <field>
+            <a>cardName</a>
+            <b>cardName</b>
+        </field>
+
+        <field>
+            <a>cardNumber</a>
+            <b>cardNumber</b>
+        </field>
+
+        <field>
+            <a>expiryMonth</a>
+            <b>expiryMonth</b>
+        </field>
+
+        <field>
+            <a>expiryYear</a>
+            <b>expiryYear</b>
+        </field>
+
+        <field>
+            <a>cvc</a>
+            <b>cvc</b>
+        </field>
+
+        <field>
+            <a>holderName</a>
+            <b>holderName</b>
+        </field>
+
+        <field>
+            <a>order</a>
+            <b>order</b>
+        </field>
+
+        <field>
+            <a>userBilling</a>
+            <b>userBilling</b>
+        </field>
+    </mapping>
+
+    <mapping map-id="shippingAddressId">
+        <class-a>com.bookstore.domain.ShippingAddress</class-a>
+        <class-b>com.bookstore.dto.shipping.ShippingAddressInfo</class-b>
+        <field>
+            <a>id</a>
+            <b>id</b>
+        </field>
+        <field>
+            <a>shippingAddressName</a>
+            <b>shippingAddressName</b>
+        </field>
+
+        <field>
+            <a>shippingAddressStreet1</a>
+            <b>shippingAddressStreet1</b>
+        </field>
+
+        <field>
+            <a>shippingAddressStreet2</a>
+            <b>shippingAddressStreet2</b>
+        </field>
+
+        <field>
+            <a>shippingAddressCity</a>
+            <b>shippingAddressCity</b>
+        </field>
+
+        <field>
+            <a>shippingAddressState</a>
+            <b>shippingAddressState</b>
+        </field>
+
+        <field>
+            <a>shippingAddressCountry</a>
+            <b>shippingAddressCountry</b>
+        </field>
+
+        <field>
+            <a>shippingAddressZipCode</a>
+            <b>shippingAddressZipCode</b>
+        </field>
+
+        <field>
+            <a>order</a>
+            <b>order</b>
+        </field>
+
+    </mapping>
+
+
+    <mapping map-id="userForPaymentInfo">
+        <class-a>com.bookstore.domain.UserPayment</class-a>
+        <class-b>com.bookstore.dto.user.UserForPaymentInfo</class-b>
+        <field>
+            <a>id</a>
+            <b>id</b>
+        </field>
+        <field>
+            <a>type</a>
+            <b>type</b>
+        </field>
+
+        <field>
+            <a>cardName</a>
+            <b>cardName</b>
+        </field>
+
+        <field>
+            <a>cardNumber</a>
+            <b>cardNumber</b>
+        </field>
+
+        <field>
+            <a>expiryMonth</a>
+            <b>expiryMonth</b>
+        </field>
+
+        <field>
+            <a>expiryYear</a>
+            <b>expiryYear</b>
+        </field>
+
+        <field>
+            <a>cvc</a>
+            <b>cvc</b>
+        </field>
+
+        <field>
+            <a>holderName</a>
+            <b>holderName</b>
+        </field>
+
+        <field>
+            <a>defaultPayment</a>
+            <b>defaultPayment</b>
+        </field>
+
+        <field>
+            <a>user</a>
+            <b>user</b>
+        </field>
+
+        <field>
+            <a>userBilling</a>
+            <b>userBilling</b>
+        </field>
+
+    </mapping>
+</mappings>

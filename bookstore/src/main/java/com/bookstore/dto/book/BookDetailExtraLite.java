@@ -1,5 +1,5 @@
 package com.bookstore.dto.book;
-import com.bookstore.domain.Book;
+import com.bookstore.domain.*;
 
 
 public class BookDetailExtraLite {

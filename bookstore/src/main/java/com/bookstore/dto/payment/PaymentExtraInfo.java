@@ -1,8 +1,6 @@
 package com.bookstore.dto.payment;
 
-import com.bookstore.domain.Order;
-import com.bookstore.domain.Payment;
-import com.bookstore.domain.UserBilling;
+import com.bookstore.domain.*;
 
 public class PaymentExtraInfo {
 
@@ -18,19 +16,6 @@ public class PaymentExtraInfo {
     private UserBilling userBilling;
 
     public PaymentExtraInfo() {
-    }
-
-    public PaymentExtraInfo(Payment payment) {
-        id = payment.getId();
-        type = payment.getType();
-        cardName = payment.getCardName();
-        cardNumber = payment.getCardNumber();
-        expiryMonth = payment.getExpiryMonth();
-        expiryYear = payment.getExpiryYear();
-        cvc = payment.getCvc();
-        holderName = payment.getHolderName();
-        order = payment.getOrder();
-        userBilling = payment.getUserBilling();
     }
 
     public Order getOrder() {

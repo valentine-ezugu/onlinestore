@@ -1,9 +1,8 @@
 package com.bookstore.repository;
+import com.bookstore.domain.*;
 
-
-import com.bookstore.domain.ShoppingCart;
+import com.bookstore.domain.*;
 import org.springframework.data.repository.CrudRepository;
-
 
 /**
  * Created by Pc on 9/8/2017.

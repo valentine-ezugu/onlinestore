@@ -37,12 +37,12 @@ public class BookControllerTest {
     private final String FILE_LOCATION = "1.png";
 
     @Autowired
-    BookController bookController;
+    private BookController bookController;
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-    BookService bookService;
+    private BookService bookService;
 
     MockMvcBuilder mockMvcBuilder;
 
@@ -87,13 +87,11 @@ public class BookControllerTest {
         Book book = new Book();
         List<Book> expectedBookList = createBookList(10);
 
-
         bookService.removeOne(anyLong());
         EasyMock.expectLastCall();
         bookService.removeOne(anyLong());
         expect(bookService.findAll()).andReturn(expectedBookList);
         replay(bookService);
-
 
         mockMvc
                 .perform(post("/book/remove")
@@ -122,7 +120,6 @@ public class BookControllerTest {
                 .andExpect(view().name("bookList"))
                 .andReturn();
     }
-
 
     private List<Book> createBookList(int count) {
         List<Book> bookList = new ArrayList<Book>();

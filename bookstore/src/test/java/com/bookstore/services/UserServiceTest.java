@@ -2,10 +2,9 @@ package com.bookstore.services;
 
 import com.bookstore.ws.AbstractTest;
 import com.bookstore.domain.User;
-import com.bookstore.domain.security.Role;
-import com.bookstore.domain.security.UserRole;
-import com.bookstore.repository.UserRepository;
-import com.bookstore.service.api.UserService;
+import com.bookstore.domain.security.*;
+
+import com.bookstore.services.api.UserService;
 import com.bookstore.utility.SecurityUtility;
 import org.junit.Before;
 import org.junit.Test;

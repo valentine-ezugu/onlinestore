@@ -6,14 +6,20 @@ import com.adminportal.dto.book.BookDetailLite;
 import com.adminportal.dto.book.BookForSave;
 import com.adminportal.repository.BookRepository;
 import com.adminportal.service.api.BookService;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Controller
 @RequestMapping("/book")
@@ -25,6 +31,9 @@ public class BookController {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+     private Mapper mapper;
+
     @GetMapping(value = "/{id}")
     @ResponseBody
     public Book getBookById(@PathVariable(value = "id") Long id) {
@@ -33,57 +42,107 @@ public class BookController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addBook(Model model) {
-        BookForSave bookForSave = new BookForSave();
+        Book book = new Book();
+
+         mapper = new DozerBeanMapper();
+
+        BookForSave bookForSave = mapper.map(book, BookForSave.class, "bookForSave" );
         model.addAttribute("book", bookForSave);
         return "addBook";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addBookPost(@ModelAttribute("bookForSave") BookForSave bookForSave, HttpServletRequest request, Model model) {
-        bookService.save(bookForSave);
+    public String addBookPost(@ModelAttribute("book") Book book, HttpServletRequest request, Model model) {
+
+        bookRepository.save(book);
+        MultipartFile bookImage = book.getBookImage();
+        try {
+            byte[] bytes = bookImage.getBytes();
+            String name = book.getId() + ".png";
+            BufferedOutputStream stream = new BufferedOutputStream(
+                    new FileOutputStream(new File("src/main/resources/static/image/book/" + name)));
+            stream.write(bytes);
+            stream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "redirect:bookList";
     }
 
     @RequestMapping("/bookInfo")
     public String bookInfo(@RequestParam("id") Long id, Model model) {
-        BookDetailLite book = new BookDetailLite(bookService.findOne(id));
-        model.addAttribute("book", book);
+
+        Book book = bookService.findOne(id);
+
+        List<String> list = new ArrayList<>();
+        list.add("mapping.xml");
+
+        mapper = new DozerBeanMapper(list);
+        BookDetailLite bookDetailLite = mapper.map(book, BookDetailLite.class,"bookDetailLiteId");
+
+        model.addAttribute("book", bookDetailLite);
         return "bookInfo";
     }
 
     @RequestMapping("/updateBook")
     public String updateBook(@RequestParam("id") Long id, Model model) {
         Book book = bookService.findOne(id);
-        model.addAttribute("book", book);
+
+        List<String> list = new ArrayList<>();
+        list.add("mapping.xml");
+
+        mapper = new DozerBeanMapper(list);
+        BookForSave bookForSave = mapper.map(book, BookForSave.class,"bookForSave");
+
+        model.addAttribute("book", bookForSave);
         return "updateBook";
     }
 
     @RequestMapping(value = "/updateBook", method = RequestMethod.POST)
-    public String updateBookPost(@ModelAttribute("book") BookForSave bookForSave, HttpServletRequest request) {
-        bookService.save(bookForSave);
-        return "redirect:/book/bookInfo?id=" + bookForSave.getId();
+    public String updateBookPost(@ModelAttribute("book") Book book, HttpServletRequest request) {
+
+        bookService.save(book);
+        return "redirect:/book/bookInfo?id=" + book.getId();
     }
 
     @RequestMapping("/bookList")
     public String bookList(Model model) {
+
         List<Book> bookList = bookService.findAll();
-        List<BookDetailForList> bookListToFront = new ArrayList<>();
-        for(Book book : bookList){
-            bookListToFront.add(new BookDetailForList(book));
+        List<String> list = new ArrayList<>();
+
+        list.add("mapping.xml");
+        mapper = new DozerBeanMapper(list);
+
+        List<BookDetailForList> bookDetailForList = new ArrayList<>();
+        for (Book book : bookList) {
+            bookDetailForList.add(mapper.map(book, BookDetailForList.class,"bookListDto"));
         }
-        model.addAttribute("bookList", bookListToFront);
+        model.addAttribute("bookList", bookDetailForList);
         return "bookList";
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public String remove(@ModelAttribute("id") String id, Model model) {
+
         bookService.removeOne(Long.parseLong(id.substring(8)));
+
         List<Book> bookList = bookService.findAll();
+
+        List<String> list = new ArrayList<>();
+        list.add("mapping.xml");
+
+         mapper = new DozerBeanMapper(list);
+
         List<BookDetailForList> bookListToFront = new ArrayList<>();
-        for(Book book : bookList){
-            bookListToFront.add(new BookDetailForList(book));
+        for (Book book : bookList) {
+            bookListToFront.add(mapper.map(book, BookDetailForList.class,"bookListDto"));
         }
+
         model.addAttribute("bookList", bookListToFront);
         return "redirect:/book/bookList";
     }
+
+
+
 }

@@ -1,9 +1,8 @@
 package com.adminportal.domain;
 
-import com.adminportal.dto.book.BookForSave;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,20 +14,32 @@ public class Book {
     private Long id;
 
     private String title;
+
     private String author;
+
     private String publisher;
+
     private String publicationDate;
+
     private String language;
+
     private String category;
+
     private String numberOfPages;
+
     private String format;
+
     private int isbn;
+
     private double shippingWeight;
+
     private double listPrice;
+
     private double ourPrice;
+
     private boolean active = true;
 
-    @Column(columnDefinition="text")
+    @Column(columnDefinition = "text")
     private String description;
 
     private int inStockNumber;
@@ -42,26 +53,25 @@ public class Book {
 
     public Book() {
     }
-
-    public Book(BookForSave bookForSave) {
-
-        this.title = bookForSave.getTitle();
-        this.id =bookForSave.getId();
-        this.author = bookForSave.getAuthor();
-        this.publisher = bookForSave.getPublisher();
-        this.publicationDate = bookForSave.getPublicationDate();
-        this.language = bookForSave.getLanguage();
-        this.category = bookForSave.getCategory();
-        this.numberOfPages = bookForSave.getNumberOfPages();
-        this.format = bookForSave.getFormat();
-        this.isbn = bookForSave.getIsbn();
-        this.shippingWeight = bookForSave.getShippingWeight();
-        this.listPrice = bookForSave.getListPrice();
-        this.ourPrice = bookForSave.getOurPrice();
-        this.active = bookForSave.isActive();
-        this.description = bookForSave.getDescription();
-        this.inStockNumber = bookForSave.getInStockNumber();
-    }
+//
+//    public Book(BookForSave bookForSave) {
+//        id = bookForSave.getId();
+//        title = bookForSave.getTitle();
+//        author = bookForSave.getAuthor();
+//        publisher = bookForSave.getPublisher();
+//        publicationDate = bookForSave.getPublicationDate();
+//        numberOfPages = bookForSave.getNumberOfPages();
+//        category = bookForSave.getCategory();
+//        format = bookForSave.getFormat();
+//        listPrice = bookForSave.getListPrice();
+//        ourPrice = bookForSave.getOurPrice();
+//        description = bookForSave.getDescription();
+//        shippingWeight = bookForSave.getShippingWeight();
+//        isbn = bookForSave.getIsbn();
+//        language = bookForSave.getLanguage();
+//        inStockNumber = bookForSave.getInStockNumber();
+//        bookImage = bookForSave.getBookImage();
+//    }
 
     public Long getId() {
         return id;

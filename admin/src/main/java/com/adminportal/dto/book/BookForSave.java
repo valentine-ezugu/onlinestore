@@ -1,6 +1,5 @@
 package com.adminportal.dto.book;
 
-import com.adminportal.domain.Book;
 import org.springframework.web.multipart.MultipartFile;
 
 public class BookForSave {
@@ -56,9 +55,6 @@ public class BookForSave {
     }
 
     public BookForSave() {
-    }
-
-    public BookForSave(Book book){
     }
 
     public String getTitle() {
