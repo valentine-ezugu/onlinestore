@@ -1,7 +1,5 @@
 package com.admin.service;
 
-//integration test
-
 import com.admin.ws.AbstractTest;
 import com.adminportal.domain.User;
 import com.adminportal.domain.security.Role;
@@ -9,21 +7,17 @@ import com.adminportal.domain.security.UserRole;
 import com.adminportal.repository.RoleRepository;
 import com.adminportal.repository.UserRepository;
 import com.adminportal.service.api.UserService;
-import com.adminportal.service.impl.UserServiceImpl;
 import com.adminportal.utility.SecurityUtility;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.easymock.EasyMock.*;
-
 
 @Transactional
 public class UserServiceTest extends AbstractTest {

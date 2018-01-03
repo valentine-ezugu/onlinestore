@@ -20,7 +20,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.easymock.EasyMock.*;
@@ -36,16 +35,19 @@ public class ShoppingCartControllerTest {
     MockMvc mockMvc;
 
     @Autowired
-    HomeController homeController;
+    private HomeController homeController;
 
     @Autowired
-    ShoppingCartController shoppingCartController;
+    private ShoppingCartController shoppingCartController;
 
-    BookService bookService;
+    @Autowired
+    private BookService bookService;
 
-    UserService userService;
+    @Autowired
+    private  UserService userService;
 
-    CartItemService cartItemService;
+    @Autowired
+    private CartItemService cartItemService;
 
 
     @Before

@@ -25,9 +25,9 @@ import static org.mockito.Mockito.when;
 @Transactional
 public class SecurityLogin {
 
-    SpringSecurityLoginService loginService;
+    private SpringSecurityLoginService loginService;
 
-     AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Before
     public void before() {

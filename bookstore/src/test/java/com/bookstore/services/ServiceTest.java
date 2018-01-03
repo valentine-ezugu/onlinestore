@@ -3,10 +3,7 @@ package com.bookstore.services;
 import com.bookstore.ws.AbstractTest;
 import com.bookstore.domain.User;
 import com.bookstore.domain.security.*;
-
-import com.bookstore.services.api.UserService;
 import com.bookstore.utility.SecurityUtility;
-import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +14,7 @@ import java.util.Set;
 import static org.junit.Assert.assertNotSame;
 
 @Transactional
-public class UserService extends AbstractTest {
+public class ServiceTest extends AbstractTest {
 
     protected Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
@@ -27,10 +24,6 @@ public class UserService extends AbstractTest {
     @Autowired
     SecurityUtility securityUtility;
 
-    @Before
-    public void setUp() throws Exception {
-
-    }
 
     @Test
     public void addUserTest() throws Exception {

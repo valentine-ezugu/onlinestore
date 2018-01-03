@@ -15,8 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,9 +27,8 @@ import java.util.Arrays;
 @Configuration
 @ComponentScan("com.adminportal")
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled=true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
 
     @Autowired
     private Environment env;
@@ -42,9 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserSecurityService userSecurityService;
 
-    private BCryptPasswordEncoder passwordEncoder() {
-        return securityUtility.passwordEncoder();
-    }
 
     private static final String[] PUBLIC_MATCHERS = {
             "/css/**",
@@ -55,8 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/login",
             "/fonts/**",
             "/bookshelf"
-
     };
+
+
+    private BCryptPasswordEncoder passwordEncoder() {
+        return securityUtility.passwordEncoder();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -80,6 +78,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe();
     }
 
+    @Bean
+    public UserDetailsService userDetailsService() {
+        GrantedAuthority authority = new SimpleGrantedAuthority("ADMIN");
+        UserDetails userDetails = (UserDetails) new User("admin", "admin", Arrays.asList(authority));
+        return new InMemoryUserDetailsManager(Arrays.asList(userDetails));
+    }
+
     @Configuration
     protected static class AuthenticationConfiguration extends
             GlobalAuthenticationConfigurerAdapter {
@@ -90,12 +95,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
 
         }
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(){
-        GrantedAuthority authority = new SimpleGrantedAuthority("ADMIN");
-        UserDetails userDetails = (UserDetails)new User("admin", "admin", Arrays.asList(authority));
-        return new InMemoryUserDetailsManager(Arrays.asList(userDetails));
     }
 }

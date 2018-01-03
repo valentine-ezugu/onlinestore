@@ -13,15 +13,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
-import sun.plugin.liveconnect.SecurityContextHelper;
 
 import javax.transaction.Transactional;
 
-import java.security.Principal;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,9 +24,9 @@ import static org.mockito.Mockito.when;
 public class SpringSecurityLoginTest {
 
 
-     private SpringSecurityLoginService loginService;
+    private SpringSecurityLoginService loginService;
 
-     private AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Before
     public void before() {

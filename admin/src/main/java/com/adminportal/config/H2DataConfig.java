@@ -1,7 +1,5 @@
 package com.adminportal.config;
 
-
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +13,12 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import javax.sql.DataSource;
-import java.util.Arrays;
-import java.util.List;
 
 
 @Profile("test")
 @Configuration
 @PropertySource(value = {"classpath:application.properties"})
-public  class H2DataConfig {
+public class H2DataConfig {
 
     @Autowired
     private Environment env;
@@ -47,7 +43,6 @@ public  class H2DataConfig {
         adapter.setGenerateDdl(true);
         return adapter;
     }
-
 
 
 }

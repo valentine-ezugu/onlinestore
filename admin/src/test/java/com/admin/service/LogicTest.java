@@ -2,18 +2,17 @@ package com.admin.service;
 
 import com.adminportal.config.SecurityConfig;
 import com.adminportal.domain.Book;
-import com.adminportal.domain.BookDetail;
 import com.adminportal.domain.User;
 import com.adminportal.domain.security.Role;
 import com.adminportal.domain.security.UserRole;
 import com.adminportal.dto.book.BookDetailLite;
+import com.adminportal.repository.BookRepository;
 import com.adminportal.repository.RoleRepository;
 import com.adminportal.repository.UserRepository;
 import com.adminportal.service.api.UserService;
 import com.adminportal.utility.SecurityUtility;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
-import org.easymock.Mock;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,10 +46,12 @@ public class LogicTest {
    @Autowired
     private Mapper mapper;
 
+    @Autowired
+    private UserRepository userRepository;
 
 
     @Autowired
-    private UserRepository userRepository;
+    private BookRepository bookRepository;
 
     private RoleRepository roleRepository;
 
@@ -63,6 +64,7 @@ public class LogicTest {
     @Before
     public void setUp() {
         userRepository = createMock(UserRepository.class);
+        bookRepository = createMock(BookRepository.class);
         roleRepository = createMock(RoleRepository.class);
         ReflectionTestUtils.setField(userService, "userRepository", userRepository);
         ReflectionTestUtils.setField(userService, "roleRepository", roleRepository);
@@ -116,4 +118,6 @@ public class LogicTest {
         expect(localUser = userRepository.save(user)).andReturn(localUser);
 
     }
+
+
 }
