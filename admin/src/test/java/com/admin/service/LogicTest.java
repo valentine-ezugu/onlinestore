@@ -2,10 +2,18 @@ package com.admin.service;
 
 import com.adminportal.config.SecurityConfig;
 import com.adminportal.domain.Book;
+import com.adminportal.domain.BookDetail;
+import com.adminportal.domain.User;
+import com.adminportal.domain.security.Role;
+import com.adminportal.domain.security.UserRole;
+import com.adminportal.dto.book.BookDetailLite;
 import com.adminportal.repository.RoleRepository;
 import com.adminportal.repository.UserRepository;
 import com.adminportal.service.api.UserService;
 import com.adminportal.utility.SecurityUtility;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
+import org.easymock.Mock;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +23,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
-
 import javax.transaction.Transactional;
-
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import static org.easymock.EasyMock.createMock;
-
+import static org.easymock.EasyMock.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -27,14 +37,17 @@ import static org.easymock.EasyMock.createMock;
 @Transactional
 public class LogicTest {
 
+
     @Autowired
     private SecurityUtility securityUtility;
 
     @Autowired
     private UserService userService;
 
-//   @Autowired
-//    private DozerBeanMapperFactoryBean dozerBean;
+   @Autowired
+    private Mapper mapper;
+
+
 
     @Autowired
     private UserRepository userRepository;
@@ -56,42 +69,51 @@ public class LogicTest {
 
     }
 
-//
-//    @Test
-//    public void tetDozerMapping() throws Exception {
-//
-//        org.dozer.Mapper mapper = dozerBean.getObject();
-//
-//        Book p1Domain = new Book();
-//        p1Domain.setTitle("John Smith");
-//        p1Domain.setId(25L);
-//
-//        BookDetail p1Dto = new BookDetail();
-//
-//        //map source: p1Domain to target:p1Dto using "dozer-bean-mappings.xml" map-id: person
-//
-//        mapper.map(p1Domain, p1Dto, "person");
-//
-//        Assert.assertEquals(p1Domain.getTitle(), p1Dto.gettitle());
-//        Assert.assertEquals(p1Domain.getId(), p1Dto.getid());
-//    }
-}
 
-        //    @Test
-//    public void createUserTest() throws Exception {
-//        User user = new User();
-//
-//        User localUser = new User();
-//
-//        Set<UserRole> userRoles = new HashSet<>();
-//        Role role1 = new Role();
-//
-//        role1.setRoleId(3);
-//        role1.setName("ADMIN");
-//        userRoles.add(new UserRole(user, role1));
-//        userService.createUser(user, userRoles);
-//
-//        expect(localUser = userService.save(user)).andReturn(localUser);
-//
-//    }
-//}
+    @Test
+    public void tetDozerMapping() throws Exception {
+
+        List<String> list = new ArrayList<>();
+        list.add("mapping.xml");
+
+          mapper = new  DozerBeanMapper(list);
+
+        Book p1Domain = new Book();
+        p1Domain.setTitle("John Smith");
+        p1Domain.setId(25L);
+
+        BookDetailLite p1Dto = mapper.map(p1Domain, BookDetailLite.class, "bookDetailLiteId");
+
+        Assert.assertEquals(p1Domain.getTitle(), p1Dto.getTitle());
+        Assert.assertEquals(p1Domain.getId(), p1Dto.getId());
+    }
+
+
+    @Test
+    public void createUserTest() throws Exception {
+         User user = new User();
+        Set<UserRole> userRoles = new HashSet<>();
+         user.setUsername("valentine");
+
+        expect(userRepository.findByUsername(anyObject())).andReturn(user);
+
+        User localUser =  new User();
+
+        Role role1 = new Role();
+        role1.setRoleId(3);
+        role1.setName("ADMIN");
+        userRoles.add(new UserRole(user, role1));
+
+        if (localUser != null) {
+         user.getUsername() ;
+        } else {
+            for (UserRole ur : userRoles) {
+                roleRepository.save(ur.getRole());
+            }
+            user.getUserRoles().addAll(userRoles);
+
+         }
+        expect(localUser = userRepository.save(user)).andReturn(localUser);
+
+    }
+}

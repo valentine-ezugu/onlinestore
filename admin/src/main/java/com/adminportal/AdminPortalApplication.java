@@ -56,6 +56,4 @@ public class AdminPortalApplication implements CommandLineRunner {
         logger.debug("Message logged at DEBUG level");
     }
 
-
-
 }

@@ -17,12 +17,12 @@ import java.util.Set;
 import static org.junit.Assert.assertNotSame;
 
 @Transactional
-public class UserServiceTest extends AbstractTest {
+public class UserService extends AbstractTest {
 
     protected Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private UserService userService;
+    private com.bookstore.services.api.UserService userService;
 
     @Autowired
     SecurityUtility securityUtility;

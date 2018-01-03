@@ -90,6 +90,7 @@ public class BookControllerTest {
         bookService.removeOne(anyLong());
         EasyMock.expectLastCall();
         bookService.removeOne(anyLong());
+
         expect(bookService.findAll()).andReturn(expectedBookList);
         replay(bookService);
 
