@@ -22,7 +22,7 @@ public class ServiceTest extends AbstractTest {
     private com.bookstore.services.api.UserService userService;
 
     @Autowired
-    SecurityUtility securityUtility;
+    private SecurityUtility securityUtility;
 
 
     @Test

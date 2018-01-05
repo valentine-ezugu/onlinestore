@@ -35,9 +35,9 @@ public class UserServiceTest extends AbstractTest {
 
     @Before
     public void setUp() {
-        userRepository = createMock(UserRepository.class);
+         userRepository = createMock(UserRepository.class);
         roleRepository = createMock(RoleRepository.class);
-        ReflectionTestUtils.setField(userService, "userRepository", userRepository);
+         ReflectionTestUtils.setField(userService, "userRepository", userRepository);
         ReflectionTestUtils.setField(userService, "roleRepository", roleRepository);
 
     }

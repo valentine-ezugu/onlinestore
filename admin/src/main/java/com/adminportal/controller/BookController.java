@@ -43,10 +43,13 @@ public class BookController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addBook(Model model) {
         Book book = new Book();
+        List<String> list = new ArrayList<>();
+        list.add("mapping.xml");
 
-         mapper = new DozerBeanMapper();
+         mapper = new DozerBeanMapper(list);
 
         BookForSave bookForSave = mapper.map(book, BookForSave.class, "bookForSave" );
+
         model.addAttribute("book", bookForSave);
         return "addBook";
     }
@@ -92,6 +95,7 @@ public class BookController {
         list.add("mapping.xml");
 
         mapper = new DozerBeanMapper(list);
+
         BookForSave bookForSave = mapper.map(book, BookForSave.class,"bookForSave");
 
         model.addAttribute("book", bookForSave);

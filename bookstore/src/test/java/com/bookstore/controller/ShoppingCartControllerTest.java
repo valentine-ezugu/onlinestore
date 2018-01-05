@@ -8,6 +8,7 @@ import com.bookstore.services.api.BookService;
 import com.bookstore.services.api.CartItemService;
 import com.bookstore.services.api.UserService;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,10 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.easymock.EasyMock.*;
@@ -147,7 +152,7 @@ public class ShoppingCartControllerTest {
     }
 
     @Test
-    @WithMockUser//(username = "V", roles = {"USER"})
+    @WithMockUser (username = "V", roles = {"USER"})
     public void checkBookDetail() throws Exception {
         Book book = new Book();
         book.setId(1L);
@@ -167,7 +172,10 @@ public class ShoppingCartControllerTest {
 
     @Test
     public void showBookShelf() throws Exception {
+        List<Book>bookList = new ArrayList<>();
 
+        expect(bookService.findAll()).andReturn(bookList);
+        replay(bookService);
         mockMvc.perform(get("/bookshelf")
                 .accept(MediaType.TEXT_HTML)
                 .contentType(MediaType.TEXT_HTML)
@@ -175,5 +183,6 @@ public class ShoppingCartControllerTest {
                 .andExpect(model().attributeExists("activeAll"))
                 .andReturn();
     }
+
 
 }

@@ -10,7 +10,6 @@ import com.adminportal.repository.BookRepository;
 import com.adminportal.repository.RoleRepository;
 import com.adminportal.repository.UserRepository;
 import com.adminportal.service.api.UserService;
-import com.adminportal.utility.SecurityUtility;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.junit.Assert;
@@ -22,12 +21,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
+
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import static org.easymock.EasyMock.createMock;
+
 import static org.easymock.EasyMock.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -36,14 +36,10 @@ import static org.easymock.EasyMock.*;
 @Transactional
 public class LogicTest {
 
-
-    @Autowired
-    private SecurityUtility securityUtility;
-
     @Autowired
     private UserService userService;
 
-   @Autowired
+    @Autowired
     private Mapper mapper;
 
     @Autowired
@@ -66,6 +62,7 @@ public class LogicTest {
         userRepository = createMock(UserRepository.class);
         bookRepository = createMock(BookRepository.class);
         roleRepository = createMock(RoleRepository.class);
+        mapper = createMock(Mapper.class);
         ReflectionTestUtils.setField(userService, "userRepository", userRepository);
         ReflectionTestUtils.setField(userService, "roleRepository", roleRepository);
 
@@ -73,12 +70,12 @@ public class LogicTest {
 
 
     @Test
-    public void tetDozerMapping() throws Exception {
+    public void testDozerMapping() throws Exception {
 
         List<String> list = new ArrayList<>();
         list.add("mapping.xml");
 
-          mapper = new  DozerBeanMapper(list);
+        mapper = new DozerBeanMapper(list);
 
         Book p1Domain = new Book();
         p1Domain.setTitle("John Smith");
@@ -93,13 +90,13 @@ public class LogicTest {
 
     @Test
     public void createUserTest() throws Exception {
-         User user = new User();
+        User user = new User();
         Set<UserRole> userRoles = new HashSet<>();
-         user.setUsername("valentine");
+        user.setUsername("valentine");
 
         expect(userRepository.findByUsername(anyObject())).andReturn(user);
 
-        User localUser =  new User();
+        User localUser = new User();
 
         Role role1 = new Role();
         role1.setRoleId(3);
@@ -107,14 +104,14 @@ public class LogicTest {
         userRoles.add(new UserRole(user, role1));
 
         if (localUser != null) {
-         user.getUsername() ;
+            user.getUsername();
         } else {
             for (UserRole ur : userRoles) {
                 roleRepository.save(ur.getRole());
             }
             user.getUserRoles().addAll(userRoles);
 
-         }
+        }
         expect(localUser = userRepository.save(user)).andReturn(localUser);
 
     }

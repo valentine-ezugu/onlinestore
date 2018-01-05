@@ -4,6 +4,7 @@ import com.bookstore.repository.BookRepository;
 import com.bookstore.services.api.BookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import com.bookstore.domain.*;
 import javax.transaction.Transactional;
@@ -31,6 +32,7 @@ public class BookServiceImpl implements BookService {
     }
 
     public List<Book> findByCategory(String category){
+
         List<Book> bookList = bookRepository.findByCategory(category);
 
         List<Book> activeBookList = new ArrayList<>();
