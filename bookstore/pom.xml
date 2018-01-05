@@ -23,7 +23,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.0.0-M4</version>
+            <version>5.0.0-M3</version>
             <scope>test</scope>
         </dependency>
 
@@ -129,11 +129,6 @@
             <!--<artifactId>mockito-all</artifactId>-->
             <!--<version>${mockito.version}</version>-->
             <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.junit.jupiter</groupId>-->
-            <!--<artifactId>junit-jupiter-api</artifactId>-->
-            <!--<version>RELEASE</version>-->
         <!--</dependency>-->
     </dependencies>
 

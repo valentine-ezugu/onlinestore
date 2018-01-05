@@ -23,7 +23,8 @@ public class Book {
     private double shippingWeight;
     private double listPrice;
     private double ourPrice;
-    private boolean active= true;
+
+    private boolean active = false;
 
     @Column(columnDefinition="text")
     private String description;
@@ -163,13 +164,7 @@ public class Book {
         this.inStockNumber = inStockNumber;
     }
 
-//    public MultipartFile getBookImage() {
-//        return bookImage;
-//    }
-//
-//    public void setBookImage(MultipartFile bookImage) {
-//        this.bookImage = bookImage;
-//    }
+
 
     public List<BookToCartItem> getBookToCartItemList() {
         return bookToCartItemList;

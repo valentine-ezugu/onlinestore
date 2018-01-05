@@ -40,8 +40,9 @@ public class BookServiceImpl implements BookService {
         for (Book book: bookList) {
             if(book.isActive()) {
                 activeBookList.add(book);
-            }
-        }
+            }else {
+                return null ;
+            } }
 
         return activeBookList;
     }
