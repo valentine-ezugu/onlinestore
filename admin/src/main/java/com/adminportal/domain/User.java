@@ -54,6 +54,15 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Order> orderList;
 
+    public User() {
+    }
+
+    public User(LoginInfo loginInfo) {
+
+        this.username = loginInfo.getUsername();
+        this.password = loginInfo.getPassword();
+    }
+
     public List<Order> getOrderList() {
         return orderList;
     }
@@ -73,15 +82,6 @@ public class User implements UserDetails {
     public Long getId() {
 
         return id;
-    }
-
-    public User() {
-    }
-
-    public User(LoginInfo loginInfo) {
-
-        this.username = loginInfo.getUsername();
-        this.password = loginInfo.getPassword();
     }
 
     public void setId(Long id) {
@@ -136,10 +136,6 @@ public class User implements UserDetails {
         this.phone = phone;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public List<UserShipping> getUserShippingList() {
         return userShippingList;
     }
@@ -190,6 +186,10 @@ public class User implements UserDetails {
     //if not enabled we cant log in
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
 }

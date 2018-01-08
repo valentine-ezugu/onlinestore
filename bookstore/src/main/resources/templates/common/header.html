@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+      lang="en">
 <head th:fragment="common-header">
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <title>Val's Bookstore</title>
 
     <!-- Bootstrap core CSS -->
-    <link  href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <link  href="/css/non-responsive.css" rel="stylesheet" />
+    <link href="/css/non-responsive.css" rel="stylesheet"/>
 
     <!-- data table -->
-    <link th:href="@{/css/jquery.dataTables.min.css}" rel="stylesheet" />
-    <link th:href="@{/css/dataTables.bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/jquery.dataTables.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/dataTables.bootstrap.min.css}" rel="stylesheet"/>
 
-    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
-    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet"/>
 
-    <link rel="icon"  href="/image/applie-touch-icon.png" />
+    <link rel="icon" href="/image/applie-touch-icon.png"/>
 </head>
 
 <body>
@@ -45,11 +45,12 @@
                             <li><a th:href="@{/hours}">Store hours &#38; Directions</a></li>
                             <li><a th:href="@{/faq}">FAQ</a></li>
 
-                        </ul></li>
+                        </ul>
+                    </li>
                     <form class="navbar-form" th:action="@{/searchBook}" method="post">
                         <div class="form-group">
                             <input type="text" name="keyword" class="form-control"
-                                   placeholder="Book title" />
+                                   placeholder="Book title"/>
                         </div>
                         <button type="submit" class="btn btn-default">Search</button>
                     </form>
@@ -70,17 +71,17 @@
 </div>
 
 <div th:fragment="footer">
-    <br />
-    <br />
+    <br/>
+    <br/>
     <footer>
         <div class="row">
             <div class="col-xs-3 footerleft">
                 <div class="logofooter">
                     <a th:href="@{/}"><img class="img-responsive"
-                                           src="/image/logo.png" style="width: 200px;" /></a>
+                                           src="/image/logo.png" style="width: 200px;"/></a>
                 </div>
                 <p>
-                    Val's Independent Book Store. <br />Serving our customers with the
+                    Val's Independent Book Store. <br/>Serving our customers with the
                     best.
                 </p>
             </div>
@@ -88,7 +89,7 @@
                 <h6 class="heading7">CONTACT</h6>
                 <ul class="post">
                     <p>
-                        <i class="fa fa-map-pin"></i> 123 XXX Ave<br /> Boston MA, USA
+                        <i class="fa fa-map-pin"></i> 123 XXX Ave<br/> Boston MA, USA
                         02112
                     </p>
                     <p>

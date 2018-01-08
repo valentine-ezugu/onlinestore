@@ -1,6 +1,6 @@
 package com.bookstore;
 
-import com.bookstore.domain.*;
+import com.bookstore.domain.User;
 import com.bookstore.domain.security.Role;
 import com.bookstore.domain.security.UserRole;
 import com.bookstore.services.api.UserService;
@@ -23,17 +23,15 @@ import java.util.Set;
 @SpringBootApplication
 @EntityScan(basePackages = {"com.bookstore"})
 @EnableJpaRepositories(basePackages = {"com.bookstore.repository"})
- @EnableTransactionManagement
-public class BookstoreApplications  implements CommandLineRunner   {
+@EnableTransactionManagement
+public class BookstoreApplications implements CommandLineRunner {
 
+    private static final Logger logger = LoggerFactory.getLogger(BookstoreApplications.class);
     @Autowired
     private SecurityUtility securityUtility;
 
     @Autowired
     private UserService userService;
-
-    private static final Logger logger = LoggerFactory.getLogger(BookstoreApplications.class);
-
 
     public static void main(String[] args) {
         SpringApplication.run(BookstoreApplications.class, args);
@@ -42,8 +40,8 @@ public class BookstoreApplications  implements CommandLineRunner   {
     @Override
     public void run(String... strings) throws Exception {
         User user1 = new User();
-        user1.setFirstname("Valentine");
-        user1.setLastname("Ezugu");
+        user1.setFirstName("Valentine");
+        user1.setLastName("Ezugu");
         user1.setUsername("V");
         user1.setPassword(securityUtility.passwordEncoder().encode("A"));
         user1.setEmail("valentineezugu@yahoo.com");

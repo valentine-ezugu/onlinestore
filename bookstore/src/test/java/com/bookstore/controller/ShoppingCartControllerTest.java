@@ -6,9 +6,9 @@ import com.bookstore.domain.CartItem;
 import com.bookstore.domain.User;
 import com.bookstore.services.api.BookService;
 import com.bookstore.services.api.CartItemService;
+import com.bookstore.services.api.SecurityService;
 import com.bookstore.services.api.UserService;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +17,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,9 +24,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.easymock.EasyMock.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.easymock.EasyMock.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @AutoConfigureMockMvc
@@ -37,10 +36,14 @@ public class ShoppingCartControllerTest {
 
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Autowired
     private HomeController homeController;
+
+    @Autowired
+    private SecurityService securityService;
+
 
     @Autowired
     private ShoppingCartController shoppingCartController;
@@ -48,8 +51,9 @@ public class ShoppingCartControllerTest {
     @Autowired
     private BookService bookService;
 
+
     @Autowired
-    private  UserService userService;
+    private UserService userService;
 
     @Autowired
     private CartItemService cartItemService;
@@ -87,9 +91,9 @@ public class ShoppingCartControllerTest {
 
 
     @Test
-    @WithMockUser//(username = "V", roles = {"USER"})
     public void addItemToShoppingCart() throws Exception {
 
+        securityService.autologin("V", "A");
         CartItem cartItem = new CartItem();
 
         String qty = "2";
@@ -124,10 +128,10 @@ public class ShoppingCartControllerTest {
     }
 
     @Test
-    @WithMockUser//(username = "V", roles = {"USER"})
     public void updateCartItemTest() throws Exception {
 
-        Book book = new Book();
+        securityService.autologin("V", "A");
+
         CartItem cartItem = new CartItem();
         cartItem.setId(1L);
         Long s = cartItem.getId();
@@ -140,20 +144,23 @@ public class ShoppingCartControllerTest {
         expectLastCall();
         replay(bookService);
 
+
         mockMvc
-                .perform(get("/shoppingCart/updateCartItem")
+                .perform(get("/shoppingCart/updateCartItem/1/")
                         .accept(MediaType.TEXT_HTML)
                         .contentType(MediaType.TEXT_HTML)
-                        .param("id", "s")
+                        // .param("id", "1")
                         .param("qty", qty))
 
-                //some problems with the attributes definition so for now like this
+                .andExpect(view().name("forward:/shoppingCart/cart"))
+
                 .andReturn();
     }
 
     @Test
-    @WithMockUser (username = "V", roles = {"USER"})
     public void checkBookDetail() throws Exception {
+
+        securityService.autologin("V", "A");
         Book book = new Book();
         book.setId(1L);
         expect(bookService.findOne(anyLong())).andReturn(book);
@@ -172,7 +179,9 @@ public class ShoppingCartControllerTest {
 
     @Test
     public void showBookShelf() throws Exception {
-        List<Book>bookList = new ArrayList<>();
+        List<Book> bookList = new ArrayList<>();
+
+        securityService.autologin("V", "A");
 
         expect(bookService.findAll()).andReturn(bookList);
         replay(bookService);

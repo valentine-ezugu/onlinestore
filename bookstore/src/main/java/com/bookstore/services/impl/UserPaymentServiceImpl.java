@@ -1,8 +1,8 @@
 package com.bookstore.services.impl;
 
+import com.bookstore.domain.UserPayment;
 import com.bookstore.repository.UserPaymentRepository;
 import com.bookstore.services.api.UserPaymentService;
-import com.bookstore.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,12 @@ public class UserPaymentServiceImpl implements UserPaymentService {
     UserPaymentRepository userPaymentRepository;
 
     @Override
-    public UserPayment findById(Long id)throws DataAccessException
-    {
+    public UserPayment findById(Long id) throws DataAccessException {
         return userPaymentRepository.findOne(id);
     }
 
     @Override
-    public void removeById(Long id)throws DataAccessException{
-       userPaymentRepository.delete(id);
+    public void removeById(Long id) throws DataAccessException {
+        userPaymentRepository.delete(id);
     }
 }

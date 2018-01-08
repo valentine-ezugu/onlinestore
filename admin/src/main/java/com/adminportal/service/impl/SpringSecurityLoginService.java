@@ -18,21 +18,20 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class SpringSecurityLoginService implements LoginService {
+    @Autowired(required = false)
+    public AuthenticationManager authenticationManager;
     private Log log = LogFactory.getLog(SpringSecurityLoginService.class);
 
-    @Autowired(required = false)
-    public   AuthenticationManager authenticationManager;
-
-    public LoginStatus getStatus()throws DataAccessException {
+    public LoginStatus getStatus() throws DataAccessException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null &&  !auth.getName().equals("anonymousUser") && auth.isAuthenticated()) {
+        if (auth != null && !auth.getName().equals("anonymousUser") && auth.isAuthenticated()) {
             return new LoginStatus(true, auth.getName());
         } else {
             return new LoginStatus(false, null);
         }
     }
 
-    public LoginStatus login(String username, String password) throws DataAccessException{
+    public LoginStatus login(String username, String password) throws DataAccessException {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
 
         try {

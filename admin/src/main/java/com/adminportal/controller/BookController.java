@@ -6,13 +6,14 @@ import com.adminportal.dto.book.BookDetailLite;
 import com.adminportal.dto.book.BookForSave;
 import com.adminportal.repository.BookRepository;
 import com.adminportal.service.api.BookService;
-import org.dozer.DozerBeanMapper;
+
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -32,7 +33,7 @@ public class BookController {
     private BookRepository bookRepository;
 
     @Autowired
-     private Mapper mapper;
+    private Mapper mapper;
 
     @GetMapping(value = "/{id}")
     @ResponseBody
@@ -43,12 +44,8 @@ public class BookController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addBook(Model model) {
         Book book = new Book();
-        List<String> list = new ArrayList<>();
-        list.add("mapping.xml");
 
-         mapper = new DozerBeanMapper(list);
-
-        BookForSave bookForSave = mapper.map(book, BookForSave.class, "bookForSave" );
+        BookForSave bookForSave = mapper.map(book, BookForSave.class, "bookForSave");
 
         model.addAttribute("book", bookForSave);
         return "addBook";
@@ -77,11 +74,7 @@ public class BookController {
 
         Book book = bookService.findOne(id);
 
-        List<String> list = new ArrayList<>();
-        list.add("mapping.xml");
-
-        mapper = new DozerBeanMapper(list);
-        BookDetailLite bookDetailLite = mapper.map(book, BookDetailLite.class,"bookDetailLiteId");
+        BookDetailLite bookDetailLite = mapper.map(book, BookDetailLite.class, "bookDetailLiteId");
 
         model.addAttribute("book", bookDetailLite);
         return "bookInfo";
@@ -91,12 +84,7 @@ public class BookController {
     public String updateBook(@RequestParam("id") Long id, Model model) {
         Book book = bookService.findOne(id);
 
-        List<String> list = new ArrayList<>();
-        list.add("mapping.xml");
-
-        mapper = new DozerBeanMapper(list);
-
-        BookForSave bookForSave = mapper.map(book, BookForSave.class,"bookForSave");
+        BookForSave bookForSave = mapper.map(book, BookForSave.class, "bookForSave");
 
         model.addAttribute("book", bookForSave);
         return "updateBook";
@@ -113,14 +101,10 @@ public class BookController {
     public String bookList(Model model) {
 
         List<Book> bookList = bookService.findAll();
-        List<String> list = new ArrayList<>();
-
-        list.add("mapping.xml");
-        mapper = new DozerBeanMapper(list);
 
         List<BookDetailForList> bookDetailForList = new ArrayList<>();
         for (Book book : bookList) {
-            bookDetailForList.add(mapper.map(book, BookDetailForList.class,"bookListDto"));
+            bookDetailForList.add(mapper.map(book, BookDetailForList.class, "bookListDto"));
         }
         model.addAttribute("bookList", bookDetailForList);
         return "bookList";
@@ -133,20 +117,13 @@ public class BookController {
 
         List<Book> bookList = bookService.findAll();
 
-        List<String> list = new ArrayList<>();
-        list.add("mapping.xml");
-
-         mapper = new DozerBeanMapper(list);
-
         List<BookDetailForList> bookListToFront = new ArrayList<>();
         for (Book book : bookList) {
-            bookListToFront.add(mapper.map(book, BookDetailForList.class,"bookListDto"));
+            bookListToFront.add(mapper.map(book, BookDetailForList.class, "bookListDto"));
         }
 
         model.addAttribute("bookList", bookListToFront);
         return "redirect:/book/bookList";
     }
-
-
 
 }

@@ -3,7 +3,6 @@ package com.bookstore.services.impl;
 import com.bookstore.domain.Book;
 import com.bookstore.repository.BookRepository;
 import com.bookstore.services.api.BookService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,4 +56,6 @@ public class BookServiceImpl implements BookService {
 
         return activeBookList;
     }
+
+
 }

@@ -1,7 +1,8 @@
 package com.bookstore.services.impl;
 
+import com.bookstore.domain.ShippingAddress;
+import com.bookstore.domain.UserShipping;
 import com.bookstore.services.api.ShippingAddressService;
-import com.bookstore.domain.*;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import javax.transaction.Transactional;
 public class ShippingAddressServiceImpl implements ShippingAddressService {
 
     @Override
-    public ShippingAddress setByUserShipping(UserShipping userShipping, ShippingAddress shippingAddress)throws AccessDeniedException
+    public ShippingAddress setByUserShipping(UserShipping userShipping, ShippingAddress shippingAddress) throws AccessDeniedException
 
     {
 

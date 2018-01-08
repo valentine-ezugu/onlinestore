@@ -6,9 +6,9 @@ import org.springframework.dao.DataAccessException;
 
 public interface LoginService {
 
-    LoginStatus getStatus()throws DataAccessException;
+    LoginStatus getStatus() throws DataAccessException;
 
-    LoginStatus login(String username, String password)throws DataAccessException;
+    LoginStatus login(String username, String password) throws DataAccessException;
 
 
 }

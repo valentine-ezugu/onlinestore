@@ -11,8 +11,8 @@ public class UserPayment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  Long id;
-    private String type ;
+    private Long id;
+    private String type;
     private String cardName;
     private String cardNumber;
     private int expiryMonth;
@@ -22,10 +22,10 @@ public class UserPayment {
     private boolean defaultPayment;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(cascade =CascadeType.ALL, mappedBy = "userPayment")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userPayment")
     private UserBilling userBilling;
 
     public Long getId() {

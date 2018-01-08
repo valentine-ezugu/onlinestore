@@ -1,6 +1,6 @@
 package com.bookstore.services.api;
 
-import com.bookstore.domain.*;
+import com.bookstore.domain.UserPayment;
 import org.springframework.dao.DataAccessException;
 
 /**

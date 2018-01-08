@@ -1,9 +1,9 @@
 package com.bookstore.services.impl;
 
+import com.bookstore.domain.*;
 import com.bookstore.repository.OrderRepository;
 import com.bookstore.services.api.CartItemService;
 import com.bookstore.services.api.OrderService;
-import com.bookstore.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.access.AccessDeniedException;
@@ -13,14 +13,13 @@ import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by Pc on 9/19/2017.
- */
 @Service
 @Transactional
 public class OrderServiceImpl implements OrderService {
+
     @Autowired
-    CartItemService cartItemService;
+    private CartItemService cartItemService;
+
     @Autowired
     private OrderRepository orderRepository;
 
@@ -47,7 +46,6 @@ public class OrderServiceImpl implements OrderService {
             Book book = cartItem.getBook();
             cartItem.setOrder(order);
             book.setInStockNumber(book.getInStockNumber() - cartItem.getQty());
-
         }
 
         order.setCartItemList(cartItemList);

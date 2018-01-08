@@ -1,6 +1,6 @@
 package com.bookstore.dto.book;
 
-import com.bookstore.domain.*;
+import com.bookstore.domain.Book;
 
 public class BookDetailForList {
 

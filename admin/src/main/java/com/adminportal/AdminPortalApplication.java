@@ -21,7 +21,9 @@ import java.util.Set;
 @Configuration
 @SpringBootApplication
 @EnableTransactionManagement
-public class AdminPortalApplication implements CommandLineRunner {
+public class AdminPortalApplication   {
+
+    private static final Logger logger = LoggerFactory.getLogger(AdminPortalApplication.class);
 
     @Autowired
     private SecurityUtility securityUtility;
@@ -29,31 +31,29 @@ public class AdminPortalApplication implements CommandLineRunner {
     @Autowired
     private UserService userService;
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminPortalApplication.class);
-
     public static void main(String[] args) {
         SpringApplication.run(AdminPortalApplication.class, args);
     }
-
-    @Override
-    public void run(String... args) throws Exception {
-
-        LoginInfo loginDto = new LoginInfo();
-        loginDto.setPassword(securityUtility.passwordEncoder().encode("admin"));
-        loginDto.setUsername("admin");
-        User user1 = new User(loginDto);
-        user1.setEmail("admin@yahoo.com");
-        Set<UserRole> userRoles = new HashSet<>();
-        Role role1 = new Role();
-        role1.setRoleId(0);
-        role1.setName("ADMIN");
-        userRoles.add(new UserRole(user1, role1));
-        userService.createUser(user1, userRoles);
-
-        logger.error("Message logged at ERROR level");
-        logger.warn("Message logged at WARN level");
-        logger.info("Message logged at INFO level");
-        logger.debug("Message logged at DEBUG level");
-    }
+//
+//    @Override
+//    public void run(String... args) throws Exception {
+//
+//        LoginInfo loginDto = new LoginInfo();
+//        loginDto.setPassword(securityUtility.passwordEncoder().encode("admin"));
+//        loginDto.setUsername("admin");
+//        User user1 = new User(loginDto);
+//        user1.setEmail("admin@yahoo.com");
+//        Set<UserRole> userRoles = new HashSet<>();
+//        Role role1 = new Role();
+//        role1.setRoleId(0);
+//        role1.setName("ADMIN");
+//        userRoles.add(new UserRole(user1, role1));
+//        userService.createUser(user1, userRoles);
+//
+//        logger.error("Message logged at ERROR level");
+//        logger.warn("Message logged at WARN level");
+//        logger.info("Message logged at INFO level");
+//        logger.debug("Message logged at DEBUG level");
+//    }
 
 }

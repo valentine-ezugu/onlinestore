@@ -1,15 +1,12 @@
 package com.bookstore.controller;
 
 import com.bookstore.domain.*;
-import com.bookstore.domain.PasswordResetToken;
-import com.bookstore.domain.security.*;
+import com.bookstore.domain.security.Role;
+import com.bookstore.domain.security.UserRole;
 import com.bookstore.dto.book.BookDetailExtraLite;
 import com.bookstore.dto.book.BookDetailForShelf;
 import com.bookstore.dto.order.OrderForFindOne;
 import com.bookstore.dto.user.*;
-import com.bookstore.repository.PasswordResetTokenRepository;
-import com.bookstore.repository.UserRepository;
-
 import com.bookstore.services.api.*;
 import com.bookstore.services.impl.UserSecurityService;
 import com.bookstore.utility.MailConstructor;
@@ -20,6 +17,7 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -53,11 +51,6 @@ public class HomeController {
     @Autowired
     private UserSecurityService userSecurityService;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordResetTokenRepository passwordResetTokenRepository;
 
     @Autowired
     private BookService bookService;
@@ -77,13 +70,19 @@ public class HomeController {
     @Autowired
     private SecurityUtility securityUtility;
 
-   @Autowired
-   private Mapper mapper;
+    @Autowired
+    private Mapper mapper;
 
     @RequestMapping("/")
     public String index() {
+        return "redirect:index";
+    }
+
+    @RequestMapping("/index")
+    public String home() {
         return "index";
     }
+
 
     @RequestMapping("/login")
     public String login(Model model) {
@@ -102,8 +101,10 @@ public class HomeController {
     }
 
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/bookshelf")
     public String bookshelf(Model model, Principal principal) {
+
         if (principal != null) {
             String username = principal.getName();
             User user = userService.findByUsername(username);
@@ -111,10 +112,11 @@ public class HomeController {
 
             model.addAttribute("user", userForLogin);
         }
+
         List<Book> bookList = bookService.findAll();
         List<BookDetailForShelf> bookDetailForShelfList = new ArrayList<>();
-        for(Book book : bookList){
-            bookDetailForShelfList.add( new BookDetailForShelf(book));
+        for (Book book : bookList) {
+            bookDetailForShelfList.add(new BookDetailForShelf(book));
         }
         model.addAttribute("bookList", bookDetailForShelfList);
         model.addAttribute("activeAll", true);
@@ -123,6 +125,7 @@ public class HomeController {
     }
 
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/bookDetail")
     public String bookDetail(
             @PathParam("id") Long id, Model model, Principal principal
@@ -149,17 +152,17 @@ public class HomeController {
     }
 
     @RequestMapping("/ForgetPassword")
-    public String ForgetPassword(
-            HttpServletRequest request,
+    public String ForgetPassword(HttpServletRequest request, @ModelAttribute("email") String email, Model model) {
 
-            @ModelAttribute("email") String email,
-            Model model) {
         model.addAttribute("classActiveForgetPassword", true);
+
         User user = userService.findByEmail(email);
+
         if (user == null) {
             model.addAttribute("emailNotExits", true);
             return "Myaccount";
         }
+
         String password = securityUtility.randomPassword();
         String encryptedPassword = securityUtility.passwordEncoder().encode(password);
         user.setPassword(encryptedPassword);
@@ -219,7 +222,6 @@ public class HomeController {
         return "Myprofile";
     }
 
-    //get method for addnewcredit card
     @RequestMapping("addNewCreditCard")
     public String addNewCreditCard(Model model, Principal principal) {
 
@@ -227,23 +229,19 @@ public class HomeController {
 
         UserForProfile userForProfile = new UserForProfile(user);
 
-        List<String> lists = new ArrayList<>();
-        lists.add("mapping.xml");
-
-        mapper = new DozerBeanMapper(lists);
 
         model.addAttribute("user", userForProfile);
         model.addAttribute("addNewCreditCard", true);
         model.addAttribute("classActiveBilling", true);
         model.addAttribute("listOfShippingAddresses", true);
 
-        //because we create new credit card we add object of payment and billinh
+
         UserBilling userBilling = new UserBilling();
         UserPayment userPayment = new UserPayment();
 
         UserForPaymentOrOrder userForBillingAddresses = new UserForPaymentOrOrder(userBilling);
 
-        UserForPaymentInfo userForPaymentAddresses = mapper.map(userPayment,UserForPaymentInfo.class ,"userForPaymentInfo");
+        UserForPaymentInfo userForPaymentAddresses = mapper.map(userPayment, UserForPaymentInfo.class, "userForPaymentInfo");
 
         model.addAttribute("userBilling", userForBillingAddresses);
         model.addAttribute("userPayment", userForPaymentAddresses);
@@ -273,10 +271,7 @@ public class HomeController {
 
         UserShipping userShipping = new UserShipping();
 
-        List<String> list = new ArrayList<>();
-        list.add("mapping.xml");
 
-        mapper = new DozerBeanMapper(list);
         UserForShippingLite userForShippingLite = mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId");
 
         model.addAttribute("userShipping", userForShippingLite);
@@ -314,7 +309,7 @@ public class HomeController {
         return "Myprofile";
     }
 
-    //post method for add new credit card
+
     @RequestMapping(value = "/addNewCreditCard", method = RequestMethod.POST)
     public String addNewCreditCard(@ModelAttribute("userPayment") UserPayment userPayment,
                                    @ModelAttribute("userBilling") UserBilling userBilling, Model model, Principal principal) {
@@ -346,17 +341,11 @@ public class HomeController {
     ) {
         User user = userService.findByUsername(principal.getName());
 
-
-        List<String> list = new ArrayList<>();
-        list.add("mapping.xml");
-
-        mapper = new DozerBeanMapper(list);
-
         UserForProfile userForProfile = new UserForProfile(user);
 
         UserPayment userPayment = userPaymentService.findById(creditCardId);
 
-        UserForPaymentInfo userForPaymentAddresses = mapper.map(userPayment,UserForPaymentInfo.class ,"userForPaymentInfo");
+        UserForPaymentInfo userForPaymentAddresses = mapper.map(userPayment, UserForPaymentInfo.class, "userForPaymentInfo");
 
 
         if (user.getId() != userPayment.getUser().getId()) {
@@ -405,7 +394,7 @@ public class HomeController {
         User user = userService.findByUsername(principal.getName());
         userService.setUserDefaultShipping(defaultShippingId, user);
 
-      UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = new UserForProfile(user);
 
         model.addAttribute("user", userForProfile);
         model.addAttribute("listOfCreditCards", true);
@@ -464,13 +453,9 @@ public class HomeController {
 
         UserForProfile userForProfile = new UserForProfile(user);
 
-        List<String> list = new ArrayList<>();
-        list.add("mapping.xml");
-
-        mapper = new DozerBeanMapper(list);
         UserForShippingLite userForShippingLite = mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId");
 
-        if (user.getId() != userShipping.getUser().getId()) { //basic securit check
+        if (user.getId() != userShipping.getUser().getId()) {
             return "badRequestPage";
         } else {
             model.addAttribute("user", userForProfile);
@@ -500,7 +485,7 @@ public class HomeController {
 
         UserShipping userShipping = userShippingService.findById(userShippingId);
 
-       UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = new UserForProfile(user);
 
         if (user.getId() != userShipping.getUser().getId()) {
             return "badRequestPage";
@@ -520,14 +505,12 @@ public class HomeController {
         }
     }
 
-    //when i clicked account it showed 404 because no  mapping to my profile
     @RequestMapping("/Myprofile")
     public String Myprofile(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
 
         UserForProfile userForProfile = new UserForProfile(user);
-//
-//        UserForPaymentOrOrder userForPaymentOrOrder = new UserForPaymentOrOrder(user);
+
 
         model.addAttribute("user", userForProfile);
         model.addAttribute("userPaymentList", userForProfile.getUserPaymentList());
@@ -536,10 +519,7 @@ public class HomeController {
 
         UserShipping userShipping = new UserShipping();
 
-        List<String> list = new ArrayList<>();
-        list.add("mapping.xml");
 
-        mapper = new DozerBeanMapper(list);
         UserForShippingLite userForShippingLite = mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId");
 
         model.addAttribute("userShipping", userForShippingLite);
@@ -555,7 +535,6 @@ public class HomeController {
         return "Myprofile";
     }
 
-    //this is for the creation of user /the saving of the new user
     @RequestMapping(value = "/newUser", method = RequestMethod.POST)
     public String newUSerPost(
             HttpServletRequest request,
@@ -567,26 +546,20 @@ public class HomeController {
         model.addAttribute("email", userEmail);
         model.addAttribute("username", username);
 
-        //now if the user exist will  not add another one
-        //findByUsername was highlighted red because it wasn't defined by userService
         if (userService.findByUsername(username) != null) {
 
             model.addAttribute("usernameExits", true);
 
-            //logically we return to myaccount not profile cause we cant have same username
             return "Myaccount";
         }
-        //only here we are required to use email as defined in user class
+
         if (userService.findByEmail(userEmail) != null) {
             model.addAttribute("emailExits", true);
-            //logically we return to myaccount not profile cause we cant have same email
+
             return "Myaccount";
         }
 
-        //now that we have checked there is no duplicate we can now create new user
-        //now we use setters method
 
-        //USER LOGIC
         User user = new User();
         user.setUsername(username);
         user.setEmail(userEmail);
@@ -598,7 +571,7 @@ public class HomeController {
 
         Role role = new Role();
         role.setRoleId(1);
-        role.setName("Role_USER");
+        role.setName("USER");
         Set<UserRole> userRoles = new HashSet<>();
         userRoles.add(new UserRole(user, role));
         userService.createUser(user, userRoles);
@@ -616,7 +589,7 @@ public class HomeController {
         return "Myaccount";
     }
 
-    // this part is responsible for the link inside the mail sent to email (not sure )
+
     @RequestMapping("/newUser")
     public String newUser(Locale locale, @RequestParam("token") String token, Model model) {
         PasswordResetToken passToken = userService.getPasswordResetToken(token);
@@ -656,7 +629,7 @@ public class HomeController {
             throw new Exception("User not found");
         }
 
-		/*check email already exists*/
+
         if (userService.findByEmail(user.getEmail()) != null) {
             if (userService.findByEmail(user.getEmail()).getId() != currentUser.getId()) {
                 model.addAttribute("emailExists", true);
@@ -664,7 +637,7 @@ public class HomeController {
             }
         }
 
-		/*check username already exists*/
+
         if (userService.findByUsername(user.getUsername()) != null) {
             if (userService.findByUsername(user.getUsername()).getId() != currentUser.getId()) {
                 model.addAttribute("usernameExists", true);
@@ -672,7 +645,7 @@ public class HomeController {
             }
         }
 
-//		update password
+
         if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")) {
             BCryptPasswordEncoder passwordEncoder = securityUtility.passwordEncoder();
             String dbPassword = currentUser.getPassword();
@@ -685,8 +658,8 @@ public class HomeController {
             }
         }
 
-        currentUser.setFirstname(user.getFirstname());
-        currentUser.setLastname(user.getLastname());
+        currentUser.setFirstName(user.getFirstName());
+        currentUser.setLastName(user.getLastName());
         currentUser.setUsername(user.getUsername());
         currentUser.setEmail(user.getEmail());
 
@@ -699,7 +672,7 @@ public class HomeController {
         model.addAttribute("listOfShippingAddresses", true);
         model.addAttribute("listOfCreditCards", true);
 
-        //securit check for safety
+
         UserDetails userDetails = userSecurityService.loadUserByUsername(currentUser.getUsername());
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),

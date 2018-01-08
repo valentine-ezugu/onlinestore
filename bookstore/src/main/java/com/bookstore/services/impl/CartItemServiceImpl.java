@@ -1,8 +1,9 @@
 package com.bookstore.services.impl;
 
-import com.bookstore.repository.*;
-import com.bookstore.services.api.CartItemService;
 import com.bookstore.domain.*;
+import com.bookstore.repository.BookToCartItemRepository;
+import com.bookstore.repository.CartItemRepository;
+import com.bookstore.services.api.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.access.AccessDeniedException;
@@ -12,26 +13,22 @@ import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by Pc on 9/8/2017.
- */
+
 @Service
 @Transactional
 public class CartItemServiceImpl implements CartItemService {
+
+    @Autowired
+    private CartItemRepository cartItemRepository;
+    @Autowired
+    private BookToCartItemRepository bookToCartItemRepository;
 
     @Override
     public List<CartItem> findByShoppingCart(ShoppingCart shoppingCart) {
         return cartItemRepository.findByShoppingCart(shoppingCart);
     }
 
-    @Autowired
-    private CartItemRepository cartItemRepository;
-
-    @Autowired
-    private BookToCartItemRepository bookToCartItemRepository;
-
-    public CartItem updateCartItem(CartItem cartItem) throws AccessDeniedException , DataAccessException
-    {
+    public CartItem updateCartItem(CartItem cartItem) throws AccessDeniedException, DataAccessException {
         BigDecimal bigDecimal = new BigDecimal(cartItem.getBook().getOurPrice()).multiply(new BigDecimal(cartItem.getQty()));
 
         bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -42,13 +39,12 @@ public class CartItemServiceImpl implements CartItemService {
         return cartItem;
     }
 
-     public CartItem addBookToCartItem(Book book, User user, int qty) throws   AccessDeniedException
-    {
+    public CartItem addBookToCartItem(Book book, User user, int qty) throws AccessDeniedException {
         List<CartItem> cartItemList = findByShoppingCart(user.getShoppingCart());
 
         for (CartItem cartItem : cartItemList) {
-            if(book.getId() == cartItem.getBook().getId()) {
-                cartItem.setQty(cartItem.getQty()+qty);
+            if (book.getId() == cartItem.getBook().getId()) {
+                cartItem.setQty(cartItem.getQty() + qty);
                 cartItem.setSubTotal(new BigDecimal(book.getOurPrice()).multiply(new BigDecimal(qty)));
                 cartItemRepository.save(cartItem);
                 return cartItem;
@@ -71,8 +67,7 @@ public class CartItemServiceImpl implements CartItemService {
         return cartItem;
     }
 
-    public CartItem findById(Long id)throws DataAccessException, AccessDeniedException
-    {
+    public CartItem findById(Long id) throws DataAccessException, AccessDeniedException {
         return cartItemRepository.findOne(id);
     }
 
@@ -84,14 +79,12 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
 
-    public CartItem save(CartItem cartItem)throws DataAccessException, AccessDeniedException
-    {
+    public CartItem save(CartItem cartItem) throws DataAccessException, AccessDeniedException {
         return cartItemRepository.save(cartItem);
     }
 
-    public List<CartItem> findByOrder(Order order)throws DataAccessException, AccessDeniedException
-    {
-        return  cartItemRepository.findByOrder(order);
+    public List<CartItem> findByOrder(Order order) throws DataAccessException, AccessDeniedException {
+        return cartItemRepository.findByOrder(order);
 
     }
 }

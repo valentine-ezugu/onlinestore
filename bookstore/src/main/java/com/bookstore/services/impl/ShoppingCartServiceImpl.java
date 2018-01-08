@@ -1,14 +1,16 @@
 package com.bookstore.services.impl;
 
-import com.bookstore.repository.*;
+import com.bookstore.domain.CartItem;
+import com.bookstore.domain.ShoppingCart;
+import com.bookstore.repository.ShoppingCartRepository;
 import com.bookstore.services.api.CartItemService;
 import com.bookstore.services.api.ShoppingCartService;
-import com.bookstore.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 
         for (CartItem cartItem : cartItemList) {
-            if(cartItem.getBook().getInStockNumber() > 0) {
+            if (cartItem.getBook().getInStockNumber() > 0) {
                 cartItemService.updateCartItem(cartItem);
                 cartTotal = cartTotal.add(cartItem.getSubTotal());
             }
@@ -43,7 +45,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         return shoppingCart;
     }
 
-    public void clearShoppingCart(ShoppingCart shoppingCart)throws DataAccessException
+    public void clearShoppingCart(ShoppingCart shoppingCart) throws DataAccessException
 
     {
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);

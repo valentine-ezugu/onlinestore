@@ -1,11 +1,11 @@
 package com.bookstore.dto.user;
 
-import com.bookstore.domain.*;
+import com.bookstore.domain.User;
 
 
 public class UserForShippingLite {
 
-    private  Long id;
+    private Long id;
     private String userShippingName;
     private String userShippingStreet1;
     private String userShippingStreet2;

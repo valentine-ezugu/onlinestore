@@ -9,7 +9,7 @@ public class BookForSave {
     private String author;
     private String publisher;
     private String publicationDate;
-    private String language ;
+    private String language;
     private String category;
     private String numberOfPages;
     private String format;
@@ -17,10 +17,13 @@ public class BookForSave {
     private double shippingWeight;
     private double listPrice;
     private double ourPrice;
-    private boolean active= true;
+    private boolean active = true;
     private String description;
     private MultipartFile bookImage;
     private int inStockNumber;
+
+    public BookForSave() {
+    }
 
     public Long getId() {
         return id;
@@ -52,9 +55,6 @@ public class BookForSave {
 
     public void setInStockNumber(int inStockNumber) {
         this.inStockNumber = inStockNumber;
-    }
-
-    public BookForSave() {
     }
 
     public String getTitle() {

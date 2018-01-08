@@ -1,6 +1,9 @@
 package com.bookstore.dto.cart;
 
-import com.bookstore.domain.*;
+import com.bookstore.domain.Book;
+import com.bookstore.domain.BookToCartItem;
+import com.bookstore.domain.Order;
+import com.bookstore.domain.ShoppingCart;
 
 import java.math.BigDecimal;
 import java.util.List;

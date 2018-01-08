@@ -1,12 +1,11 @@
 package com.adminportal.config;
 
-import com.adminportal.service.impl.UserSecurityService;
+
 import com.adminportal.utility.SecurityUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -30,16 +29,6 @@ import java.util.Arrays;
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private Environment env;
-
-    @Autowired
-    private SecurityUtility securityUtility;
-
-    @Autowired
-    private UserSecurityService userSecurityService;
-
-
     private static final String[] PUBLIC_MATCHERS = {
             "/css/**",
             "/js/**",
@@ -50,7 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/fonts/**",
             "/bookshelf"
     };
-
+    @Autowired
+    private SecurityUtility securityUtility;
 
     private BCryptPasswordEncoder passwordEncoder() {
         return securityUtility.passwordEncoder();

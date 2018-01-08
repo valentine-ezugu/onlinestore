@@ -8,6 +8,7 @@ import com.adminportal.repository.RoleRepository;
 import com.adminportal.repository.UserRepository;
 import com.adminportal.service.api.UserService;
 import com.adminportal.utility.SecurityUtility;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,9 @@ public class UserServiceTest extends AbstractTest {
 
     @Before
     public void setUp() {
-         userRepository = createMock(UserRepository.class);
+        userRepository = createMock(UserRepository.class);
         roleRepository = createMock(RoleRepository.class);
-         ReflectionTestUtils.setField(userService, "userRepository", userRepository);
+        ReflectionTestUtils.setField(userService, "userRepository", userRepository);
         ReflectionTestUtils.setField(userService, "roleRepository", roleRepository);
 
     }
@@ -45,7 +46,7 @@ public class UserServiceTest extends AbstractTest {
     @Test
     public void saveUser() throws Exception {
         User user = new User();
-        user.setUsername("vsl");
+        user.setUsername("val");
         user.setPassword(securityUtility.passwordEncoder().encode("vsl"));
         user.setEmail("val@yahoo.com");
         Set<UserRole> userRoles = new HashSet<>();
@@ -54,16 +55,50 @@ public class UserServiceTest extends AbstractTest {
         role1.setName("ROLE_USER");
         userRoles.add(new UserRole(user, role1));
         expect(userRepository.save(user)).andReturn(user);
+        replay(userRepository);
+
+        User user1 = userService.save(user);
+
+        verify(userRepository);
+
+        Assert.assertNotNull(user1);
+        Assert.assertEquals("val", user1.getUsername());
     }
 
     @Test
-    public void findSave2() throws Exception {
+    public void createUserTest() throws Exception {
         User user = new User();
-        user.setId(1L);
-        expect(userRepository.findOne(1L)).andReturn(user);
-        replay(userRepository);
-    }
+        Set<UserRole> userRoles = new HashSet<>();
+        user.setUsername("valentine");
 
+        expect(userRepository.findByUsername(anyString())).andReturn(user);
+        replay(userRepository);
+
+        User user1 = userService.findByUsername("valentine");
+        verify();
+        Assert.assertEquals("valentine", user1.getUsername());
+
+        user1.setFirstName("Ezugu");
+
+        if (user1 != null) {
+            logger.info("do nothing ");
+        } else {
+            for (UserRole ur : userRoles) {
+                roleRepository.save(ur.getRole());
+            }
+            user1.getUserRoles().addAll(userRoles);
+
+            expect(userRepository.save(user)).andReturn(user1);
+            replay(userRepository);
+
+            User userCreated = userService.createUser(user1, userRoles);
+            verify();
+
+            Assert.assertNotNull(userCreated);
+            Assert.assertEquals("Ezugu", userCreated.getFirstName());
+        }
+
+    }
 }
 
 

@@ -1,9 +1,11 @@
 package com.bookstore.controller;
 
-import com.bookstore.domain.*;
+import com.bookstore.domain.Book;
+import com.bookstore.domain.User;
 import com.bookstore.dto.book.BookDetailForList;
 import com.bookstore.dto.user.UserForProfile;
-import com.bookstore.services.api.*;
+import com.bookstore.services.api.BookService;
+import com.bookstore.services.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +51,7 @@ public class SearchController {
             return "bookshelf";
         }
         List<BookDetailForList> bookListToFront = new ArrayList<>();
-        for(Book book : bookList){
+        for (Book book : bookList) {
             bookListToFront.add(new BookDetailForList(book));
         }
         model.addAttribute("bookList", bookListToFront);
@@ -75,7 +77,7 @@ public class SearchController {
             return "bookshelf";
         }
         List<BookDetailForList> bookListToFront = new ArrayList<>();
-        for(Book book : bookList){
+        for (Book book : bookList) {
             bookListToFront.add(new BookDetailForList(book));
         }
         model.addAttribute("bookList", bookListToFront);

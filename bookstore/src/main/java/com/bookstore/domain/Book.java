@@ -15,7 +15,7 @@ public class Book {
     private String author;
     private String publisher;
     private String publicationDate;
-    private String language ;
+    private String language;
     private String category;
     private String numberOfPages;
     private String format;
@@ -24,9 +24,9 @@ public class Book {
     private double listPrice;
     private double ourPrice;
 
-    private boolean active = false;
+    private boolean active = true;
 
-    @Column(columnDefinition="text")
+    @Column(columnDefinition = "text")
     private String description;
 
     private int inStockNumber;
@@ -163,7 +163,6 @@ public class Book {
     public void setInStockNumber(int inStockNumber) {
         this.inStockNumber = inStockNumber;
     }
-
 
 
     public List<BookToCartItem> getBookToCartItemList() {

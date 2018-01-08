@@ -1,6 +1,5 @@
 package com.adminportal.dto.book;
 
-import com.adminportal.domain.Book;
 import com.adminportal.domain.BookToCartItem;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +20,7 @@ public class BookDetailForList {
     private double shippingWeight;
     private double listPrice;
     private double ourPrice;
-    private boolean active= true;
+    private boolean active = true;
     private String description;
     private int inStockNumber;
     private List<BookToCartItem> bookToCartItemList;

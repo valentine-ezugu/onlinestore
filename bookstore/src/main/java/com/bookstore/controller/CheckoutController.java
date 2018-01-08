@@ -1,5 +1,6 @@
 package com.bookstore.controller;
 
+import com.bookstore.domain.*;
 import com.bookstore.dto.billingAddress.BillingAddressCheckOut;
 import com.bookstore.dto.cart.CartItemForList;
 import com.bookstore.dto.payment.PaymentExtraInfo;
@@ -7,11 +8,9 @@ import com.bookstore.dto.shipping.ShippingAddressInfo;
 import com.bookstore.dto.user.UserForPaymentInfo;
 import com.bookstore.dto.user.UserForProfile;
 import com.bookstore.dto.user.UserForShippingLite;
+import com.bookstore.services.api.*;
 import com.bookstore.utility.MailConstructor;
 import com.bookstore.utility.USConstants;
-import com.bookstore.domain.*;
-import com.bookstore.services.api.*;
-import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -98,18 +98,12 @@ public class CheckoutController {
             }
 
         }
-
-        List<String> lists = new ArrayList<>();
-        lists.add("mapping.xml");
-
-        mapper = new DozerBeanMapper(lists);
-
         List<CartItemForList> cartItemForLists = new ArrayList<>();
         for (CartItem cartItem : cartItemList) {
-            cartItemForLists.add(mapper.map(cartItem, CartItemForList.class,"cartItemForList"));
+            cartItemForLists.add(mapper.map(cartItem, CartItemForList.class, "cartItemForList"));
         }
 
-        //Dto for usershipping
+
         List<UserShipping> userShippingList = user.getUserShippingList();
 
         List<UserForShippingLite> userForShippingLites = new ArrayList<>();
@@ -118,12 +112,11 @@ public class CheckoutController {
             userForShippingLites.add(mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId"));
         }
 
-        //Dto for userpayment
         List<UserPayment> userPaymentList = user.getUserPaymentList();
         List<UserForPaymentInfo> userForPaymentInfoList = new ArrayList<>();
 
         for (UserPayment userPayment : userPaymentList) {
-            userForPaymentInfoList.add(mapper.map(userPayment,UserForPaymentInfo.class, "userForPaymentInfo"));
+            userForPaymentInfoList.add(mapper.map(userPayment, UserForPaymentInfo.class, "userForPaymentInfo"));
         }
 
         model.addAttribute("userShippingList", userForShippingLites);
@@ -141,7 +134,7 @@ public class CheckoutController {
             model.addAttribute("emptyShippingList", false);
         }
 
-        ShoppingCart shoppingCart = user.getShoppingCart();
+
 
         for (UserShipping userShipping : userShippingList) {
             if (userShipping.isUserShippingDefault()) {
@@ -158,9 +151,9 @@ public class CheckoutController {
         }
         UserForProfile userForProfile = new UserForProfile(user);
 
-        PaymentExtraInfo paymentExtraInfo = mapper.map(payment,PaymentExtraInfo.class,"paymentExtraInfo");
-        BillingAddressCheckOut billingAddressCheckOut = mapper.map(billingAddress, BillingAddressCheckOut.class,"billingAddressCheckout");
-        ShippingAddressInfo shippingAddressInfo = mapper.map(shippingAddress, ShippingAddressInfo.class,"shippingAddressId");
+        PaymentExtraInfo paymentExtraInfo = mapper.map(payment, PaymentExtraInfo.class, "paymentExtraInfo");
+        BillingAddressCheckOut billingAddressCheckOut = mapper.map(billingAddress, BillingAddressCheckOut.class, "billingAddressCheckout");
+        ShippingAddressInfo shippingAddressInfo = mapper.map(shippingAddress, ShippingAddressInfo.class, "shippingAddressId");
 
         model.addAttribute("shippingAddress", shippingAddressInfo);
         model.addAttribute("payment", paymentExtraInfo);
@@ -200,11 +193,11 @@ public class CheckoutController {
 
             List<CartItemForList> cartItemForLists = new ArrayList<>();
             for (CartItem cartItem : cartItemList) {
-                cartItemForLists.add(mapper.map(cartItem, CartItemForList.class,"cartItemForList"));
+                cartItemForLists.add(mapper.map(cartItem, CartItemForList.class, "cartItemForList"));
             }
-            PaymentExtraInfo paymentExtraInfo = mapper.map(payment,PaymentExtraInfo.class,"paymentExtraInfo");
-            BillingAddressCheckOut billingAddressCheckOut = mapper.map(billingAddress, BillingAddressCheckOut.class,"billingAddressCheckout");
-            ShippingAddressInfo shippingAddressInfo = mapper.map(shippingAddress, ShippingAddressInfo.class,"shippingAddressId");
+            PaymentExtraInfo paymentExtraInfo = mapper.map(payment, PaymentExtraInfo.class, "paymentExtraInfo");
+            BillingAddressCheckOut billingAddressCheckOut = mapper.map(billingAddress, BillingAddressCheckOut.class, "billingAddressCheckout");
+            ShippingAddressInfo shippingAddressInfo = mapper.map(shippingAddress, ShippingAddressInfo.class, "shippingAddressId");
 
             model.addAttribute("shippingAddress", shippingAddressInfo);
             model.addAttribute("payment", paymentExtraInfo);
@@ -221,21 +214,16 @@ public class CheckoutController {
 
             List<UserPayment> userPaymentList = user.getUserPaymentList();
 
-            //DTO
-            List<String> lists = new ArrayList<>();
-            lists.add("mapping.xml");
-
-            mapper = new DozerBeanMapper(lists);
 
             for (UserShipping userShipping1 : userShippingList) {
-                userForShippingLites.add(mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId"));
+                userForShippingLites.add(mapper.map(userShipping1, UserForShippingLite.class, "userShippingLiteId"));
             }
 
 
             List<UserForPaymentInfo> userForPaymentInfoList = new ArrayList<>();
 
             for (UserPayment userPayment : userPaymentList) {
-              userForPaymentInfoList.add(mapper.map(userPayment,UserForPaymentInfo.class, "userForPaymentInfo"));
+                userForPaymentInfoList.add(mapper.map(userPayment, UserForPaymentInfo.class, "userForPaymentInfo"));
             }
             model.addAttribute("userShippingList", userForShippingLites);
             model.addAttribute("userPaymentList", userForPaymentInfoList);
@@ -257,8 +245,6 @@ public class CheckoutController {
     }
 
 
-
-
     @RequestMapping("/setPaymentMethod")
     public String setPaymentMethod(@RequestParam("userPaymentId") Long userPaymentId, Principal principal,
                                    Model model) {
@@ -268,11 +254,7 @@ public class CheckoutController {
 
         UserForProfile userForProfile = new UserForProfile(user);
 
-         //Dto added mapper
-        List<String> lists = new ArrayList<>();
-        lists.add("mapping.xml");
 
-        mapper = new DozerBeanMapper(lists);
 
         if (userPayment.getUser().getId() != user.getId()) {
             return "badRequestPage";
@@ -285,12 +267,12 @@ public class CheckoutController {
 
             List<CartItemForList> cartItemForLists = new ArrayList<>();
             for (CartItem cartItem : cartItemList) {
-                cartItemForLists.add(mapper.map(cartItem, CartItemForList.class,"cartItemForList"));
+                cartItemForLists.add(mapper.map(cartItem, CartItemForList.class, "cartItemForList"));
             }
-            ShippingAddressInfo shippingAddressInfo = mapper.map(shippingAddress, ShippingAddressInfo.class,"shippingAddressId");
+            ShippingAddressInfo shippingAddressInfo = mapper.map(shippingAddress, ShippingAddressInfo.class, "shippingAddressId");
 
-            BillingAddressCheckOut billingAddressCheckOut = mapper.map(billingAddress, BillingAddressCheckOut.class,"billingAddressCheckout");
-            PaymentExtraInfo paymentExtraInfo = mapper.map(payment,PaymentExtraInfo.class,"paymentExtraInfo");
+            BillingAddressCheckOut billingAddressCheckOut = mapper.map(billingAddress, BillingAddressCheckOut.class, "billingAddressCheckout");
+            PaymentExtraInfo paymentExtraInfo = mapper.map(payment, PaymentExtraInfo.class, "paymentExtraInfo");
             model.addAttribute("shippingAddress", shippingAddressInfo);
             model.addAttribute("payment", paymentExtraInfo);
             model.addAttribute("billingAddress", billingAddressCheckOut);
@@ -307,7 +289,6 @@ public class CheckoutController {
             List<UserForPaymentInfo> userForPaymentInfoList = new ArrayList<>();
 
 
-
             for (UserShipping userShipping : userShippingList) {
                 userForShippingLites.add(mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId"));
             }
@@ -315,7 +296,8 @@ public class CheckoutController {
             List<UserPayment> userPaymentList = user.getUserPaymentList();
 
             for (UserPayment userPayment1 : userPaymentList) {
-                userForPaymentInfoList.add(mapper.map(userPayment,UserForPaymentInfo.class, "userForPaymentInfo"));            }
+                userForPaymentInfoList.add(mapper.map(userPayment1, UserForPaymentInfo.class, "userForPaymentInfo"));
+            }
 
             model.addAttribute("userShippingList", userForShippingLites);
             model.addAttribute("userPaymentList", userForPaymentInfoList);
@@ -343,6 +325,9 @@ public class CheckoutController {
                                @ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
                                @ModelAttribute("shippingMethod") String shippingMethod, Principal principal, Model model) {
         ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
+
+
+         billingAddressCheckOut = mapper.map(billingAddress, BillingAddressCheckOut.class, "billingAddressCheckout");
 
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
         model.addAttribute("cartItemList", cartItemList);

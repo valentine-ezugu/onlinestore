@@ -1,7 +1,7 @@
 package com.bookstore.services.impl;
 
-import com.bookstore.services.api.LoginService;
 import com.bookstore.domain.security.LoginStatus;
+import com.bookstore.services.api.LoginService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,12 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class SpringSecurityLoginService implements LoginService {
-    private Log log = LogFactory.getLog(SpringSecurityLoginService.class);
 
     @Autowired
     public AuthenticationManager authenticationManager;
+    private Log log = LogFactory.getLog(SpringSecurityLoginService.class);
 
-    public LoginStatus getStatus()throws DataAccessException
+    public LoginStatus getStatus() throws DataAccessException
 
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -35,8 +35,7 @@ public class SpringSecurityLoginService implements LoginService {
         }
     }
 
-    public LoginStatus login(String username, String password)throws DataAccessException, AccessDeniedException
-    {
+    public LoginStatus login(String username, String password) throws DataAccessException, AccessDeniedException {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
 
         try {

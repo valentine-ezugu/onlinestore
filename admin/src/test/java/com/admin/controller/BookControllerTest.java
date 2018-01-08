@@ -4,6 +4,7 @@ import com.adminportal.AdminPortalApplication;
 import com.adminportal.controller.BookController;
 import com.adminportal.domain.Book;
 import com.adminportal.service.api.BookService;
+
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
@@ -18,7 +19,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +34,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AdminPortalApplication.class)
 public class BookControllerTest {
 
-    private final String FILE_LOCATION = "1.png";
-    MockMvcBuilder mockMvcBuilder;
     @Autowired
     private BookController bookController;
+
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
     private BookService bookService;
 
     @Before
@@ -64,7 +65,7 @@ public class BookControllerTest {
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
     public void addBookClicked() throws Exception {
-        Book book = new Book();
+
         mockMvc
                 .perform(get("/book/add")
                         .accept(MediaType.TEXT_HTML)
@@ -79,11 +80,12 @@ public class BookControllerTest {
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
     public void bookRemoveTest() throws Exception {
-        Book book = new Book();
+
         List<Book> expectedBookList = createBookList(10);
 
         bookService.removeOne(anyLong());
         EasyMock.expectLastCall();
+
         bookService.removeOne(anyLong());
 
         expect(bookService.findAll()).andReturn(expectedBookList);
@@ -103,10 +105,10 @@ public class BookControllerTest {
     @WithMockUser(username = "admin", roles = {"ADMIN"})
     public void showBookListPage() throws Exception {
 
-        Book book = new Book();
         List<Book> expectedBookList = createBookList(10);
 
         expect(bookService.findAll()).andReturn(expectedBookList);
+        replay(bookService);
 
         mockMvc
                 .perform(get("/book/bookList")

@@ -2,9 +2,13 @@ package com.bookstore.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
+
+
 @Configuration
+@EnableAspectJAutoProxy
 @ComponentScan(basePackages = {"com.bookstore"})
-@Import({SecurityConfig.class })
+@Import({SecurityConfig.class})
 public class AppConfig {
 }

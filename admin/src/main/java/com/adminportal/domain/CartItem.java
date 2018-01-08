@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
- public class CartItem {
+public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,8 +1,8 @@
 package com.bookstore.services.impl;
 
+import com.bookstore.domain.UserShipping;
 import com.bookstore.repository.UserShippingRepository;
 import com.bookstore.services.api.UserShippingService;
-import com.bookstore.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -18,12 +18,12 @@ public class UserShippingServiceImpl implements UserShippingService {
     UserShippingRepository userShippingRepository;
 
     @Override
-    public UserShipping findById(long id)throws DataAccessException {
+    public UserShipping findById(long id) throws DataAccessException {
         return userShippingRepository.findOne(id);
     }
 
     @Override
-    public void removeById(Long id) throws DataAccessException{
-         userShippingRepository.delete(id);
+    public void removeById(Long id) throws DataAccessException {
+        userShippingRepository.delete(id);
     }
 }

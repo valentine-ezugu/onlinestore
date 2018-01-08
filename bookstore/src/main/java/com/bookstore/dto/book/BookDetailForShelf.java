@@ -1,5 +1,6 @@
 package com.bookstore.dto.book;
-import com.bookstore.domain.*;
+
+import com.bookstore.domain.Book;
 
 
 public class BookDetailForShelf {
@@ -17,13 +18,13 @@ public class BookDetailForShelf {
     private String description;
 
     public BookDetailForShelf(Book book) {
-        id =book.getId();
+        id = book.getId();
         title = book.getTitle();
-        author =book.getAuthor();
+        author = book.getAuthor();
         publisher = book.getPublisher();
         publicationDate = book.getPublicationDate();
         numberOfPages = book.getNumberOfPages();
-        category =book.getCategory();
+        category = book.getCategory();
         format = book.getFormat();
         listPrice = book.getListPrice();
         ourPrice = book.getOurPrice();

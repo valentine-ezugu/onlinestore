@@ -1,5 +1,6 @@
 package com.bookstore.dto.book;
-import com.bookstore.domain.*;
+
+import com.bookstore.domain.Book;
 
 
 public class BookDetailExtraLite {
@@ -17,17 +18,17 @@ public class BookDetailExtraLite {
     private String description;
     private double shippingWeight;
     private int isbn;
-    private String language ;
+    private String language;
     private int inStockNumber;
 
-    public  BookDetailExtraLite(Book book) {
-        id =book.getId();
+    public BookDetailExtraLite(Book book) {
+        id = book.getId();
         title = book.getTitle();
-        author =book.getAuthor();
+        author = book.getAuthor();
         publisher = book.getPublisher();
         publicationDate = book.getPublicationDate();
         numberOfPages = book.getNumberOfPages();
-        category =book.getCategory();
+        category = book.getCategory();
         format = book.getFormat();
         listPrice = book.getListPrice();
         ourPrice = book.getOurPrice();
@@ -35,7 +36,7 @@ public class BookDetailExtraLite {
         shippingWeight = book.getShippingWeight();
         isbn = book.getIsbn();
         language = book.getLanguage();
-        inStockNumber =book.getInStockNumber();
+        inStockNumber = book.getInStockNumber();
     }
 
     public int getInStockNumber() {

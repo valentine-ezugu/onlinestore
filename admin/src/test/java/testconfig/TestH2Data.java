@@ -1,4 +1,4 @@
-package TestConfig;
+package testconfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 @Profile("test")
 @Configuration
 @PropertySource(value = {"classpath:application.properties"})
-public  class TestH2Data {
+public class TestH2Data {
 
     @Autowired
     private Environment env;
@@ -29,7 +29,7 @@ public  class TestH2Data {
                 .generateUniqueName(true)
                 .setType(EmbeddedDatabaseType.H2)
                 .setScriptEncoding("UTF-8")
-                .addScripts("schema.sql", "data.sql")
+                .addScripts("schema.mm", "data.mm")
                 .build();
     }
 

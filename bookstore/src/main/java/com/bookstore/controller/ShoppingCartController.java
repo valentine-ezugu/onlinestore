@@ -1,9 +1,15 @@
 package com.bookstore.controller;
 
-import com.bookstore.domain.*;
+import com.bookstore.domain.Book;
+import com.bookstore.domain.CartItem;
+import com.bookstore.domain.ShoppingCart;
+import com.bookstore.domain.User;
 import com.bookstore.dto.cart.CartItemForList;
 import com.bookstore.dto.shoppingCart.ShoppingCartLite;
-import com.bookstore.services.api.*;
+import com.bookstore.services.api.BookService;
+import com.bookstore.services.api.CartItemService;
+import com.bookstore.services.api.ShoppingCartService;
+import com.bookstore.services.api.UserService;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +34,7 @@ public class ShoppingCartController {
 
     @Autowired
     private BookService bookService;
+
     @Autowired
     private ShoppingCartService shoppingCartService;
 
@@ -39,29 +46,25 @@ public class ShoppingCartController {
 
         User user = userService.findByUsername(principal.getName());
 
-             ShoppingCart shoppingCart = user.getShoppingCart();
+        ShoppingCart shoppingCart = user.getShoppingCart();
 
-        List<String> lists = new ArrayList<>();
-        lists.add("mapping.xml");
-
-        mapper = new DozerBeanMapper(lists);
 
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 
         List<CartItemForList> cartItemForLists = new ArrayList<>();
         for (CartItem cartItem : cartItemList) {
-            cartItemForLists.add( mapper.map(cartItem, CartItemForList.class,"cartItemForList"));
+            cartItemForLists.add(mapper.map(cartItem, CartItemForList.class, "cartItemForList"));
         }
 
         ShoppingCartLite shoppingCartLite = new ShoppingCartLite(shoppingCart);
 
         shoppingCartService.updateShoppingCart(shoppingCart);
 
-             model.addAttribute("cartItemList", cartItemForLists);
-             model.addAttribute("shoppingCart", shoppingCartLite);
+        model.addAttribute("cartItemList", cartItemForLists);
+        model.addAttribute("shoppingCart", shoppingCartLite);
 
-             return "shoppingCart";
-         }
+        return "shoppingCart";
+    }
 
     @RequestMapping("/addItem")
     public String addItem(

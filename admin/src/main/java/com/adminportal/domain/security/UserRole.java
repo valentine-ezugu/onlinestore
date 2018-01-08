@@ -8,17 +8,15 @@ import javax.persistence.*;
 @Table(name = "user_role")
 public class UserRole {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private long userRoleId;
-
-   @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "user_id")
-   User user;
-
-   @ManyToOne(fetch =FetchType.EAGER)
-   @JoinColumn(name = "role_id")
-   Role role;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    User user;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    Role role;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long userRoleId;
 
     public UserRole() {
     }

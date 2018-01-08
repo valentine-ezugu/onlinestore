@@ -11,7 +11,7 @@ public class ShippingAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  Long id;
+    private Long id;
 
     private String shippingAddressName;
     private String shippingAddressStreet1;
@@ -20,9 +20,9 @@ public class ShippingAddress {
     private String shippingAddressState;
     private String shippingAddressCountry;
     private String shippingAddressZipCode;
- 
+
     @OneToOne
-     private Order order;
+    private Order order;
 
     public Long getId() {
         return id;

@@ -4,7 +4,6 @@ import com.bookstore.config.SecurityConfig;
 import com.bookstore.domain.Book;
 import com.bookstore.repository.BookRepository;
 import com.bookstore.services.api.BookService;
-import com.bookstore.services.api.UserService;
 import com.bookstore.services.impl.UserSecurityService;
 import com.bookstore.utility.SecurityUtility;
 import com.bookstore.ws.AbstractTest;
@@ -29,8 +28,6 @@ import static org.easymock.EasyMock.*;
 })
 @Transactional
 public class BookServiceTest extends AbstractTest {
-
-    private UserService userService;
 
     @Autowired
     private BookRepository bookRepository;
@@ -58,13 +55,31 @@ public class BookServiceTest extends AbstractTest {
         expect(bookRepository.findByCategory(anyString())).andReturn(Arrays.asList(book1, book2));
         replay(bookRepository);
 
-        List<Book> bookList = bookRepository.findByCategory("category1");
+        List<Book> bookList = bookService.findByCategory("category1");
 
         support.verifyAll();
-
         Assert.assertNotNull(bookList);
 
-        Assert.assertEquals(2,bookList.size());
-        Assert.assertEquals(book2,bookList.get(1));
+        Assert.assertEquals(2, bookList.size());
+        Assert.assertEquals(book2, bookList.get(1));
+    }
+
+    @Test
+    public void blurrySearchTest() throws Exception {
+        Book book = new Book();
+        book.isActive();
+
+        Book book1 = new Book();
+        book1.setActive(false);
+
+        expect(bookRepository.findByTitleContaining(anyString())).andReturn(Arrays.asList(book, book1));
+        replay(bookRepository);
+
+        List<Book> bookList = bookService.blurrySearch("management");
+
+        support.verifyAll();
+        Assert.assertNotNull(bookList);
+        Assert.assertEquals(1, bookList.size());
+
     }
 }

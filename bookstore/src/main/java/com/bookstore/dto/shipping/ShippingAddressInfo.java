@@ -1,5 +1,6 @@
 package com.bookstore.dto.shipping;
-import com.bookstore.domain.*;
+
+import com.bookstore.domain.Order;
 
 public class ShippingAddressInfo {
 

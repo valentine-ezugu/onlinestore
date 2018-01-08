@@ -20,7 +20,7 @@ public class Order {
     private String orderStatus;
     private BigDecimal orderTotal;
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<CartItem> cartItemList;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -1,6 +1,7 @@
 package com.bookstore.dto.payment;
 
-import com.bookstore.domain.*;
+import com.bookstore.domain.Order;
+import com.bookstore.domain.UserBilling;
 
 public class PaymentExtraInfo {
 

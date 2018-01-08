@@ -7,7 +7,7 @@ public class UserBilling {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  Long id;
+    private Long id;
 
     private String userBillingName;
     private String userBillingStreet1;
