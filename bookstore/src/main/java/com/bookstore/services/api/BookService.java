@@ -1,7 +1,7 @@
 package com.bookstore.services.api;
 
 
-import com.bookstore.domain.Book;
+import com.domain.domain.*;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;

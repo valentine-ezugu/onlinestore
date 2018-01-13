@@ -1,8 +1,8 @@
 package com.bookstore.services;
 
-import com.bookstore.domain.User;
-import com.bookstore.domain.security.Role;
-import com.bookstore.domain.security.UserRole;
+import com.domain.domain.User;
+import com.domain.domain.security.Role;
+import com.domain.domain.security.UserRole;
 import com.bookstore.utility.SecurityUtility;
 import com.bookstore.ws.AbstractTest;
 import org.junit.Test;

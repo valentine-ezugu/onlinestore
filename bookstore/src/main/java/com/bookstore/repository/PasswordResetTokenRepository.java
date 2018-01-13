@@ -1,7 +1,7 @@
 package com.bookstore.repository;
 
-import com.bookstore.domain.PasswordResetToken;
-import com.bookstore.domain.User;
+import com.domain.domain.*;
+import com.domain.domain.security.PasswordResetToken;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

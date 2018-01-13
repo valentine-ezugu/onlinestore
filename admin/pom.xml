@@ -22,6 +22,24 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.modular</groupId>
+            <artifactId>domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.modular</groupId>
+            <artifactId>ad-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.modular</groupId>
+            <artifactId>ad</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.ldap</groupId>
             <artifactId>spring-ldap-core</artifactId>
         </dependency>

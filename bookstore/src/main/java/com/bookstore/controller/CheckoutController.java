@@ -1,19 +1,20 @@
 package com.bookstore.controller;
 
-import com.bookstore.domain.*;
-import com.bookstore.dto.billingAddress.BillingAddressCheckOut;
-import com.bookstore.dto.cart.CartItemForList;
-import com.bookstore.dto.payment.PaymentExtraInfo;
-import com.bookstore.dto.shipping.ShippingAddressInfo;
-import com.bookstore.dto.user.UserForPaymentInfo;
-import com.bookstore.dto.user.UserForProfile;
-import com.bookstore.dto.user.UserForShippingLite;
+import com.domain.domain.*;
+import com.domain.dto.billingAddress.BillingAddressCheckOut;
+import com.domain.dto.cart.CartItemForList;
+import com.domain.dto.payment.PaymentExtraInfo;
+import com.domain.dto.shipping.ShippingAddressInfo;
+import com.domain.dto.user.UserForPaymentInfo;
+import com.domain.dto.user.UserForProfile;
+import com.domain.dto.user.UserForShippingLite;
 import com.bookstore.services.api.*;
 import com.bookstore.utility.MailConstructor;
 import com.bookstore.utility.USConstants;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -73,6 +74,7 @@ public class CheckoutController {
 
     private Payment payment = new Payment();
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/checkout")
     public String checkout(@RequestParam("id") Long cartId,
                            @RequestParam(value = "missingRequiredField", required = false) boolean missingRequiredField, Model model,
@@ -149,7 +151,7 @@ public class CheckoutController {
                 billingAddressService.setByUserBilling(userPayment.getUserBilling(), billingAddress);
             }
         }
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         PaymentExtraInfo paymentExtraInfo = mapper.map(payment, PaymentExtraInfo.class, "paymentExtraInfo");
         BillingAddressCheckOut billingAddressCheckOut = mapper.map(billingAddress, BillingAddressCheckOut.class, "billingAddressCheckout");
@@ -175,6 +177,7 @@ public class CheckoutController {
 
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/setShippingAddress")
     public String setShippingAddress(@RequestParam("userShippingId") Long userShippingId, Principal principal,
                                      Model model) {
@@ -182,7 +185,7 @@ public class CheckoutController {
 
         UserShipping userShipping = userShippingService.findById(userShippingId);
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         if (userShipping.getUser().getId() != user.getId()) {
             return "badRequestPage";
@@ -244,7 +247,7 @@ public class CheckoutController {
         }
     }
 
-
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/setPaymentMethod")
     public String setPaymentMethod(@RequestParam("userPaymentId") Long userPaymentId, Principal principal,
                                    Model model) {
@@ -252,7 +255,7 @@ public class CheckoutController {
         UserPayment userPayment = userPaymentService.findById(userPaymentId);
         UserBilling userBilling = userPayment.getUserBilling();
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
 
 
@@ -267,6 +270,7 @@ public class CheckoutController {
 
             List<CartItemForList> cartItemForLists = new ArrayList<>();
             for (CartItem cartItem : cartItemList) {
+
                 cartItemForLists.add(mapper.map(cartItem, CartItemForList.class, "cartItemForList"));
             }
             ShippingAddressInfo shippingAddressInfo = mapper.map(shippingAddress, ShippingAddressInfo.class, "shippingAddressId");
@@ -318,6 +322,7 @@ public class CheckoutController {
         }
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = "/checkout", method = RequestMethod.POST)
     public String checkoutPost(@ModelAttribute("shippingAddress") ShippingAddressInfo shippingAddressInfo,
                                @ModelAttribute("billingAddress") BillingAddressCheckOut billingAddressCheckOut,

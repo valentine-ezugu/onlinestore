@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -28,6 +29,7 @@ import java.util.Arrays;
 @ComponentScan("com.bookstore")
 @EnableAspectJAutoProxy
 @EnableWebSecurity
+@Order
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -76,16 +78,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth)throws Exception{
-        auth.userDetailsService( userSecurityService).passwordEncoder(passwordEncoder());
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
 
     }
 
 
-     @Bean
+    @Bean
     protected UserDetailsService userDetailsService() {
         GrantedAuthority authority = new SimpleGrantedAuthority("USER");
-        UserDetails userDetails =  new User("V", "A", Arrays.asList(authority));
+        UserDetails userDetails = new User("V", "A", Arrays.asList(authority));
         return new InMemoryUserDetailsManager(Arrays.asList(userDetails));
     }
 
@@ -95,7 +97,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         public void init(AuthenticationManagerBuilder auth) throws Exception {
             auth.inMemoryAuthentication().withUser("V").password("A").roles("USER");
-         }
+        }
     }
 
 }

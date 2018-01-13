@@ -1,6 +1,6 @@
 package com.bookstore.services.impl;
 
-import com.bookstore.domain.Book;
+import com.domain.domain.*;
 import com.bookstore.repository.BookRepository;
 import com.bookstore.services.api.BookService;
 import org.springframework.beans.factory.annotation.Autowired;

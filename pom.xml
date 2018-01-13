@@ -10,7 +10,10 @@
     <modules>
         <module>admin</module>
         <module>bookstore</module>
-
+        <module>domain</module>
+        <module>ad-service</module>
+        <module>ad-repository</module>
+        <module>ad-rest</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -22,7 +25,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.7.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent frepotory -->
     </parent>
 
     <properties>
@@ -36,12 +39,6 @@
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer-spring</artifactId>
             <version>5.5.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4.7</version>
         </dependency>
 
         <dependency>

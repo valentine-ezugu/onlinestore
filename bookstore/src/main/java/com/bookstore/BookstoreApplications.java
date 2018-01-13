@@ -1,8 +1,9 @@
 package com.bookstore;
 
-import com.bookstore.domain.User;
-import com.bookstore.domain.security.Role;
-import com.bookstore.domain.security.UserRole;
+import com.bookstore.config.SecurityConfig;
+import com.domain.domain.User;
+import com.domain.domain.security.Role;
+import com.domain.domain.security.UserRole;
 import com.bookstore.services.api.UserService;
 import com.bookstore.utility.SecurityUtility;
 import org.slf4j.Logger;
@@ -12,7 +13,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -21,12 +24,16 @@ import java.util.Set;
 
 @Configuration
 @SpringBootApplication
-@EntityScan(basePackages = {"com.bookstore"})
-@EnableJpaRepositories(basePackages = {"com.bookstore.repository"})
+@EntityScan(basePackages = {"com.modular.domain","com.domain"})
+@ComponentScan(basePackages = {"com.bookstore","com.domain",
+"com.bookstore.utility","com.domain.domain.security","com.bookstore.repository"})
+@EnableJpaRepositories(basePackages = {"com.bookstore.repository", "com.domain"})
 @EnableTransactionManagement
+@Import(SecurityConfig.class)
 public class BookstoreApplications implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(BookstoreApplications.class);
+
     @Autowired
     private SecurityUtility securityUtility;
 

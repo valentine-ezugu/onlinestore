@@ -1,8 +1,8 @@
 package com.bookstore.services.impl;
 
 
-import com.bookstore.domain.BillingAddress;
-import com.bookstore.domain.UserBilling;
+import com.domain.domain.*;
+
 import com.bookstore.services.api.BillingAddressService;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;

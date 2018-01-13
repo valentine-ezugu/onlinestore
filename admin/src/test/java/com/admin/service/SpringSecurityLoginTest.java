@@ -1,7 +1,8 @@
 package com.admin.service;
 
-import com.adminportal.domain.security.LoginStatus;
-import com.adminportal.service.impl.SpringSecurityLoginService;
+import com.adservice.impl.SpringSecurityLoginService;
+import com.domain.domain.security.LoginStatus;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

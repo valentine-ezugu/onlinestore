@@ -1,7 +1,5 @@
 package com.bookstore.services.impl;
-
-import com.bookstore.domain.ShippingAddress;
-import com.bookstore.domain.UserShipping;
+import com.domain.domain.*;
 import com.bookstore.services.api.ShippingAddressService;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;

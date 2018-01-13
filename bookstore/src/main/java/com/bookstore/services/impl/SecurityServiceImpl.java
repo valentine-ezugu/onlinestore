@@ -33,19 +33,11 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public String findLoggedInUsername() throws DataAccessException, AuthenticationException {
 
-
         SecurityContext securityContext = SecurityContextHolder.getContext();
-
-
         Authentication authentication = securityContext.getAuthentication();
-
         if (authentication instanceof AnonymousAuthenticationToken) {
-
             throw new UsernameNotFoundException("sorry but you are Anonymous");
-
         }
-
-
         String currentUserName = authentication.getName();
 
         return currentUserName;

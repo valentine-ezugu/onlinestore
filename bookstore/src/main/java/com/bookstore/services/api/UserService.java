@@ -1,7 +1,8 @@
 package com.bookstore.services.api;
 
-import com.bookstore.domain.*;
-import com.bookstore.domain.security.UserRole;
+import com.domain.domain.*;
+import com.domain.domain.security.PasswordResetToken;
+import com.domain.domain.security.UserRole;
 import org.springframework.dao.DataAccessException;
 
 import java.util.Set;

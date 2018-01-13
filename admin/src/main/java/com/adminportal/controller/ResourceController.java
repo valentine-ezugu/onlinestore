@@ -1,6 +1,6 @@
 package com.adminportal.controller;
 
-import com.adminportal.service.api.BookService;
+import com.adservice.api.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;

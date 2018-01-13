@@ -1,9 +1,9 @@
 package com.bookstore.dozer;
 
 import com.bookstore.config.MappingConfig;
-import com.bookstore.domain.UserShipping;
+import com.domain.domain.*;
 
-import com.bookstore.dto.user.UserForShippingLite;
+import com.domain.dto.user.UserForShippingLite;
 
 import org.dozer.Mapper;
 import org.junit.Assert;

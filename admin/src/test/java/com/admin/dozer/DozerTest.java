@@ -1,8 +1,8 @@
 package com.admin.dozer;
 
 import com.adminportal.config.MappingConfig;
-import com.adminportal.domain.Book;
-import com.adminportal.dto.book.BookDetailLite;
+import com.domain.domain.Book;
+import com.domain.dto.book.BookDetailLite;
 import org.dozer.Mapper;
 import org.junit.Assert;
 

@@ -1,6 +1,6 @@
 package com.bookstore.services.impl;
 
-import com.bookstore.domain.UserShipping;
+import com.domain.domain.UserShipping;
 import com.bookstore.repository.UserShippingRepository;
 import com.bookstore.services.api.UserShippingService;
 import org.springframework.beans.factory.annotation.Autowired;

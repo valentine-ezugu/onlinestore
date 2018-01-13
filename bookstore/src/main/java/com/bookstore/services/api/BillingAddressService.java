@@ -1,9 +1,8 @@
 package com.bookstore.services.api;
 
-import com.bookstore.domain.BillingAddress;
-import com.bookstore.domain.UserBilling;
-import org.springframework.dao.DataAccessException;
 
+import org.springframework.dao.DataAccessException;
+import com.domain.domain.*;
 public interface BillingAddressService {
     BillingAddress setByUserBilling(UserBilling userBilling, BillingAddress billingAddress) throws DataAccessException;
 }
