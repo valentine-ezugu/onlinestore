@@ -1,10 +1,9 @@
 package com.admin.controller;
 
-import com.adminportal.AdminPortalApplication;
-import com.adminportal.controller.BookController;
-import com.adminportal.domain.Book;
-import com.adminportal.service.api.BookService;
-
+import com.valentine.adminportal.AdminPortalApplication;
+import com.valentine.adminportal.controller.BookController;
+import com.valentine.domain.Book;
+import com.valentine.service.BookService;
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;

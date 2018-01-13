@@ -9,21 +9,21 @@
     </configuration>
 
     <mapping map-id="bookListDto">
-        <class-a>com.adminportal.domain.Book</class-a>
-        <class-b>com.adminportal.dto.book.BookDetailForList</class-b>
+        <class-a>com.valentine.domain.Book</class-a>
+        <class-b>com.valentine.dto.book.BookDetailForList</class-b>
 
     </mapping>
 
     <mapping map-id="bookForSave">
-        <class-a>com.adminportal.domain.Book</class-a>
-        <class-b>com.adminportal.dto.book.BookForSave</class-b>
+        <class-a>com.valentine.domain.Book</class-a>
+        <class-b>com.valentine.dto.book.BookForSave</class-b>
 
     </mapping>
 
     <mapping map-id="bookDetailLiteId">
 
-        <class-a>com.adminportal.domain.Book</class-a>
-        <class-b>com.adminportal.dto.book.BookDetailLite</class-b>
+        <class-a>com.valentine.domain.Book</class-a>
+        <class-b>com.valentine.dto.book.BookDetailLite</class-b>
 
     </mapping>
 
