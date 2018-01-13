@@ -1,7 +1,7 @@
 package com.bookstore.config;
 
 import com.services.impl.UserSecurityService;
-import com.bookstore.utility.SecurityUtility;
+import com.rest_end.utility.SecurityUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

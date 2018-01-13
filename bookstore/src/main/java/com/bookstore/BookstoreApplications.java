@@ -5,7 +5,7 @@ import com.domain.domain.User;
 import com.domain.domain.security.Role;
 import com.domain.domain.security.UserRole;
 import com.services.api.UserService;
-import com.bookstore.utility.SecurityUtility;
+import com.rest_end.utility.SecurityUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import java.util.Set;
 @Configuration
 @SpringBootApplication
 @EntityScan(basePackages = {"com.modular.domain","com.domain"})
-@ComponentScan(basePackages = {"com.bookstore","com.domain","com.domain","com.services","com.data.persistence"})
+@ComponentScan(basePackages = {"com.bookstore","com.domain","com.domain","com.services","com.data.persistence","com.rest_end"})
 @EnableJpaRepositories(basePackages = {"com.data.persistence", "com.domain"})
 @EnableTransactionManagement
 @Import(SecurityConfig.class)

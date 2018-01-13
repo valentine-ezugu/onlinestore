@@ -16,6 +16,7 @@
         <module>ad-rest</module>
         <module>book-service</module>
         <module>book-repository</module>
+        <module>book-rest</module>
     </modules>
 
     <packaging>pom</packaging>

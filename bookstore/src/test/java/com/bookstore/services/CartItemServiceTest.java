@@ -4,7 +4,7 @@ import com.bookstore.config.SecurityConfig;
 import com.data.persistence.CartItemRepository;
 import com.services.api.CartItemService;
 import com.services.impl.UserSecurityService;
-import com.bookstore.utility.SecurityUtility;
+import com.rest_end.utility.SecurityUtility;
 import com.bookstore.ws.AbstractTest;
 import com.domain.domain.Book;
 import com.domain.domain.CartItem;

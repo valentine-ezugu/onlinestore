@@ -3,7 +3,7 @@ package com.bookstore.services;
 import com.domain.domain.User;
 import com.domain.domain.security.Role;
 import com.domain.domain.security.UserRole;
-import com.bookstore.utility.SecurityUtility;
+import com.rest_end.utility.SecurityUtility;
 import com.bookstore.ws.AbstractTest;
 import com.services.api.UserService;
 import org.junit.Test;

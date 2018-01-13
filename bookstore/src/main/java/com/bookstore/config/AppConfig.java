@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages = {"com.bookstore","com.domain"})
+@ComponentScan(basePackages = {"com.bookstore","com.domain", "com.rest_end","com.services"})
 @Import({SecurityConfig.class})
 public class AppConfig {
 }

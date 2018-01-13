@@ -1,7 +1,7 @@
 package com.bookstore.services;
 
 import com.bookstore.config.SecurityConfig;
-import com.bookstore.utility.SecurityUtility;
+import com.rest_end.utility.SecurityUtility;
 import com.bookstore.ws.AbstractTest;
 import com.data.persistence.BookRepository;
 import com.domain.domain.Book;
