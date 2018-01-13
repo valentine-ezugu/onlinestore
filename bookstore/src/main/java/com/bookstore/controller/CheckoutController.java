@@ -8,7 +8,7 @@ import com.domain.dto.shipping.ShippingAddressInfo;
 import com.domain.dto.user.UserForPaymentInfo;
 import com.domain.dto.user.UserForProfile;
 import com.domain.dto.user.UserForShippingLite;
-import com.bookstore.services.api.*;
+import com.services.api.*;
 import com.bookstore.utility.MailConstructor;
 import com.bookstore.utility.USConstants;
 import org.dozer.Mapper;

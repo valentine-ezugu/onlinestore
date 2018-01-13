@@ -4,7 +4,7 @@ import com.bookstore.config.SecurityConfig;
 import com.domain.domain.User;
 import com.domain.domain.security.Role;
 import com.domain.domain.security.UserRole;
-import com.bookstore.services.api.UserService;
+import com.services.api.UserService;
 import com.bookstore.utility.SecurityUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +25,8 @@ import java.util.Set;
 @Configuration
 @SpringBootApplication
 @EntityScan(basePackages = {"com.modular.domain","com.domain"})
-@ComponentScan(basePackages = {"com.bookstore","com.domain",
-"com.bookstore.utility","com.domain.domain.security","com.bookstore.repository"})
-@EnableJpaRepositories(basePackages = {"com.bookstore.repository", "com.domain"})
+@ComponentScan(basePackages = {"com.bookstore","com.domain","com.domain","com.services","com.data.persistence"})
+@EnableJpaRepositories(basePackages = {"com.data.persistence", "com.domain"})
 @EnableTransactionManagement
 @Import(SecurityConfig.class)
 public class BookstoreApplications implements CommandLineRunner {

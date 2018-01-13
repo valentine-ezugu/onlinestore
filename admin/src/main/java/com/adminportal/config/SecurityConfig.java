@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/fonts/**",
             "/bookshelf"
     };
+
     @Autowired
     private SecurityUtility securityUtility;
 

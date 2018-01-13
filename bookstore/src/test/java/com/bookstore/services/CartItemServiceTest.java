@@ -1,9 +1,9 @@
 package com.bookstore.services;
 
 import com.bookstore.config.SecurityConfig;
-import com.bookstore.repository.CartItemRepository;
-import com.bookstore.services.api.CartItemService;
-import com.bookstore.services.impl.UserSecurityService;
+import com.data.persistence.CartItemRepository;
+import com.services.api.CartItemService;
+import com.services.impl.UserSecurityService;
 import com.bookstore.utility.SecurityUtility;
 import com.bookstore.ws.AbstractTest;
 import com.domain.domain.Book;

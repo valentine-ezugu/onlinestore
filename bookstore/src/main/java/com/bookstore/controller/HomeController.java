@@ -1,8 +1,8 @@
 package com.bookstore.controller;
 
 import com.bookstore.global.Validator;
-import com.bookstore.services.api.*;
-import com.bookstore.services.impl.UserSecurityService;
+import com.services.api.*;
+import com.services.impl.UserSecurityService;
 import com.bookstore.utility.MailConstructor;
 import com.bookstore.utility.SecurityUtility;
 import com.bookstore.utility.USConstants;

@@ -5,6 +5,7 @@ import com.domain.domain.security.Role;
 import com.domain.domain.security.UserRole;
 import com.bookstore.utility.SecurityUtility;
 import com.bookstore.ws.AbstractTest;
+import com.services.api.UserService;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ public class UserServiceIntegrationTest extends AbstractTest {
     private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private com.bookstore.services.api.UserService userService;
+    private UserService userService;
 
     @Autowired
     private SecurityUtility securityUtility;

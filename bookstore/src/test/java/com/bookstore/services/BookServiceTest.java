@@ -1,19 +1,18 @@
 package com.bookstore.services;
 
 import com.bookstore.config.SecurityConfig;
-import com.domain.domain.*;
-import com.bookstore.repository.BookRepository;
-import com.bookstore.services.api.BookService;
-import com.bookstore.services.impl.UserSecurityService;
 import com.bookstore.utility.SecurityUtility;
 import com.bookstore.ws.AbstractTest;
+import com.data.persistence.BookRepository;
+import com.domain.domain.Book;
+import com.services.api.BookService;
+import com.services.impl.UserSecurityService;
 import org.easymock.EasyMockSupport;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;

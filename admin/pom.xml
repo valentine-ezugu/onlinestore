@@ -36,7 +36,8 @@
 
         <dependency>
             <groupId>com.modular</groupId>
-            <artifactId>ad</artifactId>
+            <artifactId>ad-rest</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>

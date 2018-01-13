@@ -1,10 +1,7 @@
 package com.bookstore.controller;
 
 import com.bookstore.BookstoreApplications;
-import com.bookstore.services.api.BookService;
-import com.bookstore.services.api.CartItemService;
-import com.bookstore.services.api.SecurityService;
-import com.bookstore.services.api.UserService;
+import com.services.api.*;
 import com.domain.domain.Book;
 import com.domain.domain.CartItem;
 import com.domain.domain.User;
