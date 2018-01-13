@@ -1,9 +1,9 @@
 package com.bookstore.controller;
 
 import com.bookstore.BookstoreApplications;
-import com.rest_end.rest.HomeController;
-import com.rest_end.rest.ShoppingCartController;
-import com.services.api.*;
+import com.valentine.rest.HomeController;
+import com.valentine.rest.ShoppingCartController;
+import com.valentine.api.*;
 import com.domain.domain.Book;
 import com.domain.domain.CartItem;
 import com.domain.domain.User;

@@ -1,7 +1,7 @@
 package com.admin.controller;
 
-import com.adminportal.AdminPortalApplication;
-import com.rest_end.rest.BookController;
+import com.valentine.AdminPortalApplication;
+import com.valentine.rest.BookController;
 import com.adservice.api.BookService;
 import com.domain.domain.Book;
 

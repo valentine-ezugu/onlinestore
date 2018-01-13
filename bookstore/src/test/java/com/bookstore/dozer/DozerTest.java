@@ -1,6 +1,6 @@
 package com.bookstore.dozer;
 
-import com.bookstore.config.MappingConfig;
+import com.valentine.bookstore.config.MappingConfig;
 import com.domain.domain.*;
 
 import com.domain.dto.user.UserForShippingLite;

@@ -1,6 +1,6 @@
 package com.admin.dozer;
 
-import com.adminportal.config.MappingConfig;
+import com.valentine.config.MappingConfig;
 import com.domain.domain.Book;
 import com.domain.dto.book.BookDetailLite;
 import org.dozer.Mapper;
