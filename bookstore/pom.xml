@@ -5,7 +5,7 @@
     <packaging>jar</packaging>
     <parent>
         <artifactId>onlinestore</artifactId>
-        <groupId>com.modular</groupId>
+        <groupId>com.valentine</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -21,9 +21,28 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.modular</groupId>
+            <groupId>com.valentine</groupId>
             <artifactId>domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.valentine</groupId>
+            <artifactId>service-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.valentine</groupId>
+            <artifactId>service</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
         </dependency>
 
         <dependency>
@@ -135,24 +154,8 @@
             <artifactId>htmlunit-driver</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.mockito</groupId>-->
-        <!--<artifactId>mockito-all</artifactId>-->
-        <!--<version>${mockito.version}</version>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/libs-snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <build>
         <plugins>
             <plugin>

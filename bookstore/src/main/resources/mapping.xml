@@ -9,82 +9,82 @@
     </configuration>
 
     <mapping map-id="billingAddressCheckout">
-        <class-a>com.domain.domain.BillingAddress</class-a>
-        <class-b>com.domain.dto.billingAddress.BillingAddressCheckOut</class-b>
+        <class-a>com.valentine.domain.BillingAddress</class-a>
+        <class-b>com.valentine.dto.billingAddress.BillingAddressCheckOut</class-b>
 
     </mapping>
 
     <mapping map-id="bookDetailExtraLite">
-        <class-a>com.domain.domain.Book</class-a>
-        <class-b>com.domain.dto.book.BookDetailExtraLite</class-b>
+        <class-a>com.valentine.domain.Book</class-a>
+        <class-b>com.valentine.dto.book.BookDetailExtraLite</class-b>
 
     </mapping>
 
     <mapping map-id="bookDetailForList">
-        <class-a>com.domain.domain.Book</class-a>
-        <class-b>com.domain.dto.book.BookDetailForList</class-b>
+        <class-a>com.valentine.domain.Book</class-a>
+        <class-b>com.valentine.dto.book.BookDetailForList</class-b>
 
     </mapping>
 
     <mapping map-id="bookDetailForShelf">
-        <class-a>com.domain.domain.Book</class-a>
-        <class-b>com.domain.dto.book.BookDetailForShelf</class-b>
+        <class-a>com.valentine.domain.Book</class-a>
+        <class-b>com.valentine.dto.book.BookDetailForShelf</class-b>
     </mapping>
 
     <mapping map-id="cartItemForList">
-        <class-a>com.domain.domain.CartItem</class-a>
-        <class-b>com.domain.dto.cart.CartItemForList</class-b>
+        <class-a>com.valentine.domain.CartItem</class-a>
+        <class-b>com.valentine.dto.cart.CartItemForList</class-b>
 
     </mapping>
 
 
     <mapping map-id="orderForFindOne">
-        <class-a>com.domain.domain.Order</class-a>
-        <class-b>com.domain.dto.order.OrderForFindOne</class-b>
+        <class-a>com.valentine.domain.Order</class-a>
+        <class-b>com.valentine.dto.order.OrderForFindOne</class-b>
 
     </mapping>
 
     <mapping map-id="paymentExtraInfo">
-        <class-a>com.domain.domain.Payment</class-a>
-        <class-b>com.domain.dto.payment.PaymentExtraInfo</class-b>
+        <class-a>com.valentine.domain.Payment</class-a>
+        <class-b>com.valentine.dto.payment.PaymentExtraInfo</class-b>
 
     </mapping>
 
     <mapping map-id="shippingAddressId">
-        <class-a>com.domain.domain.ShippingAddress</class-a>
-        <class-b>com.domain.dto.shipping.ShippingAddressInfo</class-b>
+        <class-a>com.valentine.domain.ShippingAddress</class-a>
+        <class-b>com.valentine.dto.shipping.ShippingAddressInfo</class-b>
 
     </mapping>
 
     <mapping map-id="shoppingCartLite">
-        <class-a>com.domain.domain.ShoppingCart</class-a>
-        <class-b>com.domain.dto.shoppingCart.ShoppingCartLite</class-b>
+        <class-a>com.valentine.domain.ShoppingCart</class-a>
+        <class-b>com.valentine.dto.shoppingCart.ShoppingCartLite</class-b>
 
     </mapping>
 
 
     <mapping map-id="userShippingLiteId">
-        <class-a>com.domain.domain.UserShipping</class-a>
-        <class-b>com.domain.dto.user.UserForShippingLite</class-b>
+        <class-a>com.valentine.domain.UserShipping</class-a>
+        <class-b>com.valentine.dto.user.UserForShippingLite</class-b>
 
     </mapping>
 
 
     <mapping map-id="userForPaymentInfo">
-        <class-a>com.domain.domain.UserPayment</class-a>
-        <class-b>com.domain.dto.user.UserForPaymentInfo</class-b>
+        <class-a>com.valentine.domain.UserPayment</class-a>
+        <class-b>com.valentine.dto.user.UserForPaymentInfo</class-b>
 
     </mapping>
 
     <mapping map-id="userForProfile">
-        <class-a>com.domain.domain.User</class-a>
-        <class-b>com.domain.dto.user.UserForProfile</class-b>
+        <class-a>com.valentine.domain.User</class-a>
+        <class-b>com.valentine.dto.user.UserForProfile</class-b>
 
     </mapping>
 
     <mapping map-id="userForLogin">
-        <class-a>com.domain.domain.User</class-a>
-        <class-b>com.domain.dto.user.UserForLogin</class-b>
+        <class-a>com.valentine.domain.User</class-a>
+        <class-b>com.valentine.dto.user.UserForLogin</class-b>
 
     </mapping>
 

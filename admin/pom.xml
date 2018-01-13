@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
     <parent>
         <artifactId>onlinestore</artifactId>
-        <groupId>com.modular</groupId>
+        <groupId>com.valentine</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -22,37 +22,33 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.modular</groupId>
+            <groupId>com.valentine</groupId>
             <artifactId>domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.modular</groupId>
-            <artifactId>ad-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.modular</groupId>
-            <artifactId>ad</artifactId>
+            <groupId>com.valentine</groupId>
+            <artifactId>service-api</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.ldap</groupId>
-            <artifactId>spring-ldap-core</artifactId>
+            <groupId>com.valentine</groupId>
+            <artifactId>service</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-ldap</artifactId>
+            <groupId>com.valentine</groupId>
+            <artifactId>common</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
         </dependency>
 
         <dependency>
@@ -60,6 +56,10 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -1,13 +1,10 @@
 package com.bookstore.dozer;
 
 import com.bookstore.config.MappingConfig;
-import com.domain.domain.*;
-
-import com.domain.dto.user.UserForShippingLite;
-
+import com.valentine.domain.UserShipping;
+import com.valentine.dto.user.UserForShippingLite;
 import org.dozer.Mapper;
 import org.junit.Assert;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

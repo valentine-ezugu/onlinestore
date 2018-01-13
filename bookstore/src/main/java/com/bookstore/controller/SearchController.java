@@ -1,11 +1,11 @@
 package com.bookstore.controller;
 
-import com.domain.domain.Book;
-import com.domain.domain.User;
-import com.domain.dto.book.BookDetailForList;
-import com.domain.dto.user.UserForProfile;
-import com.bookstore.services.api.BookService;
-import com.bookstore.services.api.UserService;
+import com.valentine.service.BookService;
+import com.valentine.service.UserService;
+import com.valentine.domain.Book;
+import com.valentine.domain.User;
+import com.valentine.dto.book.BookDetailForList;
+import com.valentine.dto.user.UserForProfile;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class SearchController {
             String username = principal.getName();
             User user = userService.findByUsername(username);
 
-            UserForProfile userForProfile =mapper.map(user, UserForProfile.class, "userForProfile");
+            UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
             model.addAttribute("user", userForProfile);
         }
@@ -60,7 +60,7 @@ public class SearchController {
         List<BookDetailForList> bookListToFront = new ArrayList<>();
 
         for (Book book : bookList) {
-            bookListToFront.add(mapper.map(book,BookDetailForList.class, "bookDetailForList"));
+            bookListToFront.add(mapper.map(book, BookDetailForList.class, "bookDetailForList"));
         }
 
         model.addAttribute("bookList", bookListToFront);
@@ -88,7 +88,7 @@ public class SearchController {
 
         List<BookDetailForList> bookListToFront = new ArrayList<>();
         for (Book book : bookList) {
-            bookListToFront.add(mapper.map(book,BookDetailForList.class, "bookDetailForList"));
+            bookListToFront.add(mapper.map(book, BookDetailForList.class, "bookDetailForList"));
         }
         model.addAttribute("bookList", bookListToFront);
         return "bookshelf";

@@ -1,16 +1,16 @@
 package com.bookstore.controller;
 
-import com.domain.domain.*;
-import com.domain.dto.billingAddress.BillingAddressCheckOut;
-import com.domain.dto.cart.CartItemForList;
-import com.domain.dto.payment.PaymentExtraInfo;
-import com.domain.dto.shipping.ShippingAddressInfo;
-import com.domain.dto.user.UserForPaymentInfo;
-import com.domain.dto.user.UserForProfile;
-import com.domain.dto.user.UserForShippingLite;
-import com.bookstore.services.api.*;
-import com.bookstore.utility.MailConstructor;
-import com.bookstore.utility.USConstants;
+import com.valentine.common.utility.MailConstructor;
+import com.valentine.common.utility.USConstants;
+import com.valentine.domain.*;
+import com.valentine.dto.billingAddress.BillingAddressCheckOut;
+import com.valentine.dto.cart.CartItemForList;
+import com.valentine.dto.payment.PaymentExtraInfo;
+import com.valentine.dto.shipping.ShippingAddressInfo;
+import com.valentine.dto.user.UserForPaymentInfo;
+import com.valentine.dto.user.UserForProfile;
+import com.valentine.dto.user.UserForShippingLite;
+import com.valentine.service.*;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -137,7 +137,6 @@ public class CheckoutController {
         }
 
 
-
         for (UserShipping userShipping : userShippingList) {
             if (userShipping.isUserShippingDefault()) {
                 shippingAddressService.setByUserShipping(userShipping, shippingAddress);
@@ -258,7 +257,6 @@ public class CheckoutController {
         UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
 
-
         if (userPayment.getUser().getId() != user.getId()) {
             return "badRequestPage";
         } else {
@@ -332,7 +330,7 @@ public class CheckoutController {
         ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
 
 
-         billingAddressCheckOut = mapper.map(billingAddress, BillingAddressCheckOut.class, "billingAddressCheckout");
+        billingAddressCheckOut = mapper.map(billingAddress, BillingAddressCheckOut.class, "billingAddressCheckout");
 
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
         model.addAttribute("cartItemList", cartItemList);

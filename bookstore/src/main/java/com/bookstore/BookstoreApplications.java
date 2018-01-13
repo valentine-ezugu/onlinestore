@@ -1,11 +1,10 @@
 package com.bookstore;
 
 import com.bookstore.config.SecurityConfig;
-import com.domain.domain.User;
-import com.domain.domain.security.Role;
-import com.domain.domain.security.UserRole;
-import com.bookstore.services.api.UserService;
-import com.bookstore.utility.SecurityUtility;
+import com.valentine.service.UserService;
+import com.valentine.domain.User;
+import com.valentine.domain.security.Role;
+import com.valentine.domain.security.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +23,10 @@ import java.util.Set;
 
 @Configuration
 @SpringBootApplication
-@EntityScan(basePackages = {"com.modular.domain","com.domain"})
-@ComponentScan(basePackages = {"com.bookstore","com.domain",
-"com.bookstore.utility","com.domain.domain.security","com.bookstore.repository"})
-@EnableJpaRepositories(basePackages = {"com.bookstore.repository", "com.domain"})
+@EntityScan(basePackages = {"com.modular.valentine", "com.valentine"})
+@ComponentScan(basePackages = {"com.bookstore", "com.valentine",
+        "com.bookstore.utility", "com.valentine.valentine.security", "com.bookstore.repository"})
+@EnableJpaRepositories(basePackages = {"com.bookstore.repository", "com.valentine"})
 @EnableTransactionManagement
 @Import(SecurityConfig.class)
 public class BookstoreApplications implements CommandLineRunner {

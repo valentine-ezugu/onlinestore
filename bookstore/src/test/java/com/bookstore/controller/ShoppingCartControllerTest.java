@@ -1,13 +1,13 @@
 package com.bookstore.controller;
 
 import com.bookstore.BookstoreApplications;
-import com.bookstore.services.api.BookService;
-import com.bookstore.services.api.CartItemService;
-import com.bookstore.services.api.SecurityService;
-import com.bookstore.services.api.UserService;
-import com.domain.domain.Book;
-import com.domain.domain.CartItem;
-import com.domain.domain.User;
+import com.valentine.service.BookService;
+import com.valentine.service.CartItemService;
+import com.valentine.service.SecurityService;
+import com.valentine.service.UserService;
+import com.valentine.domain.Book;
+import com.valentine.domain.CartItem;
+import com.valentine.domain.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
