@@ -1,13 +1,13 @@
 package com.bookstore.services;
 
 import com.bookstore.config.SecurityConfig;
-import com.bookstore.domain.Book;
-import com.bookstore.domain.CartItem;
-import com.bookstore.repository.CartItemRepository;
-import com.bookstore.services.api.CartItemService;
-import com.bookstore.services.impl.UserSecurityService;
-import com.bookstore.utility.SecurityUtility;
+import com.data.persistence.CartItemRepository;
+import com.services.api.CartItemService;
+import com.services.impl.UserSecurityService;
+import com.rest_end.utility.SecurityUtility;
 import com.bookstore.ws.AbstractTest;
+import com.domain.domain.Book;
+import com.domain.domain.CartItem;
 import org.easymock.EasyMockSupport;
 import org.junit.Assert;
 import org.junit.Before;

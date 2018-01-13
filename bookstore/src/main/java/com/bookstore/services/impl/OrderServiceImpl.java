@@ -1,6 +1,6 @@
 package com.bookstore.services.impl;
 
-import com.bookstore.domain.*;
+import com.domain.domain.*;
 import com.bookstore.repository.OrderRepository;
 import com.bookstore.services.api.CartItemService;
 import com.bookstore.services.api.OrderService;

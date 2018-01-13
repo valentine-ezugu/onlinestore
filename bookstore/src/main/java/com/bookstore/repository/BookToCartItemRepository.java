@@ -1,7 +1,5 @@
 package com.bookstore.repository;
-
-import com.bookstore.domain.BookToCartItem;
-import com.bookstore.domain.CartItem;
+import com.domain.domain.*;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 

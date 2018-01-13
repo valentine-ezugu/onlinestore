@@ -1,6 +1,6 @@
 package com.bookstore.services.impl;
 
-import com.bookstore.domain.UserPayment;
+import com.domain.domain.*;
 import com.bookstore.repository.UserPaymentRepository;
 import com.bookstore.services.api.UserPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;

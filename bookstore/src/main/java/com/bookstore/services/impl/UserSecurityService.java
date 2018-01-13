@@ -1,6 +1,6 @@
 package com.bookstore.services.impl;
 
-import com.bookstore.domain.User;
+import com.domain.domain.*;
 import com.bookstore.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

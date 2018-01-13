@@ -1,11 +1,12 @@
 package com.bookstore.controller;
 
-import com.bookstore.domain.Book;
-import com.bookstore.domain.User;
-import com.bookstore.dto.book.BookDetailForList;
-import com.bookstore.dto.user.UserForProfile;
-import com.bookstore.services.api.BookService;
-import com.bookstore.services.api.UserService;
+import com.domain.domain.Book;
+import com.domain.domain.User;
+import com.domain.dto.book.BookDetailForList;
+import com.domain.dto.user.UserForProfile;
+import com.services.api.BookService;
+import com.services.api.UserService;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,9 @@ public class SearchController {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private Mapper mapper;
+
     @RequestMapping("/searchByCategory")
     public String searchByCategory(
             @RequestParam("category") String category,
@@ -35,7 +39,9 @@ public class SearchController {
         if (principal != null) {
             String username = principal.getName();
             User user = userService.findByUsername(username);
-            UserForProfile userForProfile = new UserForProfile(user);
+
+            UserForProfile userForProfile =mapper.map(user, UserForProfile.class, "userForProfile");
+
             model.addAttribute("user", userForProfile);
         }
 
@@ -50,10 +56,13 @@ public class SearchController {
             model.addAttribute("emptyList", true);
             return "bookshelf";
         }
+
         List<BookDetailForList> bookListToFront = new ArrayList<>();
+
         for (Book book : bookList) {
-            bookListToFront.add(new BookDetailForList(book));
+            bookListToFront.add(mapper.map(book,BookDetailForList.class, "bookDetailForList"));
         }
+
         model.addAttribute("bookList", bookListToFront);
 
         return "bookshelf";
@@ -76,9 +85,10 @@ public class SearchController {
             model.addAttribute("emptyList", true);
             return "bookshelf";
         }
+
         List<BookDetailForList> bookListToFront = new ArrayList<>();
         for (Book book : bookList) {
-            bookListToFront.add(new BookDetailForList(book));
+            bookListToFront.add(mapper.map(book,BookDetailForList.class, "bookDetailForList"));
         }
         model.addAttribute("bookList", bookListToFront);
         return "bookshelf";

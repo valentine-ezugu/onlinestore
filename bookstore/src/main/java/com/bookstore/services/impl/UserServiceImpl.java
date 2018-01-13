@@ -1,7 +1,8 @@
 package com.bookstore.services.impl;
 
-import com.bookstore.domain.*;
-import com.bookstore.domain.security.UserRole;
+import com.domain.domain.*;
+import com.domain.domain.security.PasswordResetToken;
+import com.domain.domain.security.UserRole;
 import com.bookstore.repository.*;
 import com.bookstore.services.api.UserService;
 import org.slf4j.Logger;
@@ -9,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +20,13 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
 
     private static final Logger Log = LoggerFactory.getLogger(UserService.class);
+
     @Autowired
-    RoleRepository roleRepository;
+    private RoleRepository roleRepository;
+
     @Autowired
     private PasswordResetTokenRepository passwordResetTokenRepository;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -65,8 +68,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public User createUser(User user, Set<UserRole> userRoles) throws DataAccessException {
+
         User localUser = userRepository.findByUsername(user.getUsername());
 
         if (localUser != null) {
@@ -76,6 +79,7 @@ public class UserServiceImpl implements UserService {
                 roleRepository.save(ur.getRole());
             }
             user.getUserRoles().addAll(userRoles);
+
 
             ShoppingCart shoppingCart = new ShoppingCart();
             shoppingCart.setUser(user);

@@ -29,7 +29,7 @@ public class TestH2Data {
                 .generateUniqueName(true)
                 .setType(EmbeddedDatabaseType.H2)
                 .setScriptEncoding("UTF-8")
-                .addScripts("schema.mm", "data.mm")
+                .addScripts("schema.sql", "data.sql")
                 .build();
     }
 

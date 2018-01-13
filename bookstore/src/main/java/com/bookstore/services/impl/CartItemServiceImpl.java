@@ -1,6 +1,6 @@
 package com.bookstore.services.impl;
 
-import com.bookstore.domain.*;
+import com.domain.domain.*;
 import com.bookstore.repository.BookToCartItemRepository;
 import com.bookstore.repository.CartItemRepository;
 import com.bookstore.services.api.CartItemService;
@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import com.domain.domain.*;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;

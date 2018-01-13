@@ -1,18 +1,19 @@
 package com.bookstore.controller;
 
-import com.bookstore.domain.*;
-import com.bookstore.domain.security.Role;
-import com.bookstore.domain.security.UserRole;
-import com.bookstore.dto.book.BookDetailExtraLite;
-import com.bookstore.dto.book.BookDetailForShelf;
-import com.bookstore.dto.order.OrderForFindOne;
-import com.bookstore.dto.user.*;
-import com.bookstore.services.api.*;
-import com.bookstore.services.impl.UserSecurityService;
+import com.bookstore.global.Validator;
+import com.services.api.*;
+import com.services.impl.UserSecurityService;
 import com.bookstore.utility.MailConstructor;
 import com.bookstore.utility.SecurityUtility;
 import com.bookstore.utility.USConstants;
-import org.dozer.DozerBeanMapper;
+import com.domain.domain.*;
+import com.domain.domain.security.PasswordResetToken;
+import com.domain.domain.security.Role;
+import com.domain.domain.security.UserRole;
+import com.domain.dto.book.BookDetailExtraLite;
+import com.domain.dto.book.BookDetailForShelf;
+import com.domain.dto.order.OrderForFindOne;
+import com.domain.dto.user.*;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -101,22 +102,25 @@ public class HomeController {
     }
 
 
-    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/bookshelf")
     public String bookshelf(Model model, Principal principal) {
 
         if (principal != null) {
             String username = principal.getName();
             User user = userService.findByUsername(username);
+
             UserForLogin userForLogin = new UserForLogin(user);
 
             model.addAttribute("user", userForLogin);
         }
 
         List<Book> bookList = bookService.findAll();
+
         List<BookDetailForShelf> bookDetailForShelfList = new ArrayList<>();
         for (Book book : bookList) {
-            bookDetailForShelfList.add(new BookDetailForShelf(book));
+
+            bookDetailForShelfList.add(mapper.map(book, BookDetailForShelf.class, "bookDetailForShelf"));
+
         }
         model.addAttribute("bookList", bookDetailForShelfList);
         model.addAttribute("activeAll", true);
@@ -125,7 +129,6 @@ public class HomeController {
     }
 
 
-    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/bookDetail")
     public String bookDetail(
             @PathParam("id") Long id, Model model, Principal principal
@@ -139,7 +142,7 @@ public class HomeController {
 
         Book book = bookService.findOne(id);
 
-        BookDetailExtraLite bookDetailExtraLite = new BookDetailExtraLite(book);
+        BookDetailExtraLite bookDetailExtraLite = mapper.map(book, BookDetailExtraLite.class, "bookDetailExtraLite");
 
         model.addAttribute("book", bookDetailExtraLite);
 
@@ -181,14 +184,14 @@ public class HomeController {
         return "Myaccount";
     }
 
-
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/listOfCreditCards")
     public String listOfCreditCards(
             Model model, Principal principal, HttpServletRequest request
     ) {
         User user = userService.findByUsername(principal.getName());
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         model.addAttribute("user", userForProfile);
         model.addAttribute("userPaymentList", userForProfile.getUserPaymentList());
@@ -202,13 +205,14 @@ public class HomeController {
         return "Myprofile";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/listOfShippingAddresses")
     public String listOfShippingAddresses(
             Model model, Principal principal, HttpServletRequest request
     ) {
         User user = userService.findByUsername(principal.getName());
-        UserForProfile userForProfile = new UserForProfile(user);
 
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
         model.addAttribute("user", user);
         model.addAttribute("userPaymentList", userForProfile.getUserPaymentList());
         model.addAttribute("userShippingList", userForProfile.getUserShippingList());
@@ -222,12 +226,13 @@ public class HomeController {
         return "Myprofile";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("addNewCreditCard")
     public String addNewCreditCard(Model model, Principal principal) {
 
         User user = userService.findByUsername(principal.getName());
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
 
         model.addAttribute("user", userForProfile);
@@ -256,12 +261,13 @@ public class HomeController {
         return "Myprofile";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("addNewShippingAddesses")
     public String addNewShippingAddesses(Model model, Principal principal) {
 
         User user = userService.findByUsername(principal.getName());
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         model.addAttribute("user", userForProfile);
 
@@ -289,6 +295,7 @@ public class HomeController {
         return "Myprofile";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = "/addNewShippingAddress", method = RequestMethod.POST)
     public String addNewShippingAddressPost(
             @ModelAttribute("userShipping") UserShipping userShipping,
@@ -296,7 +303,7 @@ public class HomeController {
     ) {
         User user = userService.findByUsername(principal.getName());
         userService.updateUserShipping(userShipping, user);
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         model.addAttribute("user", userForProfile);
         model.addAttribute("userPaymentList", userForProfile.getUserPaymentList());
@@ -310,12 +317,13 @@ public class HomeController {
     }
 
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = "/addNewCreditCard", method = RequestMethod.POST)
     public String addNewCreditCard(@ModelAttribute("userPayment") UserPayment userPayment,
                                    @ModelAttribute("userBilling") UserBilling userBilling, Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         userService.updateUserBilling(userBilling, userPayment, user);
 
@@ -335,13 +343,14 @@ public class HomeController {
         return "Myprofile";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/removeCreditCard")
     public String removeCreditCard(
             @ModelAttribute("id") Long creditCardId, Principal principal, Model model
     ) {
         User user = userService.findByUsername(principal.getName());
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         UserPayment userPayment = userPaymentService.findById(creditCardId);
 
@@ -366,6 +375,7 @@ public class HomeController {
         }
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = "/setDefaultPayment", method = RequestMethod.POST)
     public String setDefaultPayment(
             @ModelAttribute("defaultUserPaymentId") Long defaultPaymentId, Principal principal, Model model
@@ -373,7 +383,7 @@ public class HomeController {
         User user = userService.findByUsername(principal.getName());
         userService.setUserDefaultPayment(defaultPaymentId, user);
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         model.addAttribute("user", userForProfile);
         model.addAttribute("listOfCreditCards", true);
@@ -387,6 +397,7 @@ public class HomeController {
         return "Myprofile";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = "/setDefaultShippingAddress", method = RequestMethod.POST)
     public String setDefaultShippingAddress(
             @ModelAttribute("defaultShippingAddressId") Long defaultShippingId, Principal principal, Model model
@@ -394,7 +405,7 @@ public class HomeController {
         User user = userService.findByUsername(principal.getName());
         userService.setUserDefaultShipping(defaultShippingId, user);
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         model.addAttribute("user", userForProfile);
         model.addAttribute("listOfCreditCards", true);
@@ -408,6 +419,7 @@ public class HomeController {
         return "Myprofile";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/updateCreditCard")
     public String updateCreditCard(
             @ModelAttribute("id") Long creditCardId, Principal principal, Model model
@@ -415,7 +427,7 @@ public class HomeController {
         User user = userService.findByUsername(principal.getName());
         UserPayment userPayment = userPaymentService.findById(creditCardId);
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         if (user.getId() != userPayment.getUser().getId()) {
             return "badRequestPage";
@@ -444,6 +456,7 @@ public class HomeController {
     }
 
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/updateUserShipping")
     public String updateUserShipping(
             @ModelAttribute("id") Long shippingAddressId, Principal principal, Model model
@@ -451,7 +464,7 @@ public class HomeController {
         User user = userService.findByUsername(principal.getName());
         UserShipping userShipping = userShippingService.findById(shippingAddressId);
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         UserForShippingLite userForShippingLite = mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId");
 
@@ -477,6 +490,7 @@ public class HomeController {
 
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/removeUserShipping")
     public String removeUserShipping(
             @ModelAttribute("id") Long userShippingId, Principal principal, Model model
@@ -485,7 +499,7 @@ public class HomeController {
 
         UserShipping userShipping = userShippingService.findById(userShippingId);
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         if (user.getId() != userShipping.getUser().getId()) {
             return "badRequestPage";
@@ -509,7 +523,7 @@ public class HomeController {
     public String Myprofile(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
 
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
 
         model.addAttribute("user", userForProfile);
@@ -535,6 +549,7 @@ public class HomeController {
         return "Myprofile";
     }
 
+
     @RequestMapping(value = "/newUser", method = RequestMethod.POST)
     public String newUSerPost(
             HttpServletRequest request,
@@ -542,6 +557,8 @@ public class HomeController {
             @ModelAttribute("username") String username,
             Model model)
             throws Exception {
+
+
         model.addAttribute("classActiveNewAccount", true);
         model.addAttribute("email", userEmail);
         model.addAttribute("username", username);
@@ -554,11 +571,16 @@ public class HomeController {
         }
 
         if (userService.findByEmail(userEmail) != null) {
-            model.addAttribute("emailExits", true);
+            model.addAttribute("emailExists", true);
 
             return "Myaccount";
         }
 
+        if (!Validator.EMAIL_PATTERN.matcher(userEmail).matches()) {
+            model.addAttribute("notEmail", true);
+
+            return "Myaccount";
+        }
 
         User user = new User();
         user.setUsername(username);
@@ -684,17 +706,19 @@ public class HomeController {
         return "Myprofile";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/orderDetail")
     public String orderDetail(
             @RequestParam("id") Long orderId,
             Principal principal, Model model
     ) {
         User user = userService.findByUsername(principal.getName());
-        UserForProfile userForProfile = new UserForProfile(user);
+        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
         Order order = orderService.findOne(orderId);
 
-        OrderForFindOne orderForFindOne = new OrderForFindOne(order);
+        OrderForFindOne orderForFindOne = mapper.map(order, OrderForFindOne.class, "orderForFindOne");
+
 
         if (order.getUser().getId() != user.getId()) {
             return "badRequestPage";
@@ -710,10 +734,7 @@ public class HomeController {
 
             UserShipping userShipping = new UserShipping();
 
-            List<String> list = new ArrayList<>();
-            list.add("mapping.xml");
 
-            mapper = new DozerBeanMapper(list);
             UserForShippingLite userForShippingLite = mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId");
 
             model.addAttribute("userShipping", userForShippingLite);

@@ -1,13 +1,13 @@
 package com.admin.service;
 
 import com.admin.ws.AbstractTest;
-import com.adminportal.domain.User;
-import com.adminportal.domain.security.Role;
-import com.adminportal.domain.security.UserRole;
-import com.adminportal.repository.RoleRepository;
-import com.adminportal.repository.UserRepository;
-import com.adminportal.service.api.UserService;
-import com.adminportal.utility.SecurityUtility;
+import com.domain.domain.User;
+import com.domain.domain.security.Role;
+import com.domain.domain.security.UserRole;
+import com.repository.repo.RoleRepository;
+import com.repository.repo.UserRepository;
+import com.adservice.api.*;
+import com.rest_end.utility.SecurityUtility;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +32,7 @@ public class UserServiceTest extends AbstractTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
     private RoleRepository roleRepository;
 
     @Before

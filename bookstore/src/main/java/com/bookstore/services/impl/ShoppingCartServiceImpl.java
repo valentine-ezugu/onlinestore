@@ -1,10 +1,10 @@
 package com.bookstore.services.impl;
 
-import com.bookstore.domain.CartItem;
-import com.bookstore.domain.ShoppingCart;
 import com.bookstore.repository.ShoppingCartRepository;
 import com.bookstore.services.api.CartItemService;
 import com.bookstore.services.api.ShoppingCartService;
+import com.domain.domain.CartItem;
+import com.domain.domain.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.access.AccessDeniedException;

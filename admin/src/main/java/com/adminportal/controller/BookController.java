@@ -1,11 +1,11 @@
 package com.adminportal.controller;
 
-import com.adminportal.domain.Book;
-import com.adminportal.dto.book.BookDetailForList;
-import com.adminportal.dto.book.BookDetailLite;
-import com.adminportal.dto.book.BookForSave;
-import com.adminportal.repository.BookRepository;
-import com.adminportal.service.api.BookService;
+import com.domain.domain.Book;
+import com.domain.dto.book.BookDetailForList;
+import com.domain.dto.book.BookDetailLite;
+import com.domain.dto.book.BookForSave;
+import com.repository.repo.BookRepository;
+import com.adservice.api.BookService;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +106,7 @@ public class BookController {
         for (Book book : bookList) {
             bookDetailForList.add(mapper.map(book, BookDetailForList.class, "bookListDto"));
         }
+
         model.addAttribute("bookList", bookDetailForList);
         return "bookList";
     }

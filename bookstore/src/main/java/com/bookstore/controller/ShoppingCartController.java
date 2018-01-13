@@ -1,18 +1,18 @@
 package com.bookstore.controller;
 
-import com.bookstore.domain.Book;
-import com.bookstore.domain.CartItem;
-import com.bookstore.domain.ShoppingCart;
-import com.bookstore.domain.User;
-import com.bookstore.dto.cart.CartItemForList;
-import com.bookstore.dto.shoppingCart.ShoppingCartLite;
-import com.bookstore.services.api.BookService;
-import com.bookstore.services.api.CartItemService;
-import com.bookstore.services.api.ShoppingCartService;
-import com.bookstore.services.api.UserService;
-import org.dozer.DozerBeanMapper;
+import com.domain.domain.Book;
+import com.domain.domain.CartItem;
+import com.domain.domain.ShoppingCart;
+import com.domain.domain.User;
+import com.domain.dto.cart.CartItemForList;
+import com.domain.dto.shoppingCart.ShoppingCartLite;
+import com.services.api.BookService;
+import com.services.api.CartItemService;
+import com.services.api.ShoppingCartService;
+import com.services.api.UserService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -66,6 +66,7 @@ public class ShoppingCartController {
         return "shoppingCart";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/addItem")
     public String addItem(
             @ModelAttribute("book") Book book,
@@ -73,6 +74,7 @@ public class ShoppingCartController {
             Model model, Principal principal
     ) {
         User user = userService.findByUsername(principal.getName());
+
 
         try {
             book = bookService.findOne(book.getId());
@@ -93,7 +95,7 @@ public class ShoppingCartController {
     }
 
 
-    @RequestMapping("/updateCartItem")
+    @RequestMapping("/updateCartItem/")
     public String updateShoppingCartItem(@ModelAttribute("id") Long cartItemId,
                                          @ModelAttribute("qty") int qty) {
 

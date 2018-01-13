@@ -1,7 +1,7 @@
 package com.bookstore.utility;
 
-import com.bookstore.domain.Order;
-import com.bookstore.domain.User;
+import com.domain.domain.Order;
+import com.domain.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;

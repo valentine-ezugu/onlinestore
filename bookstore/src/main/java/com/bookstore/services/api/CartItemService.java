@@ -1,13 +1,11 @@
 package com.bookstore.services.api;
 
-import com.bookstore.domain.*;
+import com.domain.domain.ShoppingCart;
+import com.domain.domain.*;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
-/**
- * Created by Pc on 9/8/2017.
- */
 public interface CartItemService {
     List<CartItem> findByShoppingCart(ShoppingCart shoppingCart) throws DataAccessException;
 

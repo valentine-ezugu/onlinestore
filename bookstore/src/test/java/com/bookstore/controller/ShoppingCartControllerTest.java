@@ -1,13 +1,12 @@
 package com.bookstore.controller;
 
 import com.bookstore.BookstoreApplications;
-import com.bookstore.domain.Book;
-import com.bookstore.domain.CartItem;
-import com.bookstore.domain.User;
-import com.bookstore.services.api.BookService;
-import com.bookstore.services.api.CartItemService;
-import com.bookstore.services.api.SecurityService;
-import com.bookstore.services.api.UserService;
+import com.rest_end.rest.HomeController;
+import com.rest_end.rest.ShoppingCartController;
+import com.services.api.*;
+import com.domain.domain.Book;
+import com.domain.domain.CartItem;
+import com.domain.domain.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -109,8 +108,7 @@ public class ShoppingCartControllerTest {
         expect(userService.findByUsername(anyObject())).andReturn(user);
         expect(bookService.findOne(anyLong())).andReturn(book);
 
-        expect(cartItemService.addBookToCartItem(anyObject(), anyObject(), anyInt())).andReturn(cartItem);
-
+        expect(cartItemService.addBookToCartItem(book, user, Integer.parseInt(qty))).andReturn(cartItem);
 
         mockMvc
                 .perform(get("/shoppingCart/addItem")
@@ -124,43 +122,14 @@ public class ShoppingCartControllerTest {
 
                 .andExpect(view().name("forward:/bookDetail?id=" + cartItem.getId()))
                 .andReturn();
-
     }
 
-    @Test
-    public void updateCartItemTest() throws Exception {
-
-        securityService.autologin("V", "A");
-
-        CartItem cartItem = new CartItem();
-        cartItem.setId(1L);
-        Long s = cartItem.getId();
-
-        String qty = "2";
-        cartItem.setQty(Integer.parseInt(qty));
-
-        expect(cartItemService.findById(anyLong())).andReturn(cartItem);
-        cartItemService.updateCartItem(cartItem);
-        expectLastCall();
-        replay(bookService);
-
-
-        mockMvc
-                .perform(get("/shoppingCart/updateCartItem/1/")
-                        .accept(MediaType.TEXT_HTML)
-                        .contentType(MediaType.TEXT_HTML)
-                        // .param("id", "1")
-                        .param("qty", qty))
-
-                .andExpect(view().name("forward:/shoppingCart/cart"))
-
-                .andReturn();
-    }
 
     @Test
     public void checkBookDetail() throws Exception {
 
         securityService.autologin("V", "A");
+
         Book book = new Book();
         book.setId(1L);
         expect(bookService.findOne(anyLong())).andReturn(book);

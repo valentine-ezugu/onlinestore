@@ -1,7 +1,6 @@
 package com.bookstore.services.impl;
 
-import com.bookstore.domain.Payment;
-import com.bookstore.domain.UserPayment;
+import com.domain.domain.*;
 import com.bookstore.services.api.PaymentService;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
