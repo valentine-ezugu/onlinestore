@@ -1,7 +1,7 @@
 package com.adminportal.config;
 
 
-import com.adminportal.utility.SecurityUtility;
+import com.rest_end.utility.SecurityUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,7 +24,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import java.util.Arrays;
 
 @Configuration
-@ComponentScan("com.adminportal")
+@ComponentScan(basePackages = {"com.adminportal","com.rest_end"})
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

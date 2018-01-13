@@ -7,7 +7,7 @@ import com.domain.domain.security.UserRole;
 import com.repository.repo.RoleRepository;
 import com.repository.repo.UserRepository;
 import com.adservice.api.*;
-import com.adminportal.utility.SecurityUtility;
+import com.rest_end.utility.SecurityUtility;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

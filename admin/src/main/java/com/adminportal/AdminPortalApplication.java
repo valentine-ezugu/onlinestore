@@ -4,7 +4,7 @@ import com.domain.domain.User;
 import com.domain.domain.security.Role;
 import com.domain.domain.security.UserRole;
 import com.adservice.api.UserService;
-import com.adminportal.utility.SecurityUtility;
+import com.rest_end.utility.SecurityUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,7 +20,7 @@ import java.util.Set;
 
 @Configuration
 @EntityScan(basePackages = {"com.modular.domain", "com.domain","com.adservice", "com.repository.repo","com.adminportal"})
-@ComponentScan(basePackages ={"com.domain","com.adservice", "com.repository.repo","com.adminportal"})
+@ComponentScan(basePackages ={"com.domain","com.adservice", "com.repository.repo","com.adminportal","com.rest_end"})
 @SpringBootApplication
 @EnableJpaRepositories("com.repository.repo")
 public class AdminPortalApplication implements CommandLineRunner {
