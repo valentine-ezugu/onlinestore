@@ -1,4 +1,4 @@
-package com.bookstore.controller;
+package com.valentine.bookstore.controller;
 
 import com.valentine.common.utility.MailConstructor;
 import com.valentine.common.utility.USConstants;

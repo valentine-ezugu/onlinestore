@@ -1,6 +1,6 @@
-package com.bookstore.dozer;
+package com.valentine.bookstore.dozer;
 
-import com.bookstore.config.MappingConfig;
+import com.valentine.bookstore.config.MappingConfig;
 import com.valentine.domain.UserShipping;
 import com.valentine.dto.user.UserForShippingLite;
 import org.dozer.Mapper;

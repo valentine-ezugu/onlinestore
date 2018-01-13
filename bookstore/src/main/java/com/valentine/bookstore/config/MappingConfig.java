@@ -1,4 +1,4 @@
-package com.bookstore.config;
+package com.valentine.bookstore.config;
 
 import org.dozer.spring.DozerBeanMapperFactoryBean;
 import org.springframework.beans.factory.annotation.Value;

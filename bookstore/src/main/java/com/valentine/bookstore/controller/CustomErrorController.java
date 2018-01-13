@@ -1,6 +1,6 @@
-package com.bookstore.controller;
+package com.valentine.bookstore.controller;
 
-import com.bookstore.errorHandler.ErrorJson;
+import com.valentine.bookstore.errorHandler.ErrorJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;

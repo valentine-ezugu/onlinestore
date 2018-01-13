@@ -1,10 +1,7 @@
 package com.valentine.test.service;
 
-import com.bookstore.config.SecurityConfig;
 import com.valentine.repository.BookRepository;
 import com.valentine.service.BookService;
-import com.valentine.service.UserSecurityService;
-import com.bookstore.ws.AbstractTest;
 import com.valentine.domain.Book;
 import org.easymock.EasyMockSupport;
 import org.junit.Assert;
@@ -12,10 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
-
 import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.List;
@@ -23,8 +18,7 @@ import java.util.List;
 import static org.easymock.EasyMock.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {SecurityConfig.class, SecurityUtility.class, UserSecurityService.class, BookService.class
-})
+
 @Transactional
 public class BookServiceTest extends AbstractTest {
 

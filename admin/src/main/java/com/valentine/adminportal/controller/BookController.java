@@ -34,7 +34,7 @@ public class BookController {
     @Autowired
     private Mapper mapper;
 
-    @GetMapping(value = "/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Book getBookById(@PathVariable(value = "id") Long id) {
         return bookRepository.findOne(id);

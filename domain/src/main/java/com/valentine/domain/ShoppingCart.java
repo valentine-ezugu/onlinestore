@@ -1,7 +1,5 @@
 package com.valentine.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,7 +14,6 @@ public class ShoppingCart {
     private BigDecimal grandTotal;
 
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<CartItem> cartItemList;
 
     @OneToOne(cascade = CascadeType.ALL)

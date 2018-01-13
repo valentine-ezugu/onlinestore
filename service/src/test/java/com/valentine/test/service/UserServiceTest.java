@@ -1,6 +1,5 @@
 package com.valentine.test.service;
 
-import com.admin.ws.AbstractTest;
 import com.valentine.common.utility.SecurityUtility;
 import com.valentine.domain.User;
 import com.valentine.domain.security.Role;

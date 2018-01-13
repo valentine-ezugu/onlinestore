@@ -1,6 +1,5 @@
 package com.valentine.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.valentine.domain.security.Authority;
 import com.valentine.domain.security.UserRole;
 import org.springframework.security.core.GrantedAuthority;
@@ -46,7 +45,6 @@ public class User implements UserDetails {
     private List<UserPayment> userPaymentList;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
     private Set<UserRole> userRoles = new HashSet<>();
 
     @OneToMany(mappedBy = "user")

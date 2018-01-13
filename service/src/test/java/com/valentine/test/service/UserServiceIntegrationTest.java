@@ -18,7 +18,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 
 @Transactional
-public class UserServiceIntegrationTest extends AbstractTest {
+public class UserServiceIntegrationTest {
 
     private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 

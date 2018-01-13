@@ -1,6 +1,5 @@
 package com.valentine.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -33,7 +32,6 @@ public class Book {
     private int inStockNumber;
 
     @OneToMany(mappedBy = "book")
-    @JsonIgnore
     private List<BookToCartItem> bookToCartItemList;
 
 

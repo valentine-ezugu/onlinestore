@@ -20,14 +20,16 @@ import java.util.Set;
 
 @Configuration
 @EntityScan(basePackages = {"com.valentine.domain"})
-@ComponentScan(basePackages = {"com.valentine"})
+@ComponentScan(basePackages = {
+        "com.valentine.test.service.testconfig",
+        "com.valentine.service",
+        "com.valentine.common.utility"})
 @SpringBootApplication
 @EnableJpaRepositories("com.valentine.repository")
 public class TestRunner implements CommandLineRunner {
 
     @Autowired
     private UserService userService;
-
 
     @Autowired
     private SecurityUtility securityUtility;

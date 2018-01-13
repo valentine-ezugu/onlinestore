@@ -1,7 +1,5 @@
 package com.valentine.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,7 +19,6 @@ public class CartItem {
     private Book book;
 
     @OneToMany(mappedBy = "cartItem")
-    @JsonIgnore
     private List<BookToCartItem> bookToCartItemList;
 
 

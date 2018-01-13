@@ -1,6 +1,6 @@
-package com.bookstore.controller;
+package com.valentine.bookstore.controller;
 
-import com.bookstore.BookstoreApplications;
+import com.valentine.bookstore.BookstoreApplications;
 import com.valentine.service.BookService;
 import com.valentine.service.CartItemService;
 import com.valentine.service.SecurityService;

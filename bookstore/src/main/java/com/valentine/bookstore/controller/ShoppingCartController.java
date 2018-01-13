@@ -1,4 +1,4 @@
-package com.bookstore.controller;
+package com.valentine.bookstore.controller;
 
 import com.valentine.service.BookService;
 import com.valentine.service.CartItemService;
