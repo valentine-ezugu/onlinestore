@@ -19,24 +19,34 @@
     </properties>
 
     <dependencies>
-
         <dependency>
-            <groupId>com.modular</groupId>
+            <groupId>com.valentine</groupId>
             <artifactId>domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.modular</groupId>
-            <artifactId>book-repository</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>com.valentine</groupId>
+            <artifactId>service-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.valentine</groupId>
+            <artifactId>service</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
-            <version>1.4.7</version>
         </dependency>
 
         <dependency>
@@ -47,24 +57,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.modular</groupId>
-            <artifactId>book-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.ldap</groupId>
-            <artifactId>spring-ldap-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-ldap</artifactId>
         </dependency>
 
         <dependency>
@@ -124,11 +118,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-        </dependency>
-
 
         <!--for checking -->
         <dependency>
@@ -148,24 +137,8 @@
             <artifactId>htmlunit-driver</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.mockito</groupId>-->
-        <!--<artifactId>mockito-all</artifactId>-->
-        <!--<version>${mockito.version}</version>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/libs-snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <build>
         <plugins>
             <plugin>

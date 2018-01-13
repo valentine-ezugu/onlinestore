@@ -11,18 +11,21 @@
         <module>admin</module>
         <module>bookstore</module>
         <module>domain</module>
-        <module>ad-service</module>
-        <module>ad-repository</module>
-        <module>ad-rest</module>
-        <module>book-service</module>
-        <module>book-repository</module>
-        <module>book-rest</module>
+        <module>service</module>
+        <module>repository</module>
+        <module>service-api</module>
+        <module>common</module>
     </modules>
+
+
 
     <packaging>pom</packaging>
 
+
+
     <name>onlinestore</name>
     <description>Demo project for Spring Boot</description>
+
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -35,44 +38,89 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <dozer.version>5.5.1</dozer.version>
+        <project.version>0.0.1-SNAPSHOT</project.version>
+        <spring-security.version>4.2.3.RELEASE</spring-security.version>
+        <mail.version>1.4.7</mail.version>
+        <easymock.version>3.4</easymock.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer-spring</artifactId>
-            <version>5.5.1</version>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
 
-        <dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer</artifactId>
-            <version>5.5.1</version>
-        </dependency>
+            <dependency>
+                <groupId>com.valentine</groupId>
+                <artifactId>service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4.7</version>
-        </dependency>
-    </dependencies>
+            <dependency>
+                <groupId>com.valentine</groupId>
+                <artifactId>service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-    <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/libs-snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+            <dependency>
+                <groupId>com.valentine</groupId>
+                <artifactId>repository</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.valentine</groupId>
+                <artifactId>common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.valentine</groupId>
+                <artifactId>domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${mail.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer-spring</artifactId>
+                <version>${dozer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-test</artifactId>
+                <version>${spring-security.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer</artifactId>
+                <version>${dozer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.easymock</groupId>
+                <artifactId>easymock</artifactId>
+                <version>${easymock.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project>

@@ -18,49 +18,51 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
     </properties>
-
     <dependencies>
 
         <dependency>
-            <groupId>com.modular</groupId>
+            <groupId>com.valentine</groupId>
             <artifactId>domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.valentine</groupId>
+            <artifactId>service-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.valentine</groupId>
+            <artifactId>service</artifactId>
         </dependency>
 
 
         <dependency>
-            <groupId>com.modular</groupId>
-            <artifactId>ad-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>com.valentine</groupId>
+            <artifactId>common</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.modular</groupId>
-            <artifactId>ad-rest</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
 
         <dependency>
-            <groupId>org.springframework.ldap</groupId>
-            <artifactId>spring-ldap-core</artifactId>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer-spring</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-ldap</artifactId>
-        </dependency>
 
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -88,11 +90,11 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
 
         <!-- this is added to check weather user logged in or not-->
 
@@ -102,6 +104,7 @@
             <version>3.4</version>
             <scope>test</scope>
         </dependency>
+
 
         <dependency>
             <groupId>com.h2database</groupId>
@@ -116,6 +119,7 @@
         </dependency>
 
         <!--for checking -->
+
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit</artifactId>
@@ -128,11 +132,13 @@
             <scope>test</scope>
         </dependency>
 
+
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
