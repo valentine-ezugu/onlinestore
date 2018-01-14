@@ -16,7 +16,7 @@
         <module>services-api</module>
         <module>global</module>
         <module>dao</module>
-        <module>test</module>
+        
     </modules>
 
     <packaging>pom</packaging>

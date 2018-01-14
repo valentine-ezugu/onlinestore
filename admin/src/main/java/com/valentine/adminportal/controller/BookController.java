@@ -25,7 +25,15 @@ import java.util.List;
 @RequestMapping("/book")
 public class BookController {
 
-    
+    @Autowired
+    private BookService bookService;
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private Mapper mapper;
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Book getBookById(@PathVariable(value = "id") Long id) {
