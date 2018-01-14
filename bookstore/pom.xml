@@ -5,7 +5,7 @@
     <packaging>jar</packaging>
     <parent>
         <artifactId>onlinestore</artifactId>
-        <groupId>com.modular</groupId>
+        <groupId>com.valentine</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -19,6 +19,7 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>com.valentine</groupId>
             <artifactId>domain</artifactId>
@@ -26,12 +27,24 @@
 
         <dependency>
             <groupId>com.valentine</groupId>
-            <artifactId>service-api</artifactId>
+            <artifactId>global</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.valentine</groupId>
-            <artifactId>service</artifactId>
+            <artifactId>dao</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.valentine</groupId>
+            <artifactId>services-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.valentine</groupId>
+            <artifactId>services</artifactId>
         </dependency>
 
         <dependency>

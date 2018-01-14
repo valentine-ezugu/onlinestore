@@ -1,7 +1,7 @@
 package com.valentine.bookstore.config;
 
-import com.valentine.impl.UserSecurityService;
-import com.valentine.utility.SecurityUtility;
+import com.valentine.common.utility.SecurityUtility;
+import com.valentine.service.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,7 +26,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import java.util.Arrays;
 
 @Configuration
-@ComponentScan("com.bookstore")
+@ComponentScan("com.valentine.bookstore")
 @EnableAspectJAutoProxy
 @EnableWebSecurity
 @Order

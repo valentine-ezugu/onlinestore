@@ -19,14 +19,9 @@ import javax.sql.DataSource;
 @PropertySource(value = {"classpath:application.properties"})
 public class TestH2Data {
 
-    @Autowired
-    private Environment env;
-
-
     @Bean(name = "dataSource")
     public DataSource dataSourceTest() {
         return new EmbeddedDatabaseBuilder()
-                .generateUniqueName(true)
                 .setType(EmbeddedDatabaseType.H2)
                 .setScriptEncoding("UTF-8")
                 .addScripts("schema.sql", "data.sql")

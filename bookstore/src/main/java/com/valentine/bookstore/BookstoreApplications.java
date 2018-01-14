@@ -2,10 +2,10 @@ package com.valentine.bookstore;
 
 import com.valentine.bookstore.config.SecurityConfig;
 import com.valentine.common.utility.SecurityUtility;
+import com.valentine.service.UserService;
 import com.valentine.domain.User;
 import com.valentine.domain.security.Role;
 import com.valentine.domain.security.UserRole;
-import com.valentine.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +22,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Configuration
 @SpringBootApplication
 @EntityScan(basePackages = {"com.valentine.domain"})
-@ComponentScan(basePackages = {"com.valentine.bookstore", "com.valentine.common"})
+@ComponentScan(basePackages = {"com.valentine.bookstore", "com.valentine.service"})
 @EnableJpaRepositories(basePackages = {"com.valentine.repository"})
 @EnableTransactionManagement
 @Import(SecurityConfig.class)
@@ -40,7 +39,6 @@ public class BookstoreApplications implements CommandLineRunner {
     @Autowired
     private UserService userService;
 
-
     public static void main(String[] args) {
         SpringApplication.run(BookstoreApplications.class, args);
     }
@@ -53,7 +51,7 @@ public class BookstoreApplications implements CommandLineRunner {
         user1.setUsername("V");
         user1.setPassword(securityUtility.passwordEncoder().encode("A"));
         user1.setEmail("valentineezugu@yahoo.com");
-        Set<UserRole> userRoles = new HashSet<>()
+        Set<UserRole> userRoles = new HashSet<>();
         Role role1 = new Role();
         role1.setRoleId(1);
         role1.setName("USER");

@@ -1,15 +1,15 @@
 package com.valentine.bookstore.controller;
 
-import com.domain.domain.Book;
-import com.domain.domain.CartItem;
-import com.domain.domain.ShoppingCart;
-import com.domain.domain.User;
-import com.domain.dto.cart.CartItemForList;
-import com.domain.dto.shoppingCart.ShoppingCartLite;
-import com.valentine.api.BookService;
-import com.valentine.api.CartItemService;
-import com.valentine.api.ShoppingCartService;
-import com.valentine.api.UserService;
+import com.valentine.service.BookService;
+import com.valentine.service.CartItemService;
+import com.valentine.service.ShoppingCartService;
+import com.valentine.service.UserService;
+import com.valentine.domain.Book;
+import com.valentine.domain.CartItem;
+import com.valentine.domain.ShoppingCart;
+import com.valentine.domain.User;
+import com.valentine.dto.cart.CartItemForList;
+import com.valentine.dto.shoppingCart.ShoppingCartLite;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

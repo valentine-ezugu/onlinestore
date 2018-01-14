@@ -3,25 +3,26 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.modular</groupId>
+    <groupId>com.valentine</groupId>
     <artifactId>onlinestore</artifactId>
+
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
         <module>admin</module>
         <module>bookstore</module>
         <module>domain</module>
-        <module>service</module>
-        <module>repository</module>
-        <module>service-api</module>
-        <module>common</module>
+        <module>services</module>
+        <module>services-api</module>
+        <module>global</module>
+        <module>dao</module>
+        <module>test</module>
     </modules>
 
     <packaging>pom</packaging>
 
-
-
     <name>onlinestore</name>
+
     <description>Demo project for Spring Boot</description>
 
 
@@ -48,32 +49,20 @@
 
             <dependency>
                 <groupId>com.valentine</groupId>
-                <artifactId>service</artifactId>
-                <version>${project.version}</version>
+                <artifactId>services</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>com.valentine</groupId>
-                <artifactId>service-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.valentine</groupId>
-                <artifactId>repository</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.valentine</groupId>
-                <artifactId>common</artifactId>
-                <version>${project.version}</version>
+                <artifactId>services-api</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>com.valentine</groupId>
                 <artifactId>domain</artifactId>
-                <version>${project.version}</version>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
@@ -121,4 +110,5 @@
             </plugins>
         </pluginManagement>
     </build>
+
 </project>
