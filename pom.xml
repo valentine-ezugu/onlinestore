@@ -41,13 +41,49 @@
         <dependencies>
 
             <dependency>
-                <groupId>com.valentine</groupId>
-                <artifactId>common</artifactId>
+                <groupId>com.valentine.common</groupId>
+                <artifactId>utility</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.valentine</groupId>
+                <groupId>com.valentine.common</groupId>
+                <artifactId>repository</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.valentine.common</groupId>
+                <artifactId>service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.valentine.common</groupId>
+                <artifactId>service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.valentine.bookstore</groupId>
+                <artifactId>repository</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.valentine.bookstore</groupId>
+                <artifactId>service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.valentine.bookstore</groupId>
+                <artifactId>service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.valentine.domain</groupId>
                 <artifactId>domain</artifactId>
                 <version>${project.version}</version>
             </dependency>

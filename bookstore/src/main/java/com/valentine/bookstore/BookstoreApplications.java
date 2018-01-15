@@ -1,7 +1,7 @@
 package com.valentine.bookstore;
 
 import com.valentine.bookstore.config.SecurityConfig;
-import com.valentine.common.utility.SecurityUtility;
+import utility.SecurityUtility;
 import com.valentine.service.UserService;
 import com.valentine.domain.User;
 import com.valentine.domain.security.Role;
@@ -25,7 +25,7 @@ import java.util.Set;
 @Configuration
 @SpringBootApplication
 @EntityScan(basePackages = {"com.valentine.domain"})
-@ComponentScan(basePackages = {"com.valentine.bookstore", "com.valentine.common"})
+@ComponentScan(basePackages = {"com.valentine.bookstore", "com.valentine.com.valentine.common"})
 @EnableJpaRepositories(basePackages = {"com.valentine.repository"})
 @EnableTransactionManagement
 @Import(SecurityConfig.class)

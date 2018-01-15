@@ -1,6 +1,6 @@
 package com.valentine.bookstore.config;
 
-import com.valentine.common.utility.SecurityUtility;
+import utility.SecurityUtility;
 import com.valentine.service.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

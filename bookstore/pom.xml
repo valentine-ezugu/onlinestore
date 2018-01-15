@@ -2,7 +2,13 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+    <modules>
+        <module>repository</module>
+        <module>service-api</module>
+        <module>service</module>
+        <module>rest</module>
+    </modules>
     <parent>
         <artifactId>onlinestore</artifactId>
         <groupId>com.valentine</groupId>

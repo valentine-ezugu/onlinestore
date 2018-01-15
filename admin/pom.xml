@@ -3,7 +3,12 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>rest</module>
+    </modules>
+
     <parent>
         <artifactId>onlinestore</artifactId>
         <groupId>com.valentine</groupId>
@@ -39,7 +44,7 @@
 
         <dependency>
             <groupId>com.valentine</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>com.valentine.common</artifactId>
         </dependency>
 
         <dependency>
