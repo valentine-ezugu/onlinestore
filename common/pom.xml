@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <packaging>pom</packaging>
 
@@ -11,10 +11,10 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
-        <module>repository</module>
+        <module>common-repository</module>
         <module>utility</module>
-        <module>service-api</module>
-        <module>service</module>
+        <module>common-service-api</module>
+        <module>common-service</module>
     </modules>
 
     <parent>
@@ -22,7 +22,6 @@
         <groupId>com.valentine</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
 
 
 </project>
