@@ -10,6 +10,11 @@
     <packaging>jar</packaging>
 
     <modelVersion>4.0.0</modelVersion>
+<<<<<<< HEAD
+=======
+
+    <groupId>com.valentine.domain</groupId>
+>>>>>>> big_refactoring
     <artifactId>domain</artifactId>
 
     <dependencies>

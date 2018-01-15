@@ -4,6 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <packaging>jar</packaging>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>rest</module>
     <parent>
         <artifactId>onlinestore</artifactId>
         <groupId>com.valentine</groupId>
@@ -11,6 +15,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.valentine.admin</groupId>
     <artifactId>admin</artifactId>
 
     <properties>
@@ -34,6 +39,7 @@
 
         <dependency>
             <groupId>com.valentine</groupId>
+<<<<<<< HEAD
             <artifactId>services</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -46,12 +52,13 @@
         </dependency>
 
 
+ 
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer-spring</artifactId>
         </dependency>
 
-
+ 
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>

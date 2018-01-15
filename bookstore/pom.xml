@@ -2,7 +2,13 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+    <modules>
+        <module>repository</module>
+        <module>service-api</module>
+        <module>service</module>
+        <module>rest</module>
+    </modules>
     <parent>
         <artifactId>onlinestore</artifactId>
         <groupId>com.valentine</groupId>
@@ -10,6 +16,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
+    <groupId>com.valentine.bookstore</groupId>
     <artifactId>bookstore</artifactId>
 
     <properties>
@@ -27,12 +34,17 @@
 
         <dependency>
             <groupId>com.valentine</groupId>
+<<<<<<< HEAD
             <artifactId>global</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+=======
+            <artifactId>service-api</artifactId>
+>>>>>>> big_refactoring
         </dependency>
 
         <dependency>
             <groupId>com.valentine</groupId>
+<<<<<<< HEAD
             <artifactId>dao</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -48,6 +60,12 @@
         </dependency>
 
         <dependency>
+=======
+            <artifactId>service</artifactId>
+        </dependency>
+
+        <dependency>
+>>>>>>> big_refactoring
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer-spring</artifactId>
         </dependency>
