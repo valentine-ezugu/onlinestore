@@ -8,10 +8,13 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
-        <module>admin</module>
-        <module>bookstore</module>
+        <module>admin-rest</module>
+        <module>bookstore-rest</module>
         <module>domain</module>
-        <module>common</module>
+        <module>utility</module>
+        <module>repository</module>
+        <module>service-api</module>
+        <module>service</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -41,49 +44,31 @@
         <dependencies>
 
             <dependency>
-                <groupId>com.valentine.common</groupId>
+                <groupId>com.valentine.onlinestore</groupId>
                 <artifactId>utility</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.valentine.common</groupId>
-                <artifactId>common-repository</artifactId>
+                <groupId>com.valentine.onlinestore</groupId>
+                <artifactId>repository</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.valentine.common</groupId>
-                <artifactId>common-service-api</artifactId>
+                <groupId>com.valentine.onlinestore</groupId>
+                <artifactId>service-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.valentine.common</groupId>
-                <artifactId>common-service</artifactId>
+                <groupId>com.valentine.onlinestore</groupId>
+                <artifactId>service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.valentine.bookstore</groupId>
-                <artifactId>bookstore-repository</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.valentine.bookstore</groupId>
-                <artifactId>bookstore-service-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.valentine.bookstore</groupId>
-                <artifactId>bookstore-service</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.valentine.domain</groupId>
+                <groupId>com.valentine.onlinestore</groupId>
                 <artifactId>domain</artifactId>
                 <version>${project.version}</version>
             </dependency>

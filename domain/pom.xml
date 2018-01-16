@@ -11,7 +11,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.valentine.domain</groupId>
+    <groupId>com.valentine.onlinestore</groupId>
     <artifactId>domain</artifactId>
 
     <dependencies>
