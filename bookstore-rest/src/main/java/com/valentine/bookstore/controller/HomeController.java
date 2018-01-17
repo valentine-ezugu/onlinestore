@@ -1,18 +1,14 @@
 package com.valentine.bookstore.controller;
 
-import com.valentine.utility.MailConstructor;
-import com.valentine.utility.SecurityUtility;
-import com.valentine.utility.USConstants;
-import com.valentine.utility.Validator;
 import com.valentine.domain.*;
-import com.valentine.domain.security.PasswordResetToken;
-import com.valentine.domain.security.Role;
-import com.valentine.domain.security.UserRole;
+import com.valentine.domain.PasswordResetToken;
+import com.valentine.domain.Role;
 import com.valentine.dto.book.BookDetailExtraLite;
 import com.valentine.dto.book.BookDetailForShelf;
 import com.valentine.dto.order.OrderForFindOne;
 import com.valentine.dto.user.*;
 import com.valentine.service.*;
+import com.valentine.utility.*;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -49,7 +45,7 @@ public class HomeController {
     private UserService userService;
 
     @Autowired
-    private UserSecurityService userSecurityService;
+    private UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Autowired
     private BookService bookService;
@@ -590,11 +586,10 @@ public class HomeController {
         user.setPassword(encryptedPassword);
 
         Role role = new Role();
-        role.setRoleId(1);
-        role.setName("USER");
-        Set<UserRole> userRoles = new HashSet<>();
-        userRoles.add(new UserRole(user, role));
-        userService.createUser(user, userRoles);
+        role.setName("ROLE_USER");
+        user.getRoles().add(role);
+
+        userService.createUser(user);
 
         //mostly sending passowrd to email logic
         String token = UUID.randomUUID().toString();
@@ -623,7 +618,7 @@ public class HomeController {
         User user = passToken.getUser();
         String username = user.getUsername();
 
-        UserDetails userDetails = userSecurityService.loadUserByUsername(username);
+        UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),
                 userDetails.getAuthorities());
@@ -693,7 +688,7 @@ public class HomeController {
         model.addAttribute("listOfCreditCards", true);
 
 
-        UserDetails userDetails = userSecurityService.loadUserByUsername(currentUser.getUsername());
+        UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(currentUser.getUsername());
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),
                 userDetails.getAuthorities());

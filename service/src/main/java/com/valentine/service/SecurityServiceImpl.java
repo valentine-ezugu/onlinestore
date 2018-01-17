@@ -14,12 +14,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
 
+import javax.transaction.Transactional;
 
 @Service
 @Transactional
 public class SecurityServiceImpl implements SecurityService {
+
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -27,17 +28,22 @@ public class SecurityServiceImpl implements SecurityService {
     @Autowired
     private UserDetailsService userDetailsService;
 
+
     @Override
     public String findLoggedInUsername() throws DataAccessException, AuthenticationException {
 
+
         SecurityContext securityContext = SecurityContextHolder.getContext();
+
 
         Authentication authentication = securityContext.getAuthentication();
 
         if (authentication instanceof AnonymousAuthenticationToken) {
 
             throw new UsernameNotFoundException("sorry but you are Anonymous");
+
         }
+
 
         String currentUserName = authentication.getName();
 
@@ -45,14 +51,16 @@ public class SecurityServiceImpl implements SecurityService {
 
     }
 
+
     @Override
     public void autologin(String username, String password) throws AuthenticationException {
+
 
         UserDetails userDetails;
         try {
             userDetails = userDetailsService.loadUserByUsername(username);
 
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails , password, userDetails.getAuthorities());
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
             authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 

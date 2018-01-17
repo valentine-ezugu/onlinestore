@@ -45,9 +45,6 @@ hs_err_pid*
 *.iws
 **/*.iml
 
-
-**/.directory
-
 ## Additional for IntelliJ
 out/
 

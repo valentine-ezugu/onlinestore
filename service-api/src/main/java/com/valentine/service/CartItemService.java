@@ -5,6 +5,9 @@ import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
+/**
+ * Created by Pc on 9/8/2017.
+ */
 public interface CartItemService {
     List<CartItem> findByShoppingCart(ShoppingCart shoppingCart) throws DataAccessException;
 

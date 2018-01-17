@@ -1,6 +1,6 @@
 package com.valentine.service;
 
-import com.valentine.domain.security.LoginStatus;
+import com.valentine.utility.LoginStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +16,12 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class SpringSecurityLoginService implements LoginService {
+public class LoginServiceImpl implements LoginService {
 
-    @Autowired(required = false)
+    @Autowired
     public AuthenticationManager authenticationManager;
 
-    private Log log = LogFactory.getLog(SpringSecurityLoginService.class);
+    private Log log = LogFactory.getLog(LoginServiceImpl.class);
 
     public LoginStatus getStatus() throws DataAccessException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -3,7 +3,9 @@ package com.valentine.bookstore.controller;
 import com.valentine.domain.Book;
 import com.valentine.domain.CartItem;
 import com.valentine.domain.User;
-import com.valentine.service.*;
+import com.valentine.service.BookService;
+import com.valentine.service.CartItemService;
+import com.valentine.service.UserService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,11 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(properties = "classpath:application.properties")
 public class ShoppingCartControllerTest {
 
-    @Autowired
-    private LoginService loginService;
-
-    @Autowired
-    private SecurityService security;
 
     @Autowired
     private MockMvc mockMvc;
@@ -87,9 +85,8 @@ public class ShoppingCartControllerTest {
 
 
     @Test
+    @WithMockUser(username = "V", roles = {"A"})
     public void addItemToShoppingCart() throws Exception {
-
-        security.autologin("V", "A");
 
         CartItem cartItem = new CartItem();
 
@@ -117,13 +114,14 @@ public class ShoppingCartControllerTest {
 
                 .andExpect(model().attributeExists("book"))
                 .andExpect(model().attributeExists("qty"))
-                .andExpect(view().name("bookDetail"))
+
                 .andExpect(view().name("forward:/bookDetail?id=" + cartItem.getId()))
                 .andReturn();
     }
 
 
     @Test
+    @WithMockUser(username = "V", roles = {"A"})
     public void checkBookDetail() throws Exception {
 
         Book book = new Book();
@@ -143,10 +141,9 @@ public class ShoppingCartControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "V", roles = {"A"})
     public void showBookShelf() throws Exception {
-
         List<Book> bookList = new ArrayList<>();
-
 
         expect(bookService.findAll()).andReturn(bookList);
         replay(bookService);

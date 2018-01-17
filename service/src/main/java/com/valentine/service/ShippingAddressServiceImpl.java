@@ -9,8 +9,7 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class
-ShippingAddressServiceImpl implements ShippingAddressService {
+public class ShippingAddressServiceImpl implements ShippingAddressService {
 
     @Override
     public ShippingAddress setByUserShipping(UserShipping userShipping, ShippingAddress shippingAddress) throws AccessDeniedException

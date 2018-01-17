@@ -1,9 +1,7 @@
 package com.valentine.adminportal.controller;
 
-import com.valentine.adminportal.AdminPortalApplication;
 import com.valentine.domain.Book;
 import com.valentine.service.BookService;
-import com.valentine.service.SecurityService;
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
@@ -14,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,19 +27,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(properties = "classpath:application.properties")
-@ContextConfiguration(classes = {AdminPortalApplication.class })
 public class BookControllerTest {
 
     @Autowired
     private BookController bookController;
 
     @Autowired
-    private SecurityService securityService;
-
-    @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
     private BookService bookService;
 
     @Before
@@ -65,7 +57,7 @@ public class BookControllerTest {
 
 
     @Test
-    @WithMockUser
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
     public void addBookClicked() throws Exception {
 
         mockMvc
@@ -80,7 +72,7 @@ public class BookControllerTest {
 
 
     @Test
-    @WithMockUser
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
     public void bookRemoveTest() throws Exception {
 
         List<Book> expectedBookList = createBookList(10);
@@ -120,6 +112,7 @@ public class BookControllerTest {
                 .andExpect(view().name("bookList"))
                 .andReturn();
     }
+
     private List<Book> createBookList(int count) {
         List<Book> bookList = new ArrayList<Book>();
         for (int i = 0; i < count; i++) {

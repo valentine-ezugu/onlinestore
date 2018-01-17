@@ -4,11 +4,8 @@ import com.valentine.domain.User;
 import com.valentine.domain.UserBilling;
 import com.valentine.domain.UserPayment;
 import com.valentine.domain.UserShipping;
-import com.valentine.domain.security.PasswordResetToken;
-import com.valentine.domain.security.UserRole;
+import com.valentine.domain.PasswordResetToken;
 import org.springframework.dao.DataAccessException;
-
-import java.util.Set;
 
 public interface UserService {
 
@@ -25,7 +22,7 @@ public interface UserService {
     User findByEmail(String email) throws DataAccessException;
 
 
-    User createUser(User user, Set<UserRole> userRoles) throws Exception;
+    User createUser(User user) throws Exception;
 
     User save(User user);
 

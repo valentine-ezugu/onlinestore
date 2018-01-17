@@ -9,6 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <packaging>jar</packaging>
+
     <groupId>com.valentine.onlinestore</groupId>
     <artifactId>service</artifactId>
 
@@ -22,6 +24,11 @@
         <dependency>
             <groupId>com.valentine.onlinestore</groupId>
             <artifactId>repository</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.valentine.onlinestore</groupId>
+            <artifactId>utility</artifactId>
         </dependency>
 
     </dependencies>

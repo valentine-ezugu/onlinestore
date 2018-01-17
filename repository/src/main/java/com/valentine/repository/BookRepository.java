@@ -11,10 +11,6 @@ import java.util.List;
  */
 public interface BookRepository extends CrudRepository<Book, Long> {
 
-    List<Book> findAll();
-
-    Book findOne(Long id);
-
     List<Book> findByCategory(String category);
 
     List<Book> findByTitleContaining(String title);

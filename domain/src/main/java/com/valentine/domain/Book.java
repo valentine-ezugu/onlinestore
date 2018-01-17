@@ -7,8 +7,8 @@ import java.util.List;
 
 @Entity
 public class Book {
-    @Transient
-    MultipartFile BookImage;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -28,6 +28,9 @@ public class Book {
 
     @Column(columnDefinition = "text")
     private String description;
+
+    @Transient
+    MultipartFile BookImage;
 
     private int inStockNumber;
 

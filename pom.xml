@@ -45,13 +45,13 @@
 
             <dependency>
                 <groupId>com.valentine.onlinestore</groupId>
-                <artifactId>utility</artifactId>
+                <artifactId>repository</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.valentine.onlinestore</groupId>
-                <artifactId>repository</artifactId>
+                <artifactId>utility</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -64,6 +64,18 @@
             <dependency>
                 <groupId>com.valentine.onlinestore</groupId>
                 <artifactId>service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.valentine.onlinestore</groupId>
+                <artifactId>admin-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.valentine.onlinestore</groupId>
+                <artifactId>bookstore-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -84,18 +96,6 @@
                 <artifactId>dozer-spring</artifactId>
                 <version>${dozer.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.0.0-M6</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>5.0.0-M6</version>
-           </dependency>
 
             <dependency>
                 <groupId>org.springframework.security</groupId>

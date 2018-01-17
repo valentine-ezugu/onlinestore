@@ -1,4 +1,4 @@
-package com.valentine.domain.security;
+package com.valentine.domain;
 
 import com.valentine.domain.User;
 

@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class UserPaymentServiceImpl implements UserPaymentService {
+
     @Autowired
     UserPaymentRepository userPaymentRepository;
 

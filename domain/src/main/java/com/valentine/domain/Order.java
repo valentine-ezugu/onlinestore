@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "user_id")
 public class Order {
 
     @Id

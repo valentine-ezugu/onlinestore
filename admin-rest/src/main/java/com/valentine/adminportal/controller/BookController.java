@@ -7,7 +7,6 @@ import com.valentine.dto.book.BookForSave;
 import com.valentine.service.BookService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,14 +30,12 @@ public class BookController {
     @Autowired
     private Mapper mapper;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Book getBookById(@PathVariable(value = "id") Long id) {
         return bookService.findOne(id);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addBook(Model model) {
         Book book = new Book();
@@ -49,7 +46,6 @@ public class BookController {
         return "addBook";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addBookPost(@ModelAttribute("book") Book book, HttpServletRequest request, Model model) {
 
@@ -68,7 +64,6 @@ public class BookController {
         return "redirect:bookList";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping("/bookInfo")
     public String bookInfo(@RequestParam("id") Long id, Model model) {
 
@@ -80,7 +75,6 @@ public class BookController {
         return "bookInfo";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping("/updateBook")
     public String updateBook(@RequestParam("id") Long id, Model model) {
         Book book = bookService.findOne(id);
@@ -91,7 +85,6 @@ public class BookController {
         return "updateBook";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/updateBook", method = RequestMethod.POST)
     public String updateBookPost(@ModelAttribute("book") Book book, HttpServletRequest request) {
 
@@ -99,7 +92,6 @@ public class BookController {
         return "redirect:/book/bookInfo?id=" + book.getId();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping("/bookList")
     public String bookList(Model model) {
 
@@ -114,7 +106,6 @@ public class BookController {
         return "bookList";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public String remove(@ModelAttribute("id") String id, Model model) {
 

@@ -4,7 +4,7 @@ import com.valentine.domain.Order;
 import com.valentine.domain.ShoppingCart;
 import com.valentine.domain.UserPayment;
 import com.valentine.domain.UserShipping;
-import com.valentine.domain.security.UserRole;
+import com.valentine.domain.Role;
 
 import java.util.HashSet;
 import java.util.List;
@@ -29,8 +29,16 @@ public class UserForProfile {
     private List<UserShipping> userShippingList;
 
     private List<UserPayment> userPaymentList;
-    private Set<UserRole> userRoles = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
     private List<Order> orderList;
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -119,14 +127,6 @@ public class UserForProfile {
 
     public void setUserPaymentList(List<UserPayment> userPaymentList) {
         this.userPaymentList = userPaymentList;
-    }
-
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
     }
 
     public List<Order> getOrderList() {

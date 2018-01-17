@@ -1,7 +1,5 @@
 package com.valentine.bookstore.controller;
 
-import com.valentine.utility.MailConstructor;
-import com.valentine.utility.USConstants;
 import com.valentine.domain.*;
 import com.valentine.dto.billingAddress.BillingAddressCheckOut;
 import com.valentine.dto.cart.CartItemForList;
@@ -11,6 +9,8 @@ import com.valentine.dto.user.UserForPaymentInfo;
 import com.valentine.dto.user.UserForProfile;
 import com.valentine.dto.user.UserForShippingLite;
 import com.valentine.service.*;
+import com.valentine.utility.MailConstructor;
+import com.valentine.utility.USConstants;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -74,7 +74,7 @@ public class CheckoutController {
 
     private Payment payment = new Payment();
 
-
+    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping("/checkout")
     public String checkout(@RequestParam("id") Long cartId,
                            @RequestParam(value = "missingRequiredField", required = false) boolean missingRequiredField, Model model,

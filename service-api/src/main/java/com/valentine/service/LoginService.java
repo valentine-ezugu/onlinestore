@@ -1,6 +1,6 @@
 package com.valentine.service;
 
-import com.valentine.domain.security.LoginStatus;
+import com.valentine.utility.LoginStatus;
 import org.springframework.dao.DataAccessException;
 
 

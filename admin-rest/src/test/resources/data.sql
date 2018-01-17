@@ -1,14 +1,13 @@
 INSERT INTO user VALUES
-  (1, 'admin@yahoo.com', 'TRUE', 'ADMIN', 'ADMIN', '$2a$12$LtbYtEzOBdnsiD/E9Wtj2OZz80wXDrKDMacktYr8pq3j0X6HO75Fm', NULL,
-   'admin'),
-  (2, 'valentineezugu@yahoo.com', 'TRUE', 'Valentine', 'Ezugu',
+  (1, 'admin@yahoo.com', 'TRUE', NULL, NULL, '$2a$12$LtbYtEzOBdnsiD/E9Wtj2OZz80wXDrKDMacktYr8pq3j0X6HO75Fm', NULL,
+   'admin'), (2, 'valentineezugu@yahoo.com', 'TRUE', 'Valentine', 'Ezugu',
               '$2a$12$LtbYtEzOBdnsiD/E9Wtj2Oj7SuEU4Z0YOHffjdDm2t01lMnQLyeCe', NULL, 'V'),
   (3, 'egbusonltd@yahoo.com', 'TRUE', NULL, NULL, '$2a$12$LtbYtEzOBdnsiD/E9Wtj2OsFAal5Zn4UPZpYT22PorhapAGnanfWq', NULL,
    'ema');
 
 INSERT INTO password_reset_token VALUES (1, '2017-10-01 16:27:48', '59bdd703-c3e4-4a59-b0b8-cbc936f47fbf', 3);
 
-INSERT INTO role VALUES (0, 'admin', 0), (1, 'USER', 1);
+INSERT INTO role VALUES (0, 'ADMIN', 0), (1, 'USER', 1);
 
 INSERT INTO shopping_cart VALUES (1, NULL, 2), (2, NULL, 3);
 
@@ -17,8 +16,8 @@ INSERT INTO user_role VALUES (1, 0, 1), (2, 1, 2), (3, 1, 3);
 INSERT INTO `book` (`id`, `active`, `author`, `category`, `description`, `format`, `in_stock_number`, `isbn`, `language`, `list_price`, `number_of_pages`, `our_price`, `publication_date`, `publisher`, `shipping_weight`, `title`)
 VALUES
   (1, 'TRUE', 'Miles Davis', 'Arts & Literature',
-   '<p><span style=\"color: #333333; font-family: Arial, sans-serif;\">(Guitar Solo). 15 jazzy solo guitar arrangements of Davis classics, including: All Blues * All of You * Blue in Green * Bye Bye Blackbird * Four * Freddie Freeloader * I Could Write a Book * Milestones * Nardis * Nefertiti * Seven Steps to Heaven * So What * Solar * There Is No Greater Love * When I Fall in Love. The CD includes full demos of each piece by Jamie Findlay.</span></p>',
-    'paperback', 22, 634023020, 'english', 21.95, 96, 17.51, '2006-02-01', 'Hal Leonard', 12,
+      '<p><span style=\"color: #333333; font-family: Arial, sans-serif;\">(Guitar Solo). 15 jazzy solo guitar arrangements of Davis classics, including: All Blues * All of You * Blue in Green * Bye Bye Blackbird * Four * Freddie Freeloader * I Could Write a Book * Milestones * Nardis * Nefertiti * Seven Steps to Heaven * So What * Solar * There Is No Greater Love * When I Fall in Love. The CD includes full demos of each piece by Jamie Findlay.</span></p>',
+      'paperback', 22, 634023020, 'english', 21.95, 96, 17.51, '2006-02-01', 'Hal Leonard', 12,
    'Miles Davis for Solo Guitar'),
 
   (2, 'TRUE', ' Leonardo Da Vinci', 'Arts & Literature', '<p style=\"margin: 0px 0px 14px; padding: 0px; color: #333333; font-family: Arial, sans-serif;\"><strong>An all-new, jewel-like, reader-friendly format gives new life to this relaunch of an international best-seller.</strong></p>\r\n<p style=\"margin: -4px 0px 14px; padding: 0px; color: #333333; font-family: Arial, sans-serif;\">&nbsp;</p>\r\n<p style=\"margin: -4px 0px 14px; padding: 0px; color: #333333; font-family: Arial, sans-serif;\">Leonardo da Vinci\s artist, inventor, and prototypical Renaissance man?is a perennial source of fascination because of his astonishing intellect and boundless curiosity about the natural and man-made world. During his life he created numerous works of art and kept voluminous notebooks that detailed his artistic and intellectual pursuits.</p>\r\n<p style=\"margin: -4px 0px 14px; padding: 0px; color: #333333; font-family: Arial, sans-serif;\">&nbsp;</p>\r\n<p style=\"margin: -4px 0px 14px; padding: 0px; color: #333333; font-family: Arial, sans-serif;\">The collection of writings and art in this magnificent book are drawn from his notebooks. The book organizes his wide range of interests into subjects such as human figures, light and shade, perspective and visual perception, anatomy, botany and landscape, geography, the physical sciences and astronomy, architecture, sculpture, and inventions. Nearly every piece of writing throughout the book is keyed to the piece of artwork it describes.</p>\r\n<p style=\"margin: -4px 0px 14px; padding: 0px; color: #333333; font-family: Arial, sans-serif;\">&nbsp;</p>\r\n<p style=\"margin: -4px 0px 0px; padding: 0px; color: #333333; font-family: Arial, sans-serif;\">The writing and art is selected by art historian H. Anna Suh, who provides fascinating commentary and insight into the material, making&nbsp;<em>Leonardo\s Notebooks</em>&nbsp;an exquisite single-volume compendium celebrating his enduring genius.</p>', 'paperback', 34, 1579129463, 'english', 19.99, 448, 17.06, '2013-09-24', 'Black Dog & Leventhal', 2, 'Leonardo\s Notebooks: Writing and Art of the Great Master'),

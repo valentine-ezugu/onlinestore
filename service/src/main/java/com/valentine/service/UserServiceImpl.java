@@ -1,9 +1,11 @@
 package com.valentine.service;
 
 import com.valentine.domain.*;
-import com.valentine.domain.security.PasswordResetToken;
-import com.valentine.domain.security.UserRole;
-import com.valentine.repository.*;
+import com.valentine.domain.PasswordResetToken;
+import com.valentine.repository.PasswordResetTokenRepository;
+import com.valentine.repository.UserPaymentRepository;
+import com.valentine.repository.UserRepository;
+import com.valentine.repository.UserShippingRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
-@javax.transaction.Transactional
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private static final Logger Log = LoggerFactory.getLogger(UserService.class);
-
-    @Autowired
-    private RoleRepository roleRepository;
 
     @Autowired
     private PasswordResetTokenRepository passwordResetTokenRepository;
@@ -68,24 +66,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
-    public User createUser(User user, Set<UserRole> userRoles) throws DataAccessException {
+    public User createUser(User user) throws DataAccessException {
         User localUser = userRepository.findByUsername(user.getUsername());
 
         if (localUser != null) {
             Log.info("user {} already exists. Nothing will be done", user.getUsername());
         } else {
-            for (UserRole ur : userRoles) {
-                roleRepository.save(ur.getRole());
-            }
-            user.getUserRoles().addAll(userRoles);
 
             ShoppingCart shoppingCart = new ShoppingCart();
             shoppingCart.setUser(user);
             user.setShoppingCart(shoppingCart);
 
-            user.setUserShippingList(new ArrayList<UserShipping>());
-            user.setUserPaymentList(new ArrayList<UserPayment>());
+            user.setUserShippingList(new ArrayList<>());
+            user.setUserPaymentList(new ArrayList<>());
 
             localUser = userRepository.save(user);
         }
