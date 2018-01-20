@@ -5,11 +5,12 @@ INSERT INTO user VALUES
 
 INSERT INTO password_reset_token VALUES (1, '2017-10-01 16:27:48', '59bdd703-c3e4-4a59-b0b8-cbc936f47fbf', 3);
 
-INSERT INTO role VALUES (1, 'ADMIN'), (2, 'USER');
+INSERT INTO role VALUES (1,'ADMIN'), (2,'USER');
 
 INSERT INTO shopping_cart VALUES (1, NULL, 2), (2, NULL, 3);
 
-INSERT INTO user_role VALUES (1, 1, 1), (2, 2, 2), (3, 2, 3);
+INSERT INTO user_role VALUES (1, 1), (2, 2), (3, 2);
+
 
 INSERT INTO `book` (`id`, `active`, `author`, `category`, `description`, `format`, `in_stock_number`, `isbn`, `language`, `list_price`, `number_of_pages`, `our_price`, `publication_date`, `publisher`, `shipping_weight`, `title`)
 VALUES

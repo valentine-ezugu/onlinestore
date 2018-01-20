@@ -18,10 +18,13 @@
         <dependency>
             <groupId>com.valentine.onlinestore</groupId>
             <artifactId>domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>com.valentine.onlinestore</groupId>
             <artifactId>utility</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

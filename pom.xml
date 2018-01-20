@@ -36,60 +36,56 @@
         <dozer.version>5.5.1</dozer.version>
         <project.version>0.0.1-SNAPSHOT</project.version>
         <spring-security.version>4.2.3.RELEASE</spring-security.version>
-        <mail.version>1.4.7</mail.version>
+        <spring.version>4.3.13.RELEASE</spring.version>
         <easymock.version>3.4</easymock.version>
     </properties>
 
     <dependencyManagement>
-        <dependencies>
 
+        <dependencies>
             <dependency>
                 <groupId>com.valentine.onlinestore</groupId>
                 <artifactId>repository</artifactId>
-                <version>${project.version}</version>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>com.valentine.onlinestore</groupId>
                 <artifactId>utility</artifactId>
-                <version>${project.version}</version>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>com.valentine.onlinestore</groupId>
                 <artifactId>service-api</artifactId>
-                <version>${project.version}</version>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>com.valentine.onlinestore</groupId>
                 <artifactId>service</artifactId>
-                <version>${project.version}</version>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>com.valentine.onlinestore</groupId>
                 <artifactId>admin-rest</artifactId>
-                <version>${project.version}</version>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>com.valentine.onlinestore</groupId>
                 <artifactId>bookstore-rest</artifactId>
-                <version>${project.version}</version>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>com.valentine.onlinestore</groupId>
                 <artifactId>domain</artifactId>
-                <version>${project.version}</version>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
-            <dependency>
-                <groupId>javax.mail</groupId>
-                <artifactId>mail</artifactId>
-                <version>${mail.version}</version>
-            </dependency>
+
 
             <dependency>
                 <groupId>net.sf.dozer</groupId>
@@ -115,6 +111,18 @@
                 <artifactId>easymock</artifactId>
                 <version>${easymock.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>4.3.10.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>1.4.7</version>
             </dependency>
 
         </dependencies>

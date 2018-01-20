@@ -1,5 +1,6 @@
 package com.valentine.bookstore.controller;
 
+import com.valentine.bookstore.BookstoreApplications;
 import com.valentine.domain.Book;
 import com.valentine.domain.CartItem;
 import com.valentine.domain.User;
@@ -14,15 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.easymock.EasyMock.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -30,9 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(properties = "classpath:application.properties")
+@SpringBootTest(classes = BookstoreApplications.class, properties = "classpath:application.properties")
 public class ShoppingCartControllerTest {
-
 
     @Autowired
     private MockMvc mockMvc;
@@ -52,7 +49,6 @@ public class ShoppingCartControllerTest {
     @Autowired
     private CartItemService cartItemService;
 
-
     @Before
     public void setUp() {
         bookService = createMock(BookService.class);
@@ -67,10 +63,15 @@ public class ShoppingCartControllerTest {
 
     }
 
+
     @After
-    public void after() {
-        SecurityContextHolder.clearContext();
+    public void tearDown() {
+        reset(bookService);
+        reset(userService);
+        reset(cartItemService);
+
     }
+
 
     @Test
     public void showLoginPage() throws Exception {
@@ -85,7 +86,7 @@ public class ShoppingCartControllerTest {
 
 
     @Test
-    @WithMockUser(username = "V", roles = {"A"})
+    @WithMockUser(username = "V", authorities = {"USER"})
     public void addItemToShoppingCart() throws Exception {
 
         CartItem cartItem = new CartItem();
@@ -100,7 +101,7 @@ public class ShoppingCartControllerTest {
 
         cartItem.setBook(book);
 
-        expect(userService.findByUsername(anyObject())).andReturn(user);
+        expect(userService.findByUsername(anyString())).andReturn(user);
         expect(bookService.findOne(anyLong())).andReturn(book);
 
         expect(cartItemService.addBookToCartItem(book, user, Integer.parseInt(qty))).andReturn(cartItem);
@@ -119,9 +120,7 @@ public class ShoppingCartControllerTest {
                 .andReturn();
     }
 
-
     @Test
-    @WithMockUser(username = "V", roles = {"A"})
     public void checkBookDetail() throws Exception {
 
         Book book = new Book();
@@ -141,7 +140,6 @@ public class ShoppingCartControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "V", roles = {"A"})
     public void showBookShelf() throws Exception {
         List<Book> bookList = new ArrayList<>();
 
@@ -154,6 +152,5 @@ public class ShoppingCartControllerTest {
                 .andExpect(model().attributeExists("activeAll"))
                 .andReturn();
     }
-
 
 }

@@ -142,7 +142,6 @@ public class User {
         this.orderList = orderList;
     }
 
-    //if not enabled we cant log in
     public boolean isEnabled() {
         return enabled;
     }

@@ -3,13 +3,13 @@ package com.valentine.utility;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-
 import java.security.SecureRandom;
 import java.util.Random;
 
 @Component
 public class SecurityUtility {
-    private final String SALT = "salt"; //salt should be protected carefully;
+
+    private final String SALT = "salt";
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

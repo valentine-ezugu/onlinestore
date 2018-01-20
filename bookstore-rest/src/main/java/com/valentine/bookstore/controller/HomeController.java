@@ -7,6 +7,7 @@ import com.valentine.dto.book.BookDetailExtraLite;
 import com.valentine.dto.book.BookDetailForShelf;
 import com.valentine.dto.order.OrderForFindOne;
 import com.valentine.dto.user.*;
+import com.valentine.repository.RoleRepository;
 import com.valentine.service.*;
 import com.valentine.utility.*;
 import org.dozer.Mapper;
@@ -21,6 +22,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -67,6 +69,9 @@ public class HomeController {
 
     @Autowired
     private Mapper mapper;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @RequestMapping("/")
     public String index() {
@@ -309,7 +314,6 @@ public class HomeController {
 
         return "Myprofile";
     }
-
 
     @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = "/addNewCreditCard", method = RequestMethod.POST)
@@ -585,9 +589,19 @@ public class HomeController {
         String encryptedPassword = securityUtility.passwordEncoder().encode(password);
         user.setPassword(encryptedPassword);
 
-        Role role = new Role();
-        role.setName("ROLE_USER");
-        user.getRoles().add(role);
+        HashSet<Role> roles = new HashSet<>();
+
+        Role userRole = roleRepository.findByname("USER");
+
+        Assert.notNull(userRole, "no role with name " + "USER");
+
+        roles.add(userRole);
+
+        user.setRoles(roles);
+//
+//        Role role = new Role();
+//        role.setName("USER");
+//        user.getRoles().add(role);
 
         userService.createUser(user);
 
