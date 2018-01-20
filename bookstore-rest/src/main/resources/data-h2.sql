@@ -1,9 +1,7 @@
 INSERT INTO user VALUES
-  (1, 'admin@yahoo.com', 'TRUE', NULL, NULL, '$2a$12$LtbYtEzOBdnsiD/E9Wtj2OZz80wXDrKDMacktYr8pq3j0X6HO75Fm', NULL,
-   'admin'), (2, 'valentineezugu@yahoo.com', 'TRUE', 'Valentine', 'Ezugu',
-              '$2a$12$LtbYtEzOBdnsiD/E9Wtj2Oj7SuEU4Z0YOHffjdDm2t01lMnQLyeCe', NULL, 'V'),
-  (3, 'egbusonltd@yahoo.com', 'TRUE', NULL, NULL, '$2a$12$LtbYtEzOBdnsiD/E9Wtj2OsFAal5Zn4UPZpYT22PorhapAGnanfWq', NULL,
-   'ema');
+  (1, 'admin@yahoo.com', 'TRUE', NULL, NULL, '$2a$12$LtbYtEzOBdnsiD/E9Wtj2OZz80wXDrKDMacktYr8pq3j0X6HO75Fm', NULL, 'admin'),
+  (2, 'valentineezugu@yahoo.com', 'TRUE', 'Valentine', 'Ezugu', '$2a$12$LtbYtEzOBdnsiD/E9Wtj2Oj7SuEU4Z0YOHffjdDm2t01lMnQLyeCe', NULL, 'V'),
+  (3, 'egbusonltd@yahoo.com', 'TRUE', NULL, NULL, '$2a$12$LtbYtEzOBdnsiD/E9Wtj2OsFAal5Zn4UPZpYT22PorhapAGnanfWq', NULL, 'ema');
 
 INSERT INTO password_reset_token VALUES (1, '2017-10-01 16:27:48', '59bdd703-c3e4-4a59-b0b8-cbc936f47fbf', 3);
 
@@ -16,7 +14,7 @@ INSERT INTO user_role VALUES (1, 1), (2, 2), (3, 2);
 
 INSERT INTO `book` (`id`, `active`, `author`, `category`, `description`, `format`, `in_stock_number`, `isbn`, `language`, `list_price`, `number_of_pages`, `our_price`, `publication_date`, `publisher`, `shipping_weight`, `title`)
 VALUES
- (1, 'TRUE', 'Miles Davis', 'Arts & Literature',
+  (1, 'TRUE', 'Miles Davis', 'Arts & Literature',
       '<p><span style=\"color: #333333; font-family: Arial, sans-serif;\">(Guitar Solo). 15 jazzy solo guitar arrangements of Davis classics, including: All Blues * All of You * Blue in Green * Bye Bye Blackbird * Four * Freddie Freeloader * I Could Write a Book * Milestones * Nardis * Nefertiti * Seven Steps to Heaven * So What * Solar * There Is No Greater Love * When I Fall in Love. The CD includes full demos of each piece by Jamie Findlay.</span></p>',
       'paperback', 22, 634023020, 'english', 21.95, 96, 17.51, '2006-02-01', 'Hal Leonard', 12,
    'Miles Davis for Solo Guitar'),
