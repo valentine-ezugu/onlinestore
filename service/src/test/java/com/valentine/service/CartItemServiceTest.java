@@ -1,10 +1,8 @@
-package com.valentine.service.test;
+package com.valentine.service;
 
 import com.valentine.repository.CartItemRepository;
-import com.valentine.service.CartItemService;
 import com.valentine.domain.Book;
 import com.valentine.domain.CartItem;
-import org.easymock.EasyMockSupport;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package dozer;
+package com.valentine.bookstore;
 
 import com.valentine.bookstore.config.MappingConfig;
 import com.valentine.domain.UserShipping;

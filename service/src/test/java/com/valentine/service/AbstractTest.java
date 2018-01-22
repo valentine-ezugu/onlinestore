@@ -1,4 +1,4 @@
-package com.valentine.service.test;
+package com.valentine.service;
 
 import com.valentine.service.config.TestRunner;
 import org.junit.runner.RunWith;

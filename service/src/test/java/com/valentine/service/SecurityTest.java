@@ -1,15 +1,12 @@
-package com.valentine.service.test;
+package com.valentine.service;
 
-import com.valentine.service.LoginService;
 import com.valentine.utility.LoginStatus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -23,7 +20,6 @@ import javax.transaction.Transactional;
 
 import static org.easymock.EasyMock.mock;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional

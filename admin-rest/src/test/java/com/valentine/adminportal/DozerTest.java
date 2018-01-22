@@ -1,4 +1,4 @@
-package dozer;
+package com.valentine.adminportal;
 
 import com.valentine.adminportal.config.MappingConfig;
 import com.valentine.domain.Book;

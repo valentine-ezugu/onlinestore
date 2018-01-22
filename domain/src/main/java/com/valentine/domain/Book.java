@@ -1,7 +1,7 @@
 package com.valentine.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.valentine.domain.BookToCartItem;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,6 +28,9 @@ public class Book {
 
     @Column(columnDefinition="text")
     private String description;
+
+    @Transient
+    private MultipartFile bookImage;
 
     private int inStockNumber;
 
@@ -164,13 +167,13 @@ public class Book {
         this.inStockNumber = inStockNumber;
     }
 
-//    public MultipartFile getBookImage() {
-//        return bookImage;
-//    }
-//
-//    public void setBookImage(MultipartFile bookImage) {
-//        this.bookImage = bookImage;
-//    }
+    public MultipartFile getBookImage() {
+        return bookImage;
+    }
+
+    public void setBookImage(MultipartFile bookImage) {
+        this.bookImage = bookImage;
+    }
 
     public List<BookToCartItem> getBookToCartItemList() {
         return bookToCartItemList;

@@ -1,11 +1,8 @@
-package com.valentine.service.test;
+package com.valentine.service;
 
 import com.valentine.domain.Book;
 import com.valentine.repository.BookRepository;
-import com.valentine.service.BookService;
 
-import com.valentine.utility.SecurityUtility;
-import org.easymock.EasyMockSupport;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

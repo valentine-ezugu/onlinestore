@@ -1,10 +1,9 @@
-package com.valentine.service.test;
+package com.valentine.service;
 
 import com.valentine.domain.Role;
 import com.valentine.domain.User;
 import com.valentine.repository.RoleRepository;
 import com.valentine.repository.UserRepository;
-import com.valentine.service.UserService;
 
 import com.valentine.utility.SecurityUtility;
 import org.junit.Assert;
