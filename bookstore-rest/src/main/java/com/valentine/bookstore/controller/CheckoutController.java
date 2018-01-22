@@ -79,7 +79,6 @@ public class CheckoutController {
     public String checkout(@RequestParam("id") Long cartId,
                            @RequestParam(value = "missingRequiredField", required = false) boolean missingRequiredField, Model model,
                            Principal principal) {
-
         User user = userService.findByUsername(principal.getName());
 
         if (cartId != user.getShoppingCart().getId()) {
@@ -90,7 +89,7 @@ public class CheckoutController {
 
         if (cartItemList.size() == 0) {
             model.addAttribute("emptyCart", true);
-            return "forward:/shoppingCart/cart";
+            return "forward:/shoppintCart/cart";
         }
 
         for (CartItem cartItem : cartItemList) {
@@ -98,31 +97,13 @@ public class CheckoutController {
                 model.addAttribute("notEnoughStock", true);
                 return "forward:/shoppingCart/cart";
             }
-
         }
-        List<CartItemForList> cartItemForLists = new ArrayList<>();
-        for (CartItem cartItem : cartItemList) {
-            cartItemForLists.add(mapper.map(cartItem, CartItemForList.class, "cartItemForList"));
-        }
-
 
         List<UserShipping> userShippingList = user.getUserShippingList();
-
-        List<UserForShippingLite> userForShippingLites = new ArrayList<>();
-
-        for (UserShipping userShipping : userShippingList) {
-            userForShippingLites.add(mapper.map(userShipping, UserForShippingLite.class, "userShippingLiteId"));
-        }
-
         List<UserPayment> userPaymentList = user.getUserPaymentList();
-        List<UserForPaymentInfo> userForPaymentInfoList = new ArrayList<>();
 
-        for (UserPayment userPayment : userPaymentList) {
-            userForPaymentInfoList.add(mapper.map(userPayment, UserForPaymentInfo.class, "userForPaymentInfo"));
-        }
-
-        model.addAttribute("userShippingList", userForShippingLites);
-        model.addAttribute("userPaymentList", userForPaymentInfoList);
+        model.addAttribute("userShippingList", userShippingList);
+        model.addAttribute("userPaymentList", userPaymentList);
 
         if (userPaymentList.size() == 0) {
             model.addAttribute("emptyPaymentList", true);
@@ -136,6 +117,7 @@ public class CheckoutController {
             model.addAttribute("emptyShippingList", false);
         }
 
+        ShoppingCart shoppingCart = user.getShoppingCart();
 
         for (UserShipping userShipping : userShippingList) {
             if (userShipping.isUserShippingDefault()) {
@@ -143,24 +125,18 @@ public class CheckoutController {
             }
         }
 
-
         for (UserPayment userPayment : userPaymentList) {
             if (userPayment.isDefaultPayment()) {
                 paymentService.setByUserPayment(userPayment, payment);
                 billingAddressService.setByUserBilling(userPayment.getUserBilling(), billingAddress);
             }
         }
-        UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
-        PaymentExtraInfo paymentExtraInfo = mapper.map(payment, PaymentExtraInfo.class, "paymentExtraInfo");
-        BillingAddressCheckOut billingAddressCheckOut = mapper.map(billingAddress, BillingAddressCheckOut.class, "billingAddressCheckout");
-        ShippingAddressInfo shippingAddressInfo = mapper.map(shippingAddress, ShippingAddressInfo.class, "shippingAddressId");
-
-        model.addAttribute("shippingAddress", shippingAddressInfo);
-        model.addAttribute("payment", paymentExtraInfo);
-        model.addAttribute("billingAddress", billingAddressCheckOut);
-        model.addAttribute("cartItemList", cartItemForLists);
-        model.addAttribute("shoppingCart", userForProfile.getShoppingCart());
+        model.addAttribute("shippingAddress", shippingAddress);
+        model.addAttribute("payment", payment);
+        model.addAttribute("billingAddress", billingAddress);
+        model.addAttribute("cartItemList", cartItemList);
+        model.addAttribute("shoppingCart", user.getShoppingCart());
 
         List<String> stateList = USConstants.listOfUSStatesCode;
         Collections.sort(stateList);
@@ -322,40 +298,36 @@ public class CheckoutController {
 
     @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = "/checkout", method = RequestMethod.POST)
-    public String checkoutPost(@ModelAttribute("shippingAddress") ShippingAddressInfo shippingAddressInfo,
-                               @ModelAttribute("billingAddress") BillingAddressCheckOut billingAddressCheckOut,
-                               @ModelAttribute("payment") PaymentExtraInfo paymentExtraInfo,
+    public String checkoutPost(@ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
+                               @ModelAttribute("billingAddress") BillingAddress billingAddress, @ModelAttribute("payment") Payment payment,
                                @ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
                                @ModelAttribute("shippingMethod") String shippingMethod, Principal principal, Model model) {
         ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
-
-
-        billingAddressCheckOut = mapper.map(billingAddress, BillingAddressCheckOut.class, "billingAddressCheckout");
 
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
         model.addAttribute("cartItemList", cartItemList);
 
         if (billingSameAsShipping.equals("true")) {
-            billingAddressCheckOut.setBillingAddressName(shippingAddressInfo.getShippingAddressName());
-            billingAddressCheckOut.setBillingAddressStreet1(shippingAddressInfo.getShippingAddressStreet1());
-            billingAddressCheckOut.setBillingAddressStreet2(shippingAddressInfo.getShippingAddressStreet2());
-            billingAddressCheckOut.setBillingAddressCity(shippingAddressInfo.getShippingAddressCity());
-            billingAddressCheckOut.setBillingAddressState(shippingAddressInfo.getShippingAddressState());
-            billingAddressCheckOut.setBillingAddressCountry(shippingAddressInfo.getShippingAddressCountry());
-            billingAddressCheckOut.setBillingAddressZipCode(shippingAddressInfo.getShippingAddressZipCode());
+            billingAddress.setBillingAddressName(shippingAddress.getShippingAddressName());
+            billingAddress.setBillingAddressStreet1(shippingAddress.getShippingAddressStreet1());
+            billingAddress.setBillingAddressStreet2(shippingAddress.getShippingAddressStreet2());
+            billingAddress.setBillingAddressCity(shippingAddress.getShippingAddressCity());
+            billingAddress.setBillingAddressState(shippingAddress.getShippingAddressState());
+            billingAddress.setBillingAddressCountry(shippingAddress.getShippingAddressCountry());
+            billingAddress.setBillingAddressZipCode(shippingAddress.getShippingAddressZipCode());
         }
 
-        if (shippingAddressInfo.getShippingAddressStreet1().isEmpty()
-                || shippingAddressInfo.getShippingAddressCity().isEmpty()
-                || shippingAddressInfo.getShippingAddressState().isEmpty()
-                || shippingAddressInfo.getShippingAddressName().isEmpty()
-                || shippingAddressInfo.getShippingAddressZipCode().isEmpty()
-                || paymentExtraInfo.getCardNumber().isEmpty()
-                || paymentExtraInfo.getCvc() == 0 || billingAddressCheckOut.getBillingAddressStreet1().isEmpty()
-                || billingAddressCheckOut.getBillingAddressCity().isEmpty()
-                || billingAddressCheckOut.getBillingAddressState().isEmpty()
-                || billingAddressCheckOut.getBillingAddressName().isEmpty()
-                || billingAddressCheckOut.getBillingAddressZipCode().isEmpty())
+        if (shippingAddress.getShippingAddressStreet1().isEmpty()
+                || shippingAddress.getShippingAddressCity().isEmpty()
+                || shippingAddress.getShippingAddressState().isEmpty()
+                || shippingAddress.getShippingAddressName().isEmpty()
+                || shippingAddress.getShippingAddressZipCode().isEmpty()
+                || payment.getCardNumber().isEmpty()
+                || payment.getCvc() == 0 || billingAddress.getBillingAddressStreet1().isEmpty()
+                || billingAddress.getBillingAddressCity().isEmpty()
+                || billingAddress.getBillingAddressState().isEmpty()
+                || billingAddress.getBillingAddressName().isEmpty()
+                || billingAddress.getBillingAddressZipCode().isEmpty())
             return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
 
         User user = userService.findByUsername(principal.getName());
@@ -379,6 +351,4 @@ public class CheckoutController {
 
         return "orderSubmittedPage";
     }
-
-
 }
