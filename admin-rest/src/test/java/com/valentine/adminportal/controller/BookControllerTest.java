@@ -1,0 +1,124 @@
+package com.valentine.adminportal.controller;
+
+import com.valentine.domain.Book;
+import com.valentine.service.BookService;
+import org.easymock.EasyMock;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithSecurityContext;
+import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.easymock.EasyMock.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@AutoConfigureMockMvc
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(properties = "classpath:application.properties")
+public class BookControllerTest {
+
+    @Autowired
+    private BookController bookController;
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    private BookService bookService;
+
+    @Before
+    public void setUp() {
+        bookService = createMock(BookService.class);
+        ReflectionTestUtils.setField(bookController, "bookService", bookService);
+
+    }
+
+    @After
+    public void tearDown() {
+        reset(bookService);
+    }
+
+    @Test
+    public void TestWithoutAuthentication() throws Exception {
+        mockMvc.perform(get("/book/remove"))
+                .andExpect(status().is3xxRedirection());
+    }
+
+
+    @Test
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    public void addBookClicked() throws Exception {
+
+        mockMvc
+                .perform(get("/book/add")
+                        .accept(MediaType.TEXT_HTML)
+                        .contentType(MediaType.TEXT_HTML))
+
+                .andExpect(model().attributeExists("book"))
+                .andExpect(view().name("addBook"))
+                .andReturn();
+    }
+
+    @Test
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    public void bookRemoveTest() throws Exception {
+
+        List<Book> expectedBookList = createBookList(10);
+
+        bookService.removeOne(anyLong());
+        EasyMock.expectLastCall();
+
+        bookService.removeOne(anyLong());
+
+        expect(bookService.findAll()).andReturn(expectedBookList);
+        replay(bookService);
+
+        mockMvc
+                .perform(post("/book/remove")
+                        .accept(MediaType.TEXT_HTML)
+                        .contentType(MediaType.TEXT_HTML)
+                        .param("id", "012345678"))
+
+                .andExpect(view().name("redirect:/book/bookList"))
+                .andReturn();
+    }
+
+    @Test
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    public void showBookListPage() throws Exception {
+
+        List<Book> expectedBookList = createBookList(10);
+
+        expect(bookService.findAll()).andReturn(expectedBookList);
+        replay(bookService);
+
+        mockMvc
+                .perform(get("/book/bookList")
+                        .accept(MediaType.TEXT_HTML)
+                        .contentType(MediaType.TEXT_HTML))
+
+                .andExpect(view().name("bookList"))
+                .andReturn();
+    }
+
+    private List<Book> createBookList(int count) {
+        List<Book> bookList = new ArrayList<Book>();
+        for (int i = 0; i < count; i++) {
+            bookList.add(new Book());
+        }
+        return bookList;
+    }
+}
