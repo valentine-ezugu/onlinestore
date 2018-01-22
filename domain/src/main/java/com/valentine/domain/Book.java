@@ -1,6 +1,7 @@
-package com.bookstore.domain;
+package com.valentine.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.valentine.domain.BookToCartItem;
 
 import javax.persistence.*;
 import java.util.List;
