@@ -8,7 +8,6 @@ import java.util.List;
 @Entity
 public class Book {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

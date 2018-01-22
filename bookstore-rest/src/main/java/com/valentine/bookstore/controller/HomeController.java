@@ -547,7 +547,6 @@ public class HomeController {
         return "Myprofile";
     }
 
-
     @RequestMapping(value = "/newUser", method = RequestMethod.POST)
     public String newUSerPost(
             HttpServletRequest request,
@@ -598,14 +597,9 @@ public class HomeController {
         roles.add(userRole);
 
         user.setRoles(roles);
-//
-//        Role role = new Role();
-//        role.setName("USER");
-//        user.getRoles().add(role);
 
         userService.createUser(user);
 
-        //mostly sending passowrd to email logic
         String token = UUID.randomUUID().toString();
         userService.createPasswordResetTokenForUser(user, token);
 

@@ -95,7 +95,7 @@ public class ShoppingCartController {
     }
 
 
-    @RequestMapping("/updateCartItem/")
+    @RequestMapping("/updateCartItem")
     public String updateShoppingCartItem(@ModelAttribute("id") Long cartItemId,
                                          @ModelAttribute("qty") int qty) {
 
