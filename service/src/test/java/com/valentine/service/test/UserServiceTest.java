@@ -51,7 +51,7 @@ public class UserServiceTest extends AbstractTest {
         user.setPassword(securityUtility.passwordEncoder().encode("vsl"));
         user.setEmail("val@yahoo.com");
 
-        Role role1 = role1 = roleRepository.findByname("USER");
+        Role role1 =  roleRepository.findByname("USER");
         Set<Role> roles = new HashSet<>();
 
         roles.add(role1);

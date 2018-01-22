@@ -29,7 +29,6 @@ public class BookServiceTest extends AbstractTest {
     @Autowired
     private BookService bookService;
 
-    EasyMockSupport support = new EasyMockSupport();
 
     @Before
     public void setUp() {
@@ -53,7 +52,7 @@ public class BookServiceTest extends AbstractTest {
 
         List<Book> bookList = bookService.findByCategory(anyString());
 
-        support.verifyAll();
+         verify();
         Assert.assertNotNull(bookList);
 
         Assert.assertEquals(2, bookList.size());
@@ -73,7 +72,7 @@ public class BookServiceTest extends AbstractTest {
 
         List<Book> bookList = bookService.blurrySearch("management");
 
-        support.verifyAll();
+         verify();
         Assert.assertNotNull(bookList);
         Assert.assertEquals(1, bookList.size());
     }

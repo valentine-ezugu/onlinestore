@@ -8,7 +8,6 @@ import com.valentine.domain.User;
 import com.valentine.service.BookService;
 import com.valentine.service.CartItemService;
 import com.valentine.service.UserService;
-import org.assertj.core.internal.ObjectArrayElementComparisonStrategy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,12 +20,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.easymock.EasyMock.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @AutoConfigureMockMvc
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -104,7 +104,10 @@ public class ShoppingCartControllerTest {
         cartItem.setBook(book);
 
         expect(userService.findByUsername(anyString())).andReturn(user);
+        replay(userService);
+
         expect(bookService.findOne(anyLong())).andReturn(book);
+        replay(bookService);
 
         expect(cartItemService.addBookToCartItem(book, user, Integer.parseInt(qty))).andReturn(cartItem);
         ObjectMapper mapper = new ObjectMapper();
@@ -117,12 +120,9 @@ public class ShoppingCartControllerTest {
                         .param("book", bookAsString)
                         .param("qty", qty))
 
-//                .andExpect(model().attributeExists("book"))
-//                .andExpect(model().attributeExists("qty"))
-//
-//                .andExpect(view().name("forward:/bookDetail?id=" + cartItem.getId()))
                 .andReturn();
     }
+
 
     @Test
     public void checkBookDetail() throws Exception {

@@ -14,9 +14,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.*;
 
 @Transactional
 public class CartItemServiceTest extends AbstractTest {
@@ -26,8 +24,6 @@ public class CartItemServiceTest extends AbstractTest {
 
     @Autowired
     private CartItemService cartItemService;
-
-    private EasyMockSupport support = new EasyMockSupport();
 
     @Before
     public void setUp() {
@@ -52,7 +48,7 @@ public class CartItemServiceTest extends AbstractTest {
         replay(cartItemRepository);
 
         CartItem cartItem1 = cartItemService.updateCartItem(cartItem);
-        support.verifyAll();
+        verify();
 
         Assert.assertNotNull(cartItem1);
         Assert.assertEquals(3, cartItem1.getQty());
