@@ -1,21 +1,21 @@
-package com.valentine.domain;
+package com.bookstore.domain;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Book {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String title;
     private String author;
     private String publisher;
     private String publicationDate;
-    private String language;
+    private String language ;
     private String category;
     private String numberOfPages;
     private String format;
@@ -23,17 +23,15 @@ public class Book {
     private double shippingWeight;
     private double listPrice;
     private double ourPrice;
-    private boolean active = true;
+    private boolean active= true;
 
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition="text")
     private String description;
-
-    @Transient
-    MultipartFile BookImage;
 
     private int inStockNumber;
 
     @OneToMany(mappedBy = "book")
+    @JsonIgnore
     private List<BookToCartItem> bookToCartItemList;
 
 
@@ -141,14 +139,6 @@ public class Book {
         this.ourPrice = ourPrice;
     }
 
-    public MultipartFile getBookImage() {
-        return BookImage;
-    }
-
-    public void setBookImage(MultipartFile bookImage) {
-        BookImage = bookImage;
-    }
-
     public boolean isActive() {
         return active;
     }
@@ -173,6 +163,13 @@ public class Book {
         this.inStockNumber = inStockNumber;
     }
 
+//    public MultipartFile getBookImage() {
+//        return bookImage;
+//    }
+//
+//    public void setBookImage(MultipartFile bookImage) {
+//        this.bookImage = bookImage;
+//    }
 
     public List<BookToCartItem> getBookToCartItemList() {
         return bookToCartItemList;
