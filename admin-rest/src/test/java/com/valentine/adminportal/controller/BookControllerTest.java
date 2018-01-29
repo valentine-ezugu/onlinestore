@@ -65,7 +65,7 @@ public class BookControllerTest {
     public void addBookClicked() throws Exception {
 
         Book book1 = new Book();
-        mockMvc.perform(get("/book/add").with(user("admin").password("admin").roles("USER", "ADMIN"))
+        mockMvc.perform(get("/book/add").with(user("admin").password("admin").roles("USER"))
 
                 .accept(MediaType.TEXT_HTML)
                 .contentType(MediaType.TEXT_HTML).sessionAttr("book", book1))
@@ -89,7 +89,7 @@ public class BookControllerTest {
 
         when(bookService.findAll()).thenReturn(expectedBookList);
         mockMvc
-                .perform(delete("/book/remove").with(user("admin").password("admin").roles("USER", "ADMIN"))
+                .perform(delete("/book/remove").with(user("admin").password("admin").roles("USER"))
                         .accept(MediaType.TEXT_HTML)
                         .contentType(MediaType.TEXT_HTML)
                         .param("id", "012345678"))
@@ -106,7 +106,7 @@ public class BookControllerTest {
         when(bookService.findAll()).thenReturn(expectedBookList);
 
         mockMvc
-                .perform(get("/book/bookList").with(user("admin").password("pass").roles("USER", "ADMIN"))
+                .perform(get("/book/bookList").with(user("admin").password("pass").roles("USER"))
                         .accept(MediaType.TEXT_HTML)
                         .contentType(MediaType.TEXT_HTML)).andExpect(status().isOk())
                 .andExpect(model().attributeExists("bookList"))
@@ -116,13 +116,7 @@ public class BookControllerTest {
         Mockito.verify(bookService).findAll();
     }
 
-    private List<Book> createBookList(int count) {
-        List<Book> bookList = new ArrayList<Book>();
-        for (int i = 0; i < count; i++) {
-            bookList.add(new Book());
-        }
-        return bookList;
-    }
+
 
     @Configuration
     @Import(MappingConfig.class)
