@@ -1,7 +1,7 @@
 package com.valentine.service;
 
-import com.valentine.domain.User;
 import com.valentine.domain.Role;
+import com.valentine.domain.User;
 import com.valentine.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

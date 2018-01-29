@@ -1,10 +1,10 @@
 package com.valentine.service.config;
 
-import com.valentine.repository.RoleRepository;
-import com.valentine.utility.SecurityUtility;
-import com.valentine.domain.User;
 import com.valentine.domain.Role;
+import com.valentine.domain.User;
+import com.valentine.repository.RoleRepository;
 import com.valentine.service.UserService;
+import com.valentine.utility.SecurityUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,14 +19,14 @@ import java.util.Set;
 
 @Configuration
 @EntityScan(basePackages = {"com.valentine.domain"})
-@ComponentScan(basePackages = {
-        "com.valentine"})
+ @ComponentScan(basePackages = {
+       "com.valentine"})
 @SpringBootApplication
 @EnableJpaRepositories("com.valentine.repository")
 public class TestRunner implements CommandLineRunner {
 
     @Autowired
-    private  RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
     private UserService userService;

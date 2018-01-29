@@ -16,7 +16,7 @@
     <groupId>com.valentine.onlinestore</groupId>
     <artifactId>service</artifactId>
 
-  <dependencies>
+    <dependencies>
 
         <dependency>
             <groupId>com.valentine.onlinestore</groupId>
@@ -55,13 +55,13 @@
             <scope>test</scope>
         </dependency>
 
- </dependencies>
+    </dependencies>
     <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                </plugin>
-            </plugins>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 </project>

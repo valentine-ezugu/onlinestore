@@ -1,10 +1,6 @@
 package com.valentine.dto.user;
 
-import com.valentine.domain.Order;
-import com.valentine.domain.ShoppingCart;
-import com.valentine.domain.UserPayment;
-import com.valentine.domain.UserShipping;
-import com.valentine.domain.Role;
+import com.valentine.domain.*;
 
 import java.util.HashSet;
 import java.util.List;

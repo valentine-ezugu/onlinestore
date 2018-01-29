@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 public class DataConfig {
 
 
-   @Bean(name = "dataSource")
+    @Bean(name = "dataSource")
 
     public DataSource dataSourceTest() {
         return new EmbeddedDatabaseBuilder()

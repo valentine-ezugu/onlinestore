@@ -1,4 +1,4 @@
-package com.valentine.bookstore.config;
+package com.valentine.bookstore;
 
 import com.valentine.service.UserDetailsServiceImpl;
 import com.valentine.utility.SecurityUtility;

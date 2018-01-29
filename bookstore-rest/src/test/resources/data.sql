@@ -1,11 +1,14 @@
 INSERT INTO user VALUES
-  (1, 'admin@yahoo.com', 'TRUE', NULL, NULL, '$2a$12$LtbYtEzOBdnsiD/E9Wtj2OZz80wXDrKDMacktYr8pq3j0X6HO75Fm', NULL, 'admin'),
-  (2, 'valentineezugu@yahoo.com', 'TRUE', 'Valentine', 'Ezugu', '$2a$12$LtbYtEzOBdnsiD/E9Wtj2Oj7SuEU4Z0YOHffjdDm2t01lMnQLyeCe', NULL, 'V'),
-  (3, 'egbusonltd@yahoo.com', 'TRUE', NULL, NULL, '$2a$12$LtbYtEzOBdnsiD/E9Wtj2OsFAal5Zn4UPZpYT22PorhapAGnanfWq', NULL, 'ema');
+  (1, 'admin@yahoo.com', 'TRUE', NULL, NULL, '$2a$12$LtbYtEzOBdnsiD/E9Wtj2OZz80wXDrKDMacktYr8pq3j0X6HO75Fm', NULL,
+   'admin'),
+  (2, 'valentineezugu@yahoo.com', 'TRUE', 'Valentine', 'Ezugu',
+   '$2a$12$LtbYtEzOBdnsiD/E9Wtj2Oj7SuEU4Z0YOHffjdDm2t01lMnQLyeCe', NULL, 'V'),
+  (3, 'egbusonltd@yahoo.com', 'TRUE', NULL, NULL, '$2a$12$LtbYtEzOBdnsiD/E9Wtj2OsFAal5Zn4UPZpYT22PorhapAGnanfWq', NULL,
+   'ema');
 
 INSERT INTO password_reset_token VALUES (1, '2017-10-01 16:27:48', '59bdd703-c3e4-4a59-b0b8-cbc936f47fbf', 3);
 
-INSERT INTO role VALUES (1,'ADMIN'), (2,'USER');
+INSERT INTO role VALUES (1, 'ADMIN'), (2, 'USER');
 
 INSERT INTO shopping_cart VALUES (1, NULL, 2), (2, NULL, 3);
 

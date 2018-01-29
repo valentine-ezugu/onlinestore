@@ -1,7 +1,6 @@
 package com.valentine.service;
 
 import com.valentine.domain.*;
-import com.valentine.domain.PasswordResetToken;
 import com.valentine.repository.PasswordResetTokenRepository;
 import com.valentine.repository.UserPaymentRepository;
 import com.valentine.repository.UserRepository;

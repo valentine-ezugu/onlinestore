@@ -12,7 +12,14 @@ import com.valentine.service.ShoppingCartService;
 import com.valentine.service.UserService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,6 +47,9 @@ public class ShoppingCartController {
 
     @Autowired
     private Mapper mapper;
+
+    public ShoppingCartController() {
+    }
 
     @RequestMapping(value = "/cart")
     public String shoppingCart(Model model, Principal principal) {

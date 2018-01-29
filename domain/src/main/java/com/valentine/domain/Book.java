@@ -16,7 +16,7 @@ public class Book {
     private String author;
     private String publisher;
     private String publicationDate;
-    private String language ;
+    private String language;
     private String category;
     private String numberOfPages;
     private String format;
@@ -24,9 +24,9 @@ public class Book {
     private double shippingWeight;
     private double listPrice;
     private double ourPrice;
-    private boolean active= true;
+    private boolean active = true;
 
-    @Column(columnDefinition="text")
+    @Column(columnDefinition = "text")
     private String description;
 
     @Transient

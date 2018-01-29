@@ -2,8 +2,6 @@ package com.valentine.service;
 
 import com.valentine.domain.Book;
 import com.valentine.repository.BookRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -13,13 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
 public class BookServiceImpl implements BookService {
 
-    private Logger logger = LoggerFactory.getLogger(BookServiceImpl.class);
+
+    private BookRepository bookRepository;
 
     @Autowired
-    private BookRepository bookRepository;
+    public void sBookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     public Book save(Book book) throws DataAccessException {
         return bookRepository.save(book);

@@ -4,7 +4,6 @@ import com.valentine.domain.Role;
 import com.valentine.domain.User;
 import com.valentine.repository.RoleRepository;
 import com.valentine.repository.UserRepository;
-
 import com.valentine.utility.SecurityUtility;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,7 +19,7 @@ import java.util.Set;
 import static org.easymock.EasyMock.*;
 
 @Transactional
-@ContextConfiguration(classes = {  SecurityUtility.class, RoleRepository.class
+@ContextConfiguration(classes = {SecurityUtility.class, RoleRepository.class
 })
 public class UserServiceTest extends AbstractTest {
 
@@ -50,7 +49,7 @@ public class UserServiceTest extends AbstractTest {
         user.setPassword(securityUtility.passwordEncoder().encode("vsl"));
         user.setEmail("val@yahoo.com");
 
-        Role role1 =  roleRepository.findByname("USER");
+        Role role1 = roleRepository.findByname("USER");
         Set<Role> roles = new HashSet<>();
 
         roles.add(role1);

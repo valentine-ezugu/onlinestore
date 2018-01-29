@@ -1,10 +1,6 @@
 package com.valentine.service;
 
-import com.valentine.domain.User;
-import com.valentine.domain.UserBilling;
-import com.valentine.domain.UserPayment;
-import com.valentine.domain.UserShipping;
-import com.valentine.domain.PasswordResetToken;
+import com.valentine.domain.*;
 import org.springframework.dao.DataAccessException;
 
 public interface UserService {

@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,7 +38,7 @@ public class UserServiceIntegrationTest extends AbstractTest {
         user1.setPassword(securityUtility.passwordEncoder().encode("A"));
         user1.setEmail("valentineezugu@yahoo.com");
         Role role1 = roleRepository.findByname("USER");
-         Set<Role> roles = new HashSet<>();
+        Set<Role> roles = new HashSet<>();
         roles.add(role1);
         userService.createUser(user1);
         assert (user1.getUsername().equals("V"));

@@ -1,7 +1,5 @@
 package com.valentine.domain;
 
-import com.valentine.domain.User;
-
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;

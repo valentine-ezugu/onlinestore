@@ -1,117 +1,119 @@
 package com.valentine.adminportal.controller;
 
+import com.valentine.adminportal.config.MappingConfig;
 import com.valentine.domain.Book;
 import com.valentine.service.BookService;
-import org.easymock.EasyMock;
-import org.junit.After;
+import org.dozer.Mapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.context.support.WithSecurityContext;
-import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.easymock.EasyMock.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@AutoConfigureMockMvc
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(properties = "classpath:application.properties")
+@RunWith(SpringRunner.class)
+@WebMvcTest(BookController.class)
 public class BookControllerTest {
 
-    @Autowired
-    private BookController bookController;
+
+    Book book;
+
+    @MockBean
+    private BookService bookService;
+
+    @MockBean
+    private Mapper mapper;
 
     @Autowired
     private MockMvc mockMvc;
 
-    private BookService bookService;
-
     @Before
-    public void setUp() {
-        bookService = createMock(BookService.class);
-        ReflectionTestUtils.setField(bookController, "bookService", bookService);
-
-    }
-
-    @After
-    public void tearDown() {
-        reset(bookService);
+    public void setUpBook() throws Exception {
+        book = new Book();
+        book.setId(1L);
+        book.setTitle("Managment");
     }
 
     @Test
     public void TestWithoutAuthentication() throws Exception {
-        mockMvc.perform(get("/book/remove"))
-                .andExpect(status().is3xxRedirection());
+
+        assertThat(this.bookService).isNotNull();
+
+        mockMvc.perform(post("/book/remove").with(user("admin").password("admin").roles("WRONG")))
+                .andExpect(status().is4xxClientError());
     }
 
-
     @Test
-    @WithMockUser(username = "admin", authorities = {"ADMIN"})
     public void addBookClicked() throws Exception {
 
-        mockMvc
-                .perform(get("/book/add")
-                        .accept(MediaType.TEXT_HTML)
-                        .contentType(MediaType.TEXT_HTML))
+        Book book1 = new Book();
+        mockMvc.perform(get("/book/add").with(user("admin").password("admin").roles("USER", "ADMIN"))
+
+                .accept(MediaType.TEXT_HTML)
+                .contentType(MediaType.TEXT_HTML).sessionAttr("book", book1))
+                .andExpect(status().is2xxSuccessful()).andDo(print())
 
                 .andExpect(model().attributeExists("book"))
+
                 .andExpect(view().name("addBook"))
                 .andReturn();
+
     }
 
     @Test
-    @WithMockUser(username = "admin", authorities = {"ADMIN"})
     public void bookRemoveTest() throws Exception {
 
-        List<Book> expectedBookList = createBookList(10);
+        assertThat(bookService).isNotNull();
+        List<Book> expectedBookList = new ArrayList<>();
 
-        bookService.removeOne(anyLong());
-        EasyMock.expectLastCall();
+        bookService.removeOne(Matchers.anyLong());
+        bookService.removeOne(Matchers.anyLong());
 
-        bookService.removeOne(anyLong());
-
-        expect(bookService.findAll()).andReturn(expectedBookList);
-        replay(bookService);
-
+        when(bookService.findAll()).thenReturn(expectedBookList);
         mockMvc
-                .perform(post("/book/remove")
+                .perform(delete("/book/remove").with(user("admin").password("admin").roles("USER", "ADMIN"))
                         .accept(MediaType.TEXT_HTML)
                         .contentType(MediaType.TEXT_HTML)
                         .param("id", "012345678"))
-
+                .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/book/bookList"))
                 .andReturn();
     }
 
     @Test
-    @WithMockUser(username = "admin", authorities = {"ADMIN"})
     public void showBookListPage() throws Exception {
 
-        List<Book> expectedBookList = createBookList(10);
+        List<Book> expectedBookList = new ArrayList<>();//createBookList(10);
 
-        expect(bookService.findAll()).andReturn(expectedBookList);
-        replay(bookService);
+        when(bookService.findAll()).thenReturn(expectedBookList);
 
         mockMvc
-                .perform(get("/book/bookList")
+                .perform(get("/book/bookList").with(user("admin").password("pass").roles("USER", "ADMIN"))
                         .accept(MediaType.TEXT_HTML)
-                        .contentType(MediaType.TEXT_HTML))
-
+                        .contentType(MediaType.TEXT_HTML)).andExpect(status().isOk())
+                .andExpect(model().attributeExists("bookList"))
                 .andExpect(view().name("bookList"))
                 .andReturn();
+
+        Mockito.verify(bookService).findAll();
     }
 
     private List<Book> createBookList(int count) {
@@ -121,4 +123,14 @@ public class BookControllerTest {
         }
         return bookList;
     }
+
+    @Configuration
+    @Import(MappingConfig.class)
+    public static class TestConf {
+        @Bean
+        BookController bookController() {
+            return new BookController();
+        }
+    }
+
 }

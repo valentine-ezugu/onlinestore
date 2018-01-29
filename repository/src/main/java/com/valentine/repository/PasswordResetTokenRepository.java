@@ -1,7 +1,7 @@
 package com.valentine.repository;
 
-import com.valentine.domain.User;
 import com.valentine.domain.PasswordResetToken;
+import com.valentine.domain.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

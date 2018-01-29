@@ -14,6 +14,16 @@
 
     </mapping>
 
+    <mapping map-id="=UserForLogin">
+        <class-a>com.valentine.domain.User</class-a>
+        <class-b>com.valentine.dto.user.UserForLogin</class-b>
+
+        <field>
+            <a>username</a>
+            <b>username</b>
+        </field>
+    </mapping>
+
     <mapping map-id="bookDetailExtraLite">
         <class-a>com.valentine.domain.Book</class-a>
         <class-b>com.valentine.dto.book.BookDetailExtraLite</class-b>

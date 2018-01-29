@@ -1,15 +1,15 @@
 package com.valentine.bookstore.controller;
 
 import com.valentine.domain.*;
-import com.valentine.domain.PasswordResetToken;
-import com.valentine.domain.Role;
 import com.valentine.dto.book.BookDetailExtraLite;
 import com.valentine.dto.book.BookDetailForShelf;
 import com.valentine.dto.order.OrderForFindOne;
 import com.valentine.dto.user.*;
-import com.valentine.repository.RoleRepository;
 import com.valentine.service.*;
-import com.valentine.utility.*;
+import com.valentine.utility.MailConstructor;
+import com.valentine.utility.SecurityUtility;
+import com.valentine.utility.USConstants;
+import com.valentine.utility.Validator;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -23,6 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,13 +45,13 @@ public class HomeController {
     private MailConstructor mailConstructor;
 
     @Autowired
+    private BookService bookService;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
-
-    @Autowired
-    private BookService bookService;
 
     @Autowired
     private OrderService orderService;
@@ -71,7 +72,10 @@ public class HomeController {
     private Mapper mapper;
 
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleService roleService;
+
+    public HomeController() {
+    }
 
     @RequestMapping("/")
     public String index() {
@@ -108,7 +112,8 @@ public class HomeController {
             String username = principal.getName();
             User user = userService.findByUsername(username);
 
-            UserForLogin userForLogin = new UserForLogin(user);
+
+            UserForLogin userForLogin = new UserForLogin(user) ; // mapper.map(user, UserForLogin.class, "UserForLogin");
 
             model.addAttribute("user", userForLogin);
         }
@@ -119,34 +124,27 @@ public class HomeController {
         for (Book book : bookList) {
 
             bookDetailForShelfList.add(mapper.map(book, BookDetailForShelf.class, "bookDetailForShelf"));
-
         }
+
         model.addAttribute("bookList", bookDetailForShelfList);
         model.addAttribute("activeAll", true);
-
         return "bookshelf";
     }
 
-
     @RequestMapping("/bookDetail")
     public String bookDetail(
-            @PathParam("id") Long id, Model model, Principal principal
-    ) {
+            @PathParam("id") Long id, Model model, Principal principal) {
         if (principal != null) {
-            String username = principal.getName();
-            User user = userService.findByUsername(username);
-            UserForLogin userForLogin1 = new UserForLogin(user);
-            model.addAttribute("user", userForLogin1);
-        }
+            String userName = principal.getName();
+            User user = userService.findByUsername(userName);
 
+            model.addAttribute("user", user);
+        }
         Book book = bookService.findOne(id);
 
-        BookDetailExtraLite bookDetailExtraLite = mapper.map(book, BookDetailExtraLite.class, "bookDetailExtraLite");
-
-        model.addAttribute("book", bookDetailExtraLite);
+          model.addAttribute("book", book);
 
         List<Integer> qtyList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-
         model.addAttribute("qtyList", qtyList);
         model.addAttribute("qty", 1);
 
@@ -170,7 +168,6 @@ public class HomeController {
         user.setPassword(encryptedPassword);
         userService.save(user);
 
-        //mostly sending passowrd to email logic
         String token = UUID.randomUUID().toString();
         userService.createPasswordResetTokenForUser(user, token);
 
@@ -590,7 +587,7 @@ public class HomeController {
 
         HashSet<Role> roles = new HashSet<>();
 
-        Role userRole = roleRepository.findByname("USER");
+        Role userRole = roleService.findByName("USER");
 
         Assert.notNull(userRole, "no role with name " + "USER");
 

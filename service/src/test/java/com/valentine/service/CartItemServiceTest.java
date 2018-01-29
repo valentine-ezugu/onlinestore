@@ -1,8 +1,8 @@
 package com.valentine.service;
 
-import com.valentine.repository.CartItemRepository;
 import com.valentine.domain.Book;
 import com.valentine.domain.CartItem;
+import com.valentine.repository.CartItemRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

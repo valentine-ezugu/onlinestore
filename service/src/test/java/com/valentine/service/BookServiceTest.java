@@ -2,7 +2,6 @@ package com.valentine.service;
 
 import com.valentine.domain.Book;
 import com.valentine.repository.BookRepository;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +48,7 @@ public class BookServiceTest extends AbstractTest {
 
         List<Book> bookList = bookService.findByCategory(anyString());
 
-         verify();
+        verify();
         Assert.assertNotNull(bookList);
 
         Assert.assertEquals(2, bookList.size());
@@ -69,7 +68,7 @@ public class BookServiceTest extends AbstractTest {
 
         List<Book> bookList = bookService.blurrySearch("management");
 
-         verify();
+        verify();
         Assert.assertNotNull(bookList);
         Assert.assertEquals(1, bookList.size());
     }

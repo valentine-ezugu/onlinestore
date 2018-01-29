@@ -19,12 +19,13 @@ import org.springframework.test.util.ReflectionTestUtils;
 import javax.transaction.Transactional;
 
 import static org.easymock.EasyMock.mock;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @ContextConfiguration
-public class  SecurityTest extends AbstractTest {
+public class SecurityTest extends AbstractTest {
 
     @Autowired
     private LoginService loginService;

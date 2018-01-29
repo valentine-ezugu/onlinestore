@@ -19,7 +19,6 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Controller
 @RequestMapping("/book")
 public class BookController {
@@ -42,14 +41,14 @@ public class BookController {
 
         BookForSave bookForSave = mapper.map(book, BookForSave.class, "bookForSave");
 
-        model.addAttribute("book", bookForSave);
+        model.addAttribute("book", new Book());
         return "addBook";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addBookPost(@ModelAttribute("book") Book book, HttpServletRequest request, Model model) {
-
         bookService.save(book);
+
         MultipartFile bookImage = book.getBookImage();
         try {
             byte[] bytes = bookImage.getBytes();
@@ -61,6 +60,7 @@ public class BookController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return "redirect:bookList";
     }
 
@@ -101,12 +101,11 @@ public class BookController {
         for (Book book : bookList) {
             bookDetailForList.add(mapper.map(book, BookDetailForList.class, "bookListDto"));
         }
-
         model.addAttribute("bookList", bookDetailForList);
         return "bookList";
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    @RequestMapping(value = "/remove", method = RequestMethod.DELETE)
     public String remove(@ModelAttribute("id") String id, Model model) {
 
         bookService.removeOne(Long.parseLong(id.substring(8)));
