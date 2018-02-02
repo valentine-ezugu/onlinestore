@@ -9,7 +9,8 @@ public class USConstants {
 
     public static final String US = "US";
 
-    public static final Map<String, String> mapOfUSStates = new HashMap<String, String>() {
+    private static final Map<String, String> mapOfUSStates = new HashMap<String, String>() {
+
         {
             put("AL", "Alabama");
             put("AK", "Alaska");
@@ -62,10 +63,10 @@ public class USConstants {
             put("WV", "West Virginia");
             put("WI", "Wisconsin");
             put("WY", "Wyoming");
+
         }
 
     };
     public static final List<String> listOfUSStatesCode = new ArrayList<>(mapOfUSStates.keySet());
     public static final List<String> listOfUSStatesNames = new ArrayList<>(mapOfUSStates.keySet());
-
 }

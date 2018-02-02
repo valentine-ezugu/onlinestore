@@ -54,10 +54,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findOne(id);
     }
 
-    @Override
-    public User getUserById(Long id) throws DataAccessException {
-        return userRepository.findOne(id);
-    }
 
     @Override
     public User findByEmail(String email) throws DataAccessException {
@@ -113,7 +109,7 @@ public class UserServiceImpl implements UserService {
     public void setUserDefaultShipping(Long userShippingId, User user) throws DataAccessException {
         List<UserShipping> userShippingList = (List<UserShipping>) userShippingRepository.findAll();
 
-        for (UserShipping userShipping : userShippingList) { //first we look through shipping list if any
+        for (UserShipping userShipping : userShippingList) {
             if (userShipping.getId() == userShippingId) {
                 userShipping.setUserShippingDefault(true);
                 userShippingRepository.save(userShipping);
@@ -123,7 +119,6 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
-
 
     @Override
     public void setUserDefaultPayment(Long userPaymentId, User user) throws DataAccessException {
@@ -140,4 +135,5 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
+
 }

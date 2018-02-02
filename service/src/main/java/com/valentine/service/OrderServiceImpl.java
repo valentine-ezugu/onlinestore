@@ -1,6 +1,7 @@
 package com.valentine.service;
 
 import com.valentine.domain.*;
+import com.valentine.repository.CartItemRepository;
 import com.valentine.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -15,8 +16,9 @@ import java.util.List;
 @Transactional
 public class OrderServiceImpl implements OrderService {
 
+
     @Autowired
-    private CartItemService cartItemService;
+    private CartItemRepository cartItemRepository;
 
     @Autowired
     private OrderRepository orderRepository;
@@ -38,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
         order.setShippingAddress(shippingAddress);
         order.setShippingMethod(shippingMethod);
 
-        List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+        List<CartItem> cartItemList = cartItemRepository.findByShoppingCart(shoppingCart);
 
         for (CartItem cartItem : cartItemList) {
             Book book = cartItem.getBook();
@@ -53,10 +55,10 @@ public class OrderServiceImpl implements OrderService {
         billingAddress.setOrder(order);
         payment.setOrder(order);
         order.setUser(user);
-        order = orderRepository.save(order);
+
+        orderRepository.save(order);
 
         return order;
-
     }
 
     @Override

@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface BookRepository extends CrudRepository<Book, Long> {
 
-    List<Book> findByCategory(String category);
+    List<Book> findByCategoryAndActiveIsTrue(String category);
 
-    List<Book> findByTitleContaining(String title);
+    List<Book> findByTitleContainingAndActiveIsTrue(String title);
+
+
+
+
 
 }

@@ -2,6 +2,7 @@ package com.valentine.service;
 
 import com.valentine.domain.CartItem;
 import com.valentine.domain.ShoppingCart;
+import com.valentine.repository.CartItemRepository;
 import com.valentine.repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -20,6 +21,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private CartItemService cartItemService;
 
     @Autowired
+    private CartItemRepository cartItemRepository;
+
+    @Autowired
     private ShoppingCartRepository shoppingCartRepository;
 
     public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) throws AccessDeniedException
@@ -27,7 +31,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     {
         BigDecimal cartTotal = new BigDecimal(0);
 
-        List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+        List<CartItem> cartItemList = cartItemRepository.findByShoppingCart(shoppingCart);
 
         for (CartItem cartItem : cartItemList) {
             if (cartItem.getBook().getInStockNumber() > 0) {
@@ -46,7 +50,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public void clearShoppingCart(ShoppingCart shoppingCart) throws DataAccessException
 
     {
-        List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+        List<CartItem> cartItemList = cartItemRepository.findByShoppingCart(shoppingCart);
 
         for (CartItem cartItem : cartItemList) {
             cartItem.setShoppingCart(null);

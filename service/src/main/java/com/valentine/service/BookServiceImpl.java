@@ -2,6 +2,8 @@ package com.valentine.service;
 
 import com.valentine.domain.Book;
 import com.valentine.repository.BookRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -11,15 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class BookServiceImpl implements BookService {
 
 
-    private BookRepository bookRepository;
-
     @Autowired
-    public void sBookServiceImpl(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+    private BookRepository bookRepository;
 
     public Book save(Book book) throws DataAccessException {
         return bookRepository.save(book);
@@ -39,30 +38,15 @@ public class BookServiceImpl implements BookService {
 
     public List<Book> findByCategory(String category) {
 
-        List<Book> bookList = bookRepository.findByCategory(category);
+        List<Book> bookList = bookRepository.findByCategoryAndActiveIsTrue(category);
 
-        List<Book> activeBookList = new ArrayList<>();
-
-        for (Book book : bookList) {
-            if (book.isActive()) {
-                activeBookList.add(book);
-            }
-        }
-
-        return activeBookList;
+        return bookList;
     }
 
     public List<Book> blurrySearch(String title) {
-        List<Book> bookList = bookRepository.findByTitleContaining(title);
-        List<Book> activeBookList = new ArrayList<>();
+        List<Book> bookList = bookRepository.findByTitleContainingAndActiveIsTrue(title);
 
-        for (Book book : bookList) {
-            if (book.isActive()) {
-                activeBookList.add(book);
-            }
-        }
-
-        return activeBookList;
+        return bookList;
     }
 
 }

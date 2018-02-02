@@ -13,8 +13,6 @@ public interface UserService {
 
     User findById(Long id) throws DataAccessException;
 
-    User getUserById(Long id) throws DataAccessException;
-
     User findByEmail(String email) throws DataAccessException;
 
 

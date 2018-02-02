@@ -1,6 +1,7 @@
 package com.valentine.bookstore.controller;
 
 import com.valentine.domain.*;
+import com.valentine.dto.book.BookDetailExtraLite;
 import com.valentine.dto.book.BookDetailForShelf;
 import com.valentine.dto.order.OrderForFindOne;
 import com.valentine.dto.user.*;

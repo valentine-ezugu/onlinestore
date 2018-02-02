@@ -1,5 +1,7 @@
 package com.valentine.utility;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -12,23 +14,29 @@ public class SecurityUtility {
 
     private final String SALT = "salt";
 
+    private Random random;
+
+    @Autowired
+    public SecurityUtility(@Value("#{new java.util.Random()}") Random random) {
+        this.random = random;
+    }
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12, new SecureRandom(SALT.getBytes()));
     }
 
-    @Bean
     public String randomPassword() {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
+        String saltChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
-        while (salt.length() < 18) {
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-            salt.append(SALTCHARS.charAt(index));
+        StringBuilder sb = new StringBuilder();
+
+        while (sb.length() < 18) {
+            int index = random.nextInt(saltChars.length());
+            sb.append(saltChars.charAt(index));
         }
-        String saltStr = salt.toString();
-        return saltStr;
+        return sb.toString();
     }
+
 }
 

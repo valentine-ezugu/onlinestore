@@ -12,7 +12,6 @@ import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
-
 @Service
 @Transactional
 public class CartItemServiceImpl implements CartItemService {
@@ -62,6 +61,7 @@ public class CartItemServiceImpl implements CartItemService {
         BookToCartItem bookToCartItem = new BookToCartItem();
         bookToCartItem.setBook(book);
         bookToCartItem.setCartItem(cartItem);
+
         bookToCartItemRepository.save(bookToCartItem);
 
         return cartItem;

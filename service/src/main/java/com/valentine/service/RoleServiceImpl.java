@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-/**
- * Created by Pc on 1/28/2018.
- */
+
 @Service
 @Transactional
 public class RoleServiceImpl implements RoleService {

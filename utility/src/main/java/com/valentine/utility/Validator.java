@@ -8,8 +8,4 @@ public class Validator {
 
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
-    public static final Pattern USERNAME_PATTERN = Pattern.compile("^[a-z0-9_-]{6,15}$");
-
-    public static final Pattern PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9]{8,15}$");
-
 }

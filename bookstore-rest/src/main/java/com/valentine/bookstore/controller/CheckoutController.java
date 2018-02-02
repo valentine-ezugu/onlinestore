@@ -68,6 +68,7 @@ public class CheckoutController {
     @Autowired
     private Mapper mapper;
 
+
     private ShippingAddress shippingAddress = new ShippingAddress();
 
     private BillingAddress billingAddress = new BillingAddress();

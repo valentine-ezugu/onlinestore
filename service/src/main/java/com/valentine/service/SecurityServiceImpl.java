@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+
 @Service
 @Transactional
 public class SecurityServiceImpl implements SecurityService {
-
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -30,34 +30,26 @@ public class SecurityServiceImpl implements SecurityService {
 
 
     @Override
-    public String findLoggedInUsername() throws DataAccessException, AuthenticationException {
-
+    public String findLoggedInUsername() throws DataAccessException {
 
         SecurityContext securityContext = SecurityContextHolder.getContext();
-
 
         Authentication authentication = securityContext.getAuthentication();
 
         if (authentication instanceof AnonymousAuthenticationToken) {
 
             throw new UsernameNotFoundException("sorry but you are Anonymous");
-
         }
+        String currentUsername = authentication.getName();
 
-
-        String currentUserName = authentication.getName();
-
-        return currentUserName;
-
+        return currentUsername;
     }
 
-
     @Override
-    public void autologin(String username, String password) throws AuthenticationException {
-
-
+    public void autoLogin(String username, String password) throws AuthenticationException {
         UserDetails userDetails;
         try {
+
             userDetails = userDetailsService.loadUserByUsername(username);
 
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
@@ -66,7 +58,6 @@ public class SecurityServiceImpl implements SecurityService {
 
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
         } catch (Exception ex) {
-
             throw new AuthenticationServiceException("invalid username or password");
         }
     }
