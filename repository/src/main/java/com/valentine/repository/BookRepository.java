@@ -10,9 +10,4 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     List<Book> findByCategoryAndActiveIsTrue(String category);
 
     List<Book> findByTitleContainingAndActiveIsTrue(String title);
-
-
-
-
-
 }
