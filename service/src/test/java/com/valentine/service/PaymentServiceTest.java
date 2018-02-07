@@ -1,6 +1,5 @@
 package com.valentine.service;
 
-
 import com.valentine.domain.Payment;
 import com.valentine.domain.UserPayment;
 import org.junit.Assert;

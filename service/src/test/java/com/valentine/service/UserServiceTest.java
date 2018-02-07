@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 @ContextConfiguration(classes = {UserService.class, SecurityUtility.class, UserRepository.class})
 public class UserServiceTest {
 
-    protected Logger logger = LoggerFactory.getLogger(UserService.class);
+    private  static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserService userService;
@@ -79,7 +79,6 @@ public class UserServiceTest {
 
         if (user1 != null) {
             logger.info("do nothing ");
-
         } else {
             when(userRepository.save(user1)).thenReturn(user1);
             User userCreated = userService.createUser(user1);
@@ -161,7 +160,10 @@ public class UserServiceTest {
         Long id = 2L;
         User user = new User();
         UserShipping userShipping = new UserShipping();
+        userShipping.setId(1L);
+
         UserShipping userShipping1 = new UserShipping();
+        userShipping1.setId(2L);
 
         List<UserShipping> userShippingList = Arrays.asList(userShipping, userShipping1);
         user.setUserShippingList(userShippingList);
@@ -169,8 +171,7 @@ public class UserServiceTest {
         when(userShippingRepository.findAll()).thenReturn(userShippingList);
         for (UserShipping userShipping3 : userShippingList) {
 
-            userShipping1.setId(2L);
-            if (userShipping3.getId() == id) {
+            if (userShipping3.getId().equals(id)) {
                 userShipping3.setUserShippingDefault(true);
 
                 userShippingRepository.save(userShipping3);
@@ -181,28 +182,27 @@ public class UserServiceTest {
                 userShippingRepository.save(userShipping3);
                 Mockito.verify(userShippingRepository).save(userShipping3);
             }
-
             userService.setUserDefaultShipping(id, user);
-
         }
     }
-
 
     @Test
     public void payment() throws Exception {
         Long id = 2L;
         User user = new User();
-        UserPayment userPayment  = new UserPayment();
+        UserPayment userPayment = new UserPayment();
+        userPayment.setId(1L);
+
         UserPayment userPayment1 = new UserPayment();
+        userPayment1.setId(2L);
 
         List<UserPayment> userPaymentList = Arrays.asList(userPayment, userPayment1);
         user.setUserPaymentList(userPaymentList);
 
         when(userPaymentRepository.findAll()).thenReturn(userPaymentList);
         for (UserPayment userPayment2 : userPaymentList) {
-            userPayment1.setId(2L);
 
-            if (userPayment2.getId() == id) {
+            if (userPayment2.getId().equals(id)) {
                 userPayment2.setDefaultPayment(true);
                 userPaymentRepository.save(userPayment2);
                 Mockito.verify(userPaymentRepository).findAll();

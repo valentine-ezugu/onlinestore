@@ -56,10 +56,10 @@ public class CartItemServiceTest {
     public void addBookToCartItemTest() throws Exception {
         Book book1 = new Book();
         User user = new User();
-        ShoppingCart shoppingCart = new ShoppingCart();
+        book1.setId(1L);
 
         CartItem cartItem1 = new CartItem();
-         cartItem1.setBook(book1);
+        cartItem1.setBook(book1);
         cartItem1.setQty(2);
 
         CartItem cartItem = new CartItem();
@@ -73,13 +73,13 @@ public class CartItemServiceTest {
         when(cartItemRepository.findByShoppingCart(user.getShoppingCart())).thenReturn(cartItemList);
 
         for (CartItem item : cartItemList) {
-
-            if (book1.getId() == item.getBook().getId()) {
+            item.setId(1L);
+            if (book1.getId().equals(item.getBook().getId())){
                 item.setQty(item.getQty() + qty);
                 item.setSubTotal(new BigDecimal(book1.getOurPrice()).multiply(new BigDecimal(qty)));
                 given(cartItemRepository.save(item)).willReturn(cartItem);
-
             }
+
             else {
                 CartItem newCartItem = new CartItem();
                 newCartItem.setShoppingCart(user.getShoppingCart());
@@ -96,14 +96,12 @@ public class CartItemServiceTest {
 
                 when(bookToCartItemRepository.save(bookToCartItem1)).thenReturn(bookToCartItem1);
 
-              CartItem cartItem2=   cartItemService.addBookToCartItem(book1, user, qty);
+                CartItem cartItem2 =   cartItemService.addBookToCartItem(book1, user, qty);
 
-                 Assert.assertNotNull(cartItem2);
+                Assert.assertNotNull(cartItem2);
                 Mockito.verify(cartItemRepository).save(newCartItem);
                 Mockito.verify(bookToCartItemRepository).save(bookToCartItem1);
-
             }
-
         }
 
     }

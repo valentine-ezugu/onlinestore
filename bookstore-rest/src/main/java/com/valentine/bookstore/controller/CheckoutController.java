@@ -82,7 +82,7 @@ public class CheckoutController {
                            Principal principal) {
         User user = userService.findByUsername(principal.getName());
 
-        if (cartId != user.getShoppingCart().getId()) {
+        if (!cartId.equals(user.getShoppingCart().getId())) {
             return "badRequestPage";
         }
 
@@ -163,7 +163,7 @@ public class CheckoutController {
 
         UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
-        if (userShipping.getUser().getId() != user.getId()) {
+        if (!userShipping.getUser().getId().equals(user.getId()) ) {
             return "badRequestPage";
         } else {
             shippingAddressService.setByUserShipping(userShipping, shippingAddress);
@@ -234,7 +234,7 @@ public class CheckoutController {
         UserForProfile userForProfile = mapper.map(user, UserForProfile.class, "userForProfile");
 
 
-        if (userPayment.getUser().getId() != user.getId()) {
+        if (!userPayment.getUser().getId().equals(user.getId())) {
             return "badRequestPage";
         } else {
             paymentService.setByUserPayment(userPayment, payment);

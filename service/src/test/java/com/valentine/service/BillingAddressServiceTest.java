@@ -1,6 +1,5 @@
 package com.valentine.service;
 
-
 import com.valentine.domain.BillingAddress;
 import com.valentine.domain.UserBilling;
 import org.junit.Assert;

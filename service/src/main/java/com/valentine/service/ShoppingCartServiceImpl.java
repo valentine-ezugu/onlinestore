@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
+
 @Transactional
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -27,7 +28,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private ShoppingCartRepository shoppingCartRepository;
 
     public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) throws AccessDeniedException
-
     {
         BigDecimal cartTotal = new BigDecimal(0);
 
@@ -35,15 +35,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         for (CartItem cartItem : cartItemList) {
             if (cartItem.getBook().getInStockNumber() > 0) {
-                cartItemService.updateCartItem(cartItem);
                 cartTotal = cartTotal.add(cartItem.getSubTotal());
             }
         }
-
         shoppingCart.setGrandTotal(cartTotal);
-
         shoppingCartRepository.save(shoppingCart);
-
         return shoppingCart;
     }
 

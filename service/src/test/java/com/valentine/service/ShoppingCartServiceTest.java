@@ -65,7 +65,6 @@ public class ShoppingCartServiceTest {
         for (CartItem cartItem : cartItemList) {
 
             if (cartItem.getBook().getInStockNumber() > 0) {
-                cartItemService.updateCartItem(cartItem);
                 cartTotal = cartTotal.add(cartItem.getSubTotal());
             }
         }
