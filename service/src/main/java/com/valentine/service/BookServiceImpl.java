@@ -14,8 +14,13 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
 
 
-    @Autowired
     private BookRepository bookRepository;
+
+
+    public BookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
 
     public Book save(Book book) throws DataAccessException {
         return bookRepository.save(book);
@@ -45,5 +50,7 @@ public class BookServiceImpl implements BookService {
 
         return bookList;
     }
+
+
 
 }

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.io.IOException;
 
 
@@ -19,22 +18,37 @@ public class RestErrorHandler {
     @ExceptionHandler(DataAccessException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public String handleDataAccessException(DataAccessException ex) {
-        return ex.getLocalizedMessage();
+    public ModelAndView handleDataAccessException(DataAccessException e) {
+        ModelAndView mav = new ModelAndView("exception");
+
+        mav.addObject("name", e.getClass().getSimpleName());
+        mav.addObject("message", e.getMessage());
+
+        return mav ;
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public String handleIllegalArgumentException(IllegalArgumentException ex) {
-        return ex.getLocalizedMessage();
+    public ModelAndView handleIllegalArgumentException(IllegalArgumentException e) {
+        ModelAndView mav = new ModelAndView("exception");
+
+        mav.addObject("name", e.getClass().getSimpleName());
+        mav.addObject("message", e.getMessage());
+
+        return mav ;
     }
 
     @ExceptionHandler(IllegalStateException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public String handleIllegalStateException(IllegalStateException ex) {
-        return ex.getLocalizedMessage();
+    public ModelAndView handleIllegalStateException(IllegalStateException e) {
+        ModelAndView mav = new ModelAndView("exception");
+
+        mav.addObject("name", e.getClass().getSimpleName());
+        mav.addObject("message", e.getMessage());
+
+        return mav ;
     }
 
     @ExceptionHandler(AccessDeniedException.class)

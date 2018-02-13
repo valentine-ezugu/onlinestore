@@ -13,7 +13,6 @@ import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,11 +22,11 @@ import java.util.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = UserServiceImpl.class)
-@ContextConfiguration(classes = {UserService.class, SecurityUtility.class, UserRepository.class})
+@ContextConfiguration(classes = {UserServiceImpl.class, SecurityUtility.class, UserRepository.class})
+//because we need more than one class context but yet not all app context
 public class UserServiceTest {
 
-    private  static final Logger logger = LoggerFactory.getLogger(UserService.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserService userService;
@@ -46,6 +45,7 @@ public class UserServiceTest {
 
     @MockBean
     private UserShippingRepository userShippingRepository;
+
 
     @Test
     public void saveUser() throws Exception {
@@ -77,7 +77,7 @@ public class UserServiceTest {
         Assert.assertEquals("valentine", user1.getUsername());
         user1.setFirstName("Ezugu");
 
-        if (user1 != null) {
+        if (!user1.equals(null)) {
             logger.info("do nothing ");
         } else {
             when(userRepository.save(user1)).thenReturn(user1);

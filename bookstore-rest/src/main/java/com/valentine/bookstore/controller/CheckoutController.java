@@ -118,8 +118,6 @@ public class CheckoutController {
             model.addAttribute("emptyShippingList", false);
         }
 
-        ShoppingCart shoppingCart = user.getShoppingCart();
-
         for (UserShipping userShipping : userShippingList) {
             if (userShipping.isUserShippingDefault()) {
                 shippingAddressService.setByUserShipping(userShipping, shippingAddress);

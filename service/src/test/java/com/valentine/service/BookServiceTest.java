@@ -3,18 +3,21 @@ package com.valentine.service;
 import com.valentine.domain.Book;
 import com.valentine.repository.BookRepository;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
-
 import static org.mockito.Mockito.when;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BookServiceImpl.class)
@@ -25,6 +28,10 @@ public class BookServiceTest {
 
     @Autowired
     private BookService bookService;
+
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
+
 
     @Test
     public void findByCategoryTest() throws Exception {
@@ -120,6 +127,40 @@ public class BookServiceTest {
         Assert.assertEquals(book, book1);
         Mockito.verify(bookRepository).save(book);
 
+    }
+
+
+    @Test
+    public void removeThrowsNullPointerException() {
+
+       Mockito.doThrow(new DataAccessException(""){}).when(bookRepository).delete(1L);
+
+        BookService foo = new BookServiceImpl(bookRepository);
+
+        exception.expect(DataAccessException.class);
+        foo.removeOne(1L);
+    }
+
+
+    @Test
+    public void findOneThrowsDataAccessException() {
+
+        when(bookRepository.findOne(1L)).thenThrow(new DataAccessException(""){} );
+
+        BookService foo = new BookServiceImpl(bookRepository);
+        exception.expect(DataAccessException.class);
+        foo.findOne(1L);
+   }
+
+    @Test
+      public void saveBookThrowsDataAccessException() {
+       Book book = new Book();
+       when(bookRepository.save(book)).thenThrow(new DataAccessException(""){} );
+
+        BookService foo = new BookServiceImpl(bookRepository);
+
+        exception.expect(DataAccessException.class);
+        foo.save(book);
     }
 
 }

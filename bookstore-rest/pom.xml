@@ -9,6 +9,8 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+<packaging>jar</packaging>
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.valentine.onlinestore</groupId>
@@ -41,7 +43,6 @@
             <artifactId>mail</artifactId>
             <version>1.4.6</version>
         </dependency>
-
 
         <dependency>
             <groupId>com.valentine.onlinestore</groupId>
@@ -121,7 +122,6 @@
         </dependency>
 
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -130,6 +130,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

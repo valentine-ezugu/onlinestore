@@ -412,8 +412,9 @@
                                     </div>
                                     <div class="col-xs-6">
                                         <div style="margin-left: 50px;">
-                                            <a th:href="@{/bookDetail?id=}+${cartItem.book.id}"><h4
-                                                    th:text="${cartItem.book.title}"></h4></a>
+                                            <a th:href="@{/bookDetail?id=}+${cartItem.book.id}">
+                                                <h4 th:text="${cartItem.book.title}"></h4>
+                                            </a>
                                             <p th:if="${cartItem.book.inStockNumber&gt;10}"
                                                style="color: green;">In Stock</p>
                                             <p

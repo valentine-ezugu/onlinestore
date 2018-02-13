@@ -4,7 +4,6 @@ package com.valentine.service;
 import com.valentine.domain.*;
 import com.valentine.repository.CartItemRepository;
 import com.valentine.repository.OrderRepository;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
+
 
 import static org.mockito.Mockito.when;
 

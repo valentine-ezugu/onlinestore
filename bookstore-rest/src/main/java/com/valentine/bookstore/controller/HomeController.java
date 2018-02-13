@@ -88,7 +88,7 @@ public class HomeController {
     @RequestMapping("/login")
     public String login(Model model) {
         model.addAttribute("classActiveLogin", true);
-        return "Myaccount";
+        return "myAccount";
     }
 
     @RequestMapping("/hours")
@@ -157,7 +157,7 @@ public class HomeController {
 
         if (user == null) {
             model.addAttribute("emailNotExits", true);
-            return "Myaccount";
+            return "myAccount";
         }
 
         String password = securityUtility.randomPassword();
@@ -174,7 +174,7 @@ public class HomeController {
         mailSender.send(newEmail);
         model.addAttribute("forgetPasswordEmailSent", true);
 
-        return "Myaccount";
+        return "myAccount";
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -195,7 +195,7 @@ public class HomeController {
         model.addAttribute("classActiveBilling", true);
         model.addAttribute("listOfShippingAddresses", true);
 
-        return "Myprofile";
+        return "myProfile";
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -216,7 +216,7 @@ public class HomeController {
         model.addAttribute("listOfShippingAddresses", true);
 
 
-        return "Myprofile";
+        return "myProfile";
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -251,7 +251,7 @@ public class HomeController {
         model.addAttribute("userPaymentList", userForProfile.getUserPaymentList());
         model.addAttribute("userShippingList", userForProfile.getUserShippingList());
         model.addAttribute("orderList", userForProfile.getOrderList());
-        return "Myprofile";
+        return "myProfile";
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -285,7 +285,7 @@ public class HomeController {
 
         model.addAttribute("orderList", userForProfile.getOrderList());
 
-        return "Myprofile";
+        return "myProfile";
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -306,7 +306,7 @@ public class HomeController {
         model.addAttribute("listOfCreditCards", true);
         model.addAttribute("orderList", userForProfile.getOrderList());
 
-        return "Myprofile";
+        return "myProfile";
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -332,7 +332,7 @@ public class HomeController {
         model.addAttribute("listOfShippingAddresses", true);
         model.addAttribute("orderList", userForProfile.getOrderList());
 
-        return "Myprofile";
+        return "myProfile";
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -363,7 +363,7 @@ public class HomeController {
             model.addAttribute("userPaymentList", userForProfile.getUserPaymentList());
             model.addAttribute("userShippingList", userForProfile.getUserShippingList());
 
-            return "Myprofile";
+            return "myProfile";
         }
     }
 
@@ -386,7 +386,7 @@ public class HomeController {
         model.addAttribute("userShippingList", userForProfile.getUserShippingList());
         model.addAttribute("orderList", userForProfile.getOrderList());
 
-        return "Myprofile";
+        return "myProfile";
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -408,7 +408,7 @@ public class HomeController {
         model.addAttribute("userShippingList", userForProfile.getUserShippingList());
         model.addAttribute("orderList", userForProfile.getOrderList());
 
-        return "Myprofile";
+        return "myProfile";
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -442,7 +442,7 @@ public class HomeController {
             model.addAttribute("classActiveBilling", true);
             model.addAttribute("listOfShippingAddresses", true);
 
-            return "Myprofile";
+            return "myProfile";
         }
 
     }
@@ -477,7 +477,7 @@ public class HomeController {
 
             model.addAttribute("userPaymentList", userForProfile.getUserPaymentList());
             model.addAttribute("userShippingList", userForProfile.getUserShippingList());
-            return "Myprofile";
+            return "myProfile";
         }
 
     }
@@ -507,7 +507,7 @@ public class HomeController {
             model.addAttribute("userShippingList", userForProfile.getUserShippingList());
             model.addAttribute("orderList", userForProfile.getOrderList());
 
-            return "Myprofile";
+            return "myProfile";
         }
     }
 
@@ -538,7 +538,7 @@ public class HomeController {
         model.addAttribute("stateList", stateList);
         model.addAttribute("classActiveEdit", true);
 
-        return "Myprofile";
+        return "myProfile";
     }
 
     @RequestMapping(value = "/newUser", method = RequestMethod.POST)
@@ -558,19 +558,19 @@ public class HomeController {
 
             model.addAttribute("usernameExits", true);
 
-            return "Myaccount";
+            return "myAccount";
         }
 
         if (userService.findByEmail(userEmail) != null) {
             model.addAttribute("emailExists", true);
 
-            return "Myaccount";
+            return "myAccount";
         }
 
         if (!Validator.EMAIL_PATTERN.matcher(userEmail).matches()) {
             model.addAttribute("notEmail", true);
 
-            return "Myaccount";
+            return "myAccount";
         }
 
         User user = new User();
@@ -603,7 +603,7 @@ public class HomeController {
         mailSender.send(email);
         model.addAttribute("emailsent", true);
 
-        return "Myaccount";
+        return "myAccount";
     }
 
 
@@ -631,7 +631,7 @@ public class HomeController {
 
         model.addAttribute("classActiveEdit", true);
 
-        return "Myprofile";
+        return "myProfile";
     }
 
     @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
@@ -650,7 +650,7 @@ public class HomeController {
         if (userService.findByEmail(user.getEmail()) != null) {
             if (userService.findByEmail(user.getEmail()).getId() != currentUser.getId()) {
                 model.addAttribute("emailExists", true);
-                return "Myprofile";
+                return "myProfile";
             }
         }
 
@@ -658,7 +658,7 @@ public class HomeController {
         if (userService.findByUsername(user.getUsername()) != null) {
             if (userService.findByUsername(user.getUsername()).getId() != currentUser.getId()) {
                 model.addAttribute("usernameExists", true);
-                return "Myprofile";
+                return "myProfile";
             }
         }
 
@@ -671,7 +671,7 @@ public class HomeController {
             } else {
                 model.addAttribute("incorrectPassword", true);
 
-                return "Myprofile";
+                return "myProfile";
             }
         }
 
@@ -698,7 +698,7 @@ public class HomeController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         model.addAttribute("orderList", user.getOrderList());
 
-        return "Myprofile";
+        return "myProfile";
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -743,7 +743,7 @@ public class HomeController {
             model.addAttribute("listOfCreditCards", true);
             model.addAttribute("displayOrderDetail", true);
 
-            return "Myprofile";
+            return "myProfile";
         }
     }
 }
