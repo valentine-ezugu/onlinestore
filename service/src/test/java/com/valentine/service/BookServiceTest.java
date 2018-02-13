@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
+
 import static org.mockito.Mockito.when;
 
 
@@ -133,7 +134,8 @@ public class BookServiceTest {
     @Test
     public void removeThrowsNullPointerException() {
 
-       Mockito.doThrow(new DataAccessException(""){}).when(bookRepository).delete(1L);
+        Mockito.doThrow(new DataAccessException("") {
+        }).when(bookRepository).delete(1L);
 
         BookService foo = new BookServiceImpl(bookRepository);
 
@@ -145,17 +147,19 @@ public class BookServiceTest {
     @Test
     public void findOneThrowsDataAccessException() {
 
-        when(bookRepository.findOne(1L)).thenThrow(new DataAccessException(""){} );
+        when(bookRepository.findOne(1L)).thenThrow(new DataAccessException("") {
+        });
 
         BookService foo = new BookServiceImpl(bookRepository);
         exception.expect(DataAccessException.class);
         foo.findOne(1L);
-   }
+    }
 
     @Test
-      public void saveBookThrowsDataAccessException() {
-       Book book = new Book();
-       when(bookRepository.save(book)).thenThrow(new DataAccessException(""){} );
+    public void saveBookThrowsDataAccessException() {
+        Book book = new Book();
+        when(bookRepository.save(book)).thenThrow(new DataAccessException("") {
+        });
 
         BookService foo = new BookServiceImpl(bookRepository);
 
