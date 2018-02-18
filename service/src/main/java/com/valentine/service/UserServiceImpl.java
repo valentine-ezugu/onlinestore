@@ -66,7 +66,8 @@ public class UserServiceImpl implements UserService {
 
         if (localUser != null) {
             Log.info("user {} already exists. Nothing will be done", user.getUsername());
-        } else {
+        }
+        else {
 
             ShoppingCart shoppingCart = new ShoppingCart();
             shoppingCart.setUser(user);

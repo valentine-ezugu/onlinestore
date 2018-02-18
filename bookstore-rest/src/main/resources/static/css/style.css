@@ -9,6 +9,10 @@ hr {
     background-color: #333;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /*dis able side ways scrolls */
+}
 .container {
     width: 90%;
 }

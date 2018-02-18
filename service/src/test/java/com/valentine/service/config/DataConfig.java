@@ -21,7 +21,6 @@ public class DataConfig {
 
 
     @Bean(name = "dataSource")
-
     public DataSource dataSourceTest() {
         return new EmbeddedDatabaseBuilder()
                 .generateUniqueName(true)
@@ -39,18 +38,14 @@ public class DataConfig {
         adapter.setDatabasePlatform("org.hibernate.dialect.H2Dialect");
         adapter.setGenerateDdl(true);
         return adapter;
-
     }
 
     @Bean
     public JavaMailSenderImpl mailSender() {
-
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-
         javaMailSender.setProtocol("SMTP");
         javaMailSender.setHost("127.0.0.1");
         javaMailSender.setPort(25);
-
         return javaMailSender;
     }
 

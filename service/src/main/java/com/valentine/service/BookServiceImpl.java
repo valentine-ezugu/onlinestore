@@ -2,7 +2,7 @@ package com.valentine.service;
 
 import com.valentine.domain.Book;
 import com.valentine.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 

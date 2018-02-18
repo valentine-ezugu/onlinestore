@@ -16,8 +16,12 @@ import java.util.List;
 @Transactional
 public class CartItemServiceImpl implements CartItemService {
 
-    @Autowired
+
     private CartItemRepository cartItemRepository;
+
+    public CartItemServiceImpl(CartItemRepository cartItemRepository) {
+        this.cartItemRepository = cartItemRepository;
+    }
 
     @Autowired
     private BookToCartItemRepository bookToCartItemRepository;

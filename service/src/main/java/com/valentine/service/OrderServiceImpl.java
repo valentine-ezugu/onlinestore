@@ -19,8 +19,12 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private CartItemRepository cartItemRepository;
 
-    @Autowired
+
     private OrderRepository orderRepository;
+
+    public OrderServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     @Override
     public synchronized Order createOrder(ShoppingCart shoppingCart,

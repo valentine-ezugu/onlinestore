@@ -212,9 +212,7 @@ public class UserServiceTest {
                 userPaymentRepository.save(userPayment2);
                 Mockito.verify(userPaymentRepository).save(userPayment2);
             }
-
             userService.setUserDefaultPayment(id, user);
-
         }
     }
 }

@@ -2,11 +2,14 @@ package com.valentine.service;
 
 import com.valentine.domain.Book;
 import com.valentine.domain.CartItem;
+import com.valentine.domain.ShippingAddress;
 import com.valentine.domain.ShoppingCart;
 import com.valentine.repository.CartItemRepository;
 import com.valentine.repository.ShoppingCartRepository;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,10 @@ public class ShoppingCartServiceTest {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
+
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
+
 
     @Test
     public void updateShoppingCartTest() throws Exception {
@@ -101,6 +108,29 @@ public class ShoppingCartServiceTest {
         shoppingCartService.clearShoppingCart(shoppingCart);
 
         Mockito.verify(shoppingCartRepository).save(shoppingCart);
+    }
+
+    @Test
+    public void exceptionTestForUpdate() throws Exception {
+        ShoppingCart shoppingCart = new ShoppingCart();
+
+        //because to save shopping cart first we need to find there fore null pointer
+        when(shoppingCartRepository.save(shoppingCart)).thenThrow(new NullPointerException("") {
+        });
+
+        exception.expect(NullPointerException.class);
+        shoppingCartService.updateShoppingCart(shoppingCart);
+    }
+
+    @Test
+    public void exceptionForClearShopping() throws Exception {
+
+        ShoppingCart shoppingCart = new ShoppingCart();
+        when(shoppingCartRepository.save(shoppingCart)).thenThrow(new NullPointerException("") {
+        });
+
+        exception.expect(NullPointerException.class);
+        shoppingCartService.clearShoppingCart(shoppingCart);
     }
 
 }

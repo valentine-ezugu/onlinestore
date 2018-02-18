@@ -5,12 +5,15 @@ import com.valentine.domain.*;
 import com.valentine.repository.CartItemRepository;
 import com.valentine.repository.OrderRepository;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
@@ -33,6 +36,8 @@ public class OrderServiceTest {
     @Autowired
     private OrderService orderService;
 
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
 
     @Test
     public void createOrderTest() throws Exception{
@@ -98,4 +103,27 @@ public class OrderServiceTest {
 
         Mockito.verify(orderRepository).findOne(2L);
     }
+
+
+    @Test
+    public void findByCategoryException() {
+        Order order = new Order();
+        ShippingAddress shippingAddess = new ShippingAddress();
+        BillingAddress billAddress = new BillingAddress();
+        Payment payment = new Payment();
+        User user = new User();
+        ShoppingCart shoppingCart = new ShoppingCart();
+
+        when(orderRepository.save(order)).thenThrow(new NullPointerException("") {
+        });
+
+        OrderService service = new OrderServiceImpl(orderRepository);
+        exception.expect(NullPointerException.class);
+
+        service.createOrder(shoppingCart,shippingAddess, billAddress,payment,"air",user);
+        Assert.assertNull(order);
+
+    }
+
+
 }

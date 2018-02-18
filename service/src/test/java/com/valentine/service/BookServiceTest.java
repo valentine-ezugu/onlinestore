@@ -161,10 +161,11 @@ public class BookServiceTest {
         when(bookRepository.save(book)).thenThrow(new DataAccessException("") {
         });
 
-        BookService foo = new BookServiceImpl(bookRepository);
+        BookService service = new BookServiceImpl(bookRepository);
 
         exception.expect(DataAccessException.class);
-        foo.save(book);
+        service.save(book);
     }
+
 
 }
