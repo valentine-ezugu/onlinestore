@@ -7,6 +7,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ *Main app class
+ */
 @EntityScan(basePackages = {"com.valentine.domain"})
 @SpringBootApplication(scanBasePackages = {"com.valentine.adminportal", "com.valentine.service", "com.valentine.utility"})
 @EnableJpaRepositories("com.valentine.repository")

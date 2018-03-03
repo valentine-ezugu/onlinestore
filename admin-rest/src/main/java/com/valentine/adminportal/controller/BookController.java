@@ -19,22 +19,39 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 @Controller
 @RequestMapping("/book")
 public class BookController {
-
+    /**
+     *
+     */
     @Autowired
     private BookService bookService;
-
+    /**
+     *
+     */
     @Autowired
     private Mapper mapper;
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Book getBookById(@PathVariable(value = "id") Long id) {
         return bookService.findOne(id);
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addBook(Model model) {
         Book book = new Book();
@@ -45,6 +62,13 @@ public class BookController {
         return "addBook";
     }
 
+    /**
+     *
+     * @param book
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addBookPost(@ModelAttribute("book") Book book, HttpServletRequest request, Model model) {
         bookService.save(book);
@@ -64,6 +88,12 @@ public class BookController {
         return "redirect:bookList";
     }
 
+    /**
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping("/bookInfo")
     public String bookInfo(@RequestParam("id") Long id, Model model) {
 
@@ -75,6 +105,12 @@ public class BookController {
         return "bookInfo";
     }
 
+    /**
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping("/updateBook")
     public String updateBook(@RequestParam("id") Long id, Model model) {
         Book book = bookService.findOne(id);
@@ -85,6 +121,12 @@ public class BookController {
         return "updateBook";
     }
 
+    /**
+     *
+     * @param book
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/updateBook", method = RequestMethod.POST)
     public String updateBookPost(@ModelAttribute("book") Book book, HttpServletRequest request) {
 
@@ -92,6 +134,11 @@ public class BookController {
         return "redirect:/book/bookInfo?id=" + book.getId();
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping("/bookList")
     public String bookList(Model model) {
 
@@ -105,6 +152,12 @@ public class BookController {
         return "bookList";
     }
 
+    /**
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/remove", method = RequestMethod.DELETE)
     public String remove(@ModelAttribute("id") String id, Model model) {
 

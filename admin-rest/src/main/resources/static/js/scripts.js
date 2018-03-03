@@ -6,7 +6,6 @@ $(document).ready(function () {
         /*<![CDATA[*/
         var path = /*[[@{/}]]*/'remove';
         /*]]>*/
-
         var id = $(this).attr('id');
 
         bootbox.confirm({
